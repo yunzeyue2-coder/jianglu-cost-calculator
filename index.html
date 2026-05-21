@@ -24,7 +24,12 @@ input:focus,select:focus{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,23
 .dr{display:grid;gap:3px;padding:7px 0;border-bottom:1px solid #f1f5f9}
 .dr:last-child{border-bottom:none}
 .dr.i3{grid-template-columns:2fr .8fr .8fr .8fr .8fr .8fr auto}
-.dr.i2{grid-template-columns:2.5fr .8fr .8fr .8fr auto}
+.dr.i2{grid-template-columns:2.5fr .8fr .8fr .8fr .8fr auto}
+.dh{display:grid;gap:3px;padding:4px 0 6px;border-bottom:2px solid #e2e8f0;color:#64748b;font-size:10px;font-weight:600}
+.dh span{text-align:center}
+.dh span:first-child{text-align:left}
+.dh.i3{grid-template-columns:2fr .8fr .8fr .8fr .8fr .8fr auto}
+.dh.i2{grid-template-columns:2.5fr .8fr .8fr .8fr .8fr auto}
 .dr .am{font-weight:700;font-size:13px;text-align:right;color:#2563eb;padding-top:14px}
 .dr .am .pct{font-weight:400;color:#64748b;font-size:10px}
 .dr .del{background:none;border:none;color:#ef4444;font-size:20px;cursor:pointer;padding-top:12px}
@@ -76,14 +81,14 @@ input:focus,select:focus{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,23
   </div>
 </div>
 <div class="sec" id="sec-main">
-  <div class="card"><div class="ct">🥩 主料（原料）<span class="b">含水率·净料率</span></div><div id="main-rows"></div><button class="btn bo mt" onclick="addMain()">＋ 添加主料</button></div>
-  <div class="card" id="sec-aux"><div class="ct">🧂 辅料（调味料/添加物）<span class="b">可增减</span></div><div id="aux-rows"></div><button class="btn bo mt" onclick="addAux()">＋ 添加辅料</button></div>
+  <div class="card"><div class="ct">🥩 主料（原料）<span class="b">含水率·净料率</span></div><div class="dh i3"><span>原料名称</span><span>单位</span><span>采购单价</span><span>净料率%</span><span>投料量g</span><span>单件成本</span><span></span></div><div id="main-rows"></div><button class="btn bo mt" onclick="addMain()">＋ 添加主料</button></div>
+  <div class="card" id="sec-aux"><div class="ct">🧂 辅料（调味料/添加物）<span class="b">可增减</span></div><div class="dh i2"><span>辅料名称</span><span>单位</span><span>采购单价</span><span>用量(g)</span><span>合计(元/件)</span><span></span></div><div id="aux-rows"></div><button class="btn bo mt" onclick="addAux()">＋ 添加辅料</button></div>
   <div class="card" id="sec-product"><div class="ct">📊 出品率与原料成本</div>
     <div class="g2"><div><label>产品出品率（%）</label><input type="number" id="f_yield" value="60" step="1" min="1" max="100" oninput="calc()"></div><div><label>单件成品重（g）</label><input type="number" id="f_weight" step="1" min="1" oninput="calc()"></div></div>
     <div class="cb" id="raw-summary"><p class="sm">填写后自动计算</p></div></div>
 </div>
 <div class="sec" id="sec-pkg">
-  <div class="card"><div class="ct">📦 包装费用 <span class="b">可增减</span></div><div id="pkg-rows"></div><button class="btn bo mt" onclick="addPkg()">＋ 添加包装物料</button></div>
+  <div class="card"><div class="ct">📦 包装费用 <span class="b">可增减</span></div><div class="dh i2"><span>物料名称</span><span>单位</span><span>采购单价</span><span>用量</span><span>小计(含损耗)</span><span></span></div><div id="pkg-rows"></div><button class="btn bo mt" onclick="addPkg()">＋ 添加包装物料</button></div>
   <div class="card"><div class="ct">🧮 包装合计</div><div id="pkg-summary"><p class="sm">添加后自动计算</p></div></div>
 </div>
 <div class="sec" id="sec-mfg">
@@ -122,8 +127,8 @@ input:focus,select:focus{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,23
       <button class="btn bs" onclick="exportCSV()" style="flex:1;min-width:110px">📥 CSV</button></div>
     <button class="btn br mt" onclick="resetAll()">🗑️ 重置</button>
     <div style="text-align:center;margin-top:14px;padding-top:12px;border-top:1px solid #e2e8f0;font-size:11px;color:#94a3b8">
-      虾哥 · 酱卤肉制品全链路成本核算报价工具 🦞<br>
-      臻卤源生物 · 滄林团队出品 | 数据自动保存本地
+      虾哥·滄林团队 · 酱卤肉制品全链路成本核算报价工具 🦞<br>
+      数据自动保存本地 | 可导出文本/CSV
     </div></div>
 </div>
 <div class="ft">
