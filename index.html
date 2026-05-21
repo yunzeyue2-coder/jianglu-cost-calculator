@@ -120,7 +120,11 @@ input:focus,select:focus{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,23
     <div style="display:flex;gap:6px;flex-wrap:wrap">
       <button class="btn bp" onclick="exportText()" style="flex:1;min-width:110px">📋 复制</button>
       <button class="btn bs" onclick="exportCSV()" style="flex:1;min-width:110px">📥 CSV</button></div>
-    <button class="btn br mt" onclick="resetAll()">🗑️ 重置</button></div>
+    <button class="btn br mt" onclick="resetAll()">🗑️ 重置</button>
+    <div style="text-align:center;margin-top:14px;padding-top:12px;border-top:1px solid #e2e8f0;font-size:11px;color:#94a3b8">
+      虾哥 · 酱卤肉制品全链路成本核算报价工具 🦞<br>
+      臻卤源生物 · 滄林团队出品 | 数据自动保存本地
+    </div></div>
 </div>
 <div class="ft">
   <button class="btn bp" onclick="goTo('sec-price');calc();calcPrice()">📈 看报价+图表</button>
@@ -264,7 +268,7 @@ function exportText(){
   o+='\n━━━ 成本结构对比 ━━━\n';
   var its=[{l:'原料',v:pcts.raw,n:NORM.raw},{l:'包装',v:pcts.pkg,n:NORM.pkg},{l:'制费',v:pcts.mfg,n:NORM.mfg},{l:'物流',v:pcts.log,n:NORM.log}];
   its.forEach(function(x){var d=x.v-x.n;o+='  '+x.l+'：实际 '+x.v.toFixed(1)+'% / 正常 '+x.n+'%'+(d>0?' +'+d.toFixed(1)+'% ↑':d<0?' '+d.toFixed(1)+'% ↓':' 持平')+'\n'});
-  o+='━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n生成：虾哥酱卤成本报价器 🦞';
+  o+='━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n虾哥 · 酱卤肉制品全链路成本核算报价工具 🦞\n臻卤源生物 · 滄林团队出品\nhttps://yunzeyue2-coder.github.io/jianglu-cost-calculator/';
   if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(o).then(function(){alert('✅ 已复制')}).catch(function(){alert('复制失败')});else alert('📋\n\n'+o)}
 function exportCSV(){var nm=S.name||'未命名',c='产品,规格,成本项,单价,单位,用量/克,小计\n';
   S.main.forEach(function(x){c+=nm+','+S.spec+',主料-'+x.n+','+x.p+','+x.u+','+x.us+','+(x.p/(x.nr/100)*x.us/1000).toFixed(4)+'\n'});
