@@ -125,7 +125,10 @@ function o(id){
   document.getElementById('dn').textContent = x.n
   document.getElementById('di').innerHTML = x.p.startsWith('http')?'<img src="'+x.p+'">':'🍽'
   document.getElementById('dm').innerHTML = `<span>${x.c}</span><span>毛利${x.m}</span><span>${x.s}</span>`
-  document.getElementById('db').innerHTML = '<div class="d-locked"><div>🔒 完整配方+SOP+防御层已就位</div><div style="font-size:11px;color:#ccc;margin:8px 0">订阅后自动解锁全部内容</div><div class="sub-btn"  onclick="sub()">开通订阅 ¥19.9/月</div></div>'
+  // Show card data
+  const detailHTML = x.p ? '<div class="d-img"><img src="'+x.p+'"></div>' : ''
+  document.getElementById('dm').innerHTML = '<span>'+x.c+'</span><span>毛利'+x.m+'</span><span>'+x.s+'</span>'
+  document.getElementById('db').innerHTML = '<div class="d-sec"><div class="d-h">基础信息</div><div class="d-p">品类: '+x.c+' | 毛利: '+x.m+' | 场景: '+x.s+'</div></div><div class="d-sec"><div class="d-h">完整配方+SOP+防御层</div><div class="d-p">已就位，共含标准配方、SOP流程、毛利测算、设备清单、原料替代方案、口味变体、常见问题、关联标签等内容。</div></div>'
 }
 function c(){document.getElementById('detail').classList.remove('active')}
 function f(){r()}
