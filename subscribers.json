@@ -1,0 +1,6 @@
+{
+  "version": 1,
+  "subscribers": [
+    {"id":"demo","name":"演示用户","plan":"lifetime","since":"2026-05-27"}
+  ]
+}

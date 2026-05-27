@@ -188,6 +188,31 @@ const allCards = [
   {id:'XC-015',name:'卤鸭锁骨',cat:'酱卤',tag:'',img:'🦆',scene:'零食/电商',margin:'42%'},
 ]
 let curCat = '全部'
+
+// Subscriber check - uses token from URL param or localStorage
+function getAccessToken(){
+  const urlToken = new URLSearchParams(window.location.search).get('token')
+  if(urlToken){localStorage.setItem('kaku_token',urlToken);return urlToken}
+  return localStorage.getItem('kaku_token')
+}
+
+function checkAccess(){
+  const t = getAccessToken()
+  if(!t) return false
+  // For now, check against demo subscribers
+  // In production, this would call an API or load a subscribers.json
+  try{
+    // Simple check: tokens starting with "kaku_" are valid demo tokens
+    // Real implementation will use a proper backend
+    if(t === 'demo' || t.startsWith('kaku_')) return true
+  }catch(e){}
+  return false
+}
+
+// Initialize subscription state from token
+const hasAccess = checkAccess()
+if(hasAccess) subscribed = true
+
 let subscribed = false
 let currentCard = null
 
