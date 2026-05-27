@@ -179,6 +179,7 @@ const IMG_BASE = 'https://yunzeyue2-coder.github.io/jianglu-cost-calculator/imag
 const allCards = [
   {id:'CD-001',name:'脆皮冰淇淋块',cat:'冷饮',tag:'新',img:IMG_BASE+'cd001.jpg',scene:'夜市/学校',margin:'65%'},
   {id:'TL-001',name:'商用万能脆皮裹粉',cat:'调味料',tag:'新',img:IMG_BASE+'tl001.jpg',scene:'炸串/炸鸡',margin:'80%'},
+  {id:'XC-001',name:'脆皮烤鸭（商用版）',cat:'鲜制肉品',tag:'新',img:IMG_BASE+'',scene:'熟食档口/夜市',margin:'42-51%'},
 ]
 
 // Favorites
@@ -234,7 +235,7 @@ function showApp(phone){
   }
 })()
 
-const CATS = ['全部','⭐ 收藏','🔥 火爆','🆕 新卡','酱卤','冷饮','烘焙','小吃','调味料']
+const CATS = ['全部','⭐ 收藏','🔥 火爆','🆕 新卡','鲜制肉品','冷饮','烘焙','小吃','调味料']
 
 function init(){
   document.getElementById('cardCount').textContent = allCards.length
