@@ -137,6 +137,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans SC",s
   <div class="d-title" id="dTitle"></div>
   <div class="d-tags" id="dTags"></div>
   <div id="dBody"></div>
+  <!-- 互动区（预留） -->
+  <div style="margin-top:16px;padding-top:12px;border-top:1px solid #f0eee8">
+    <div style="font-size:11px;color:#999;margin-bottom:8px">💬 出摊人交流区</div>
+    <div style="text-align:center;padding:16px 0;background:#fafaf8;border-radius:8px;font-size:12px;color:#ccc">
+      已有 <strong>0</strong> 人实践了这个配方<br>
+      <span style="font-size:11px">随着用户增多，这里会出现出摊人的真实反馈和联系方式</span>
+    </div>
+  </div>
   <div style="font-size:10px;color:#ccc;margin-top:20px;padding-top:12px;border-top:1px solid #f0eee8;line-height:1.6">
     免责声明：原料/人工/零售价因地区和时间存在差异，本卡仅供参考。请实地考察比对后再投入。
   </div>
@@ -172,6 +180,15 @@ const allCards = [
   {id:'CD-001',name:'脆皮冰淇淋块',cat:'冷饮',tag:'新',img:IMG_BASE+'cd001.jpg',scene:'夜市/学校',margin:'65%'},
   {id:'TL-001',name:'商用万能脆皮裹粉',cat:'调味料',tag:'新',img:IMG_BASE+'tl001.jpg',scene:'炸串/炸鸡',margin:'80%'},
 ]
+
+// Favorites
+function toggleFav(id){
+  let f = JSON.parse(localStorage.getItem('kaku_fav')||'[]')
+  if(f.includes(id)){f=f.filter(x=>x!==id)}else{f.push(id)}
+  localStorage.setItem('kaku_fav',JSON.stringify(f))
+  renderGrid()
+}
+function isFav(id){return JSON.parse(localStorage.getItem('kaku_fav')||'[]').includes(id)}
 let curCat = '全部', currentCard = null
 
 // Login
@@ -217,7 +234,7 @@ function showApp(phone){
   }
 })()
 
-const CATS = ['全部','🔥 火爆','🆕 新卡','酱卤','冷饮','烘焙','小吃','调味料']
+const CATS = ['全部','⭐ 收藏','🔥 火爆','🆕 新卡','酱卤','冷饮','烘焙','小吃','调味料']
 
 function init(){
   document.getElementById('cardCount').textContent = allCards.length
@@ -234,7 +251,10 @@ function filter(cat){curCat=cat;renderChips();renderGrid()}
 
 function renderGrid(){
   let list = allCards
-  if(curCat==='🔥 火爆') list=allCards.filter(c=>c.tag==='火')
+  if(curCat==='⭐ 收藏'){
+    const favs=JSON.parse(localStorage.getItem('kaku_fav')||'[]')
+    list=allCards.filter(c=>favs.includes(c.id))
+  }else if(curCat==='🔥 火爆') list=allCards.filter(c=>c.tag==='火')
   else if(curCat==='🆕 新卡') list=allCards.filter(c=>c.tag==='新')
   else if(curCat!=='全部') list=allCards.filter(c=>c.cat===curCat)
 
@@ -243,7 +263,7 @@ function renderGrid(){
   el.innerHTML = list.map(c=>`
     <div class="card" onclick="openDetail('${c.id}')">
       <div class="img">${c.img.startsWith('http')?'<img src="'+c.img+'">':c.img}${c.tag==='新'?'<span class="badge badge-new">新</span>':''}${c.tag==='火'?'<span class="badge badge-fire">🔥</span>':''}</div>
-      <div class="body"><div class="name">${c.name}</div><div class="meta"><span class="tag">${c.cat}</span><span>毛利${c.margin}</span></div></div>
+      <div class="body" style="position:relative"><div class="name">${c.name}</div><div class="meta"><span class="tag">${c.cat}</span><span>毛利${c.margin}</span></div><span onclick="event.stopPropagation();toggleFav('${c.id}')" style="position:absolute;top:-2px;right:2px;font-size:16px;cursor:pointer">${isFav(c.id)?'⭐':'☆'}</span></div>
     </div>`
   ).join('')
   el.closest('.grid').classList.add('active')
@@ -255,7 +275,7 @@ function doSearch(){
   const list = allCards.filter(c=>c.name.includes(q)||c.cat.includes(q))
   const el = document.getElementById('grid')
   if(!list.length){el.innerHTML='<div style="padding:60px 20px;text-align:center;color:#ccc;grid-column:1/-1">未找到"'+q+'"</div>';return}
-  el.innerHTML = list.map(c=>`<div class="card" onclick="openDetail('${c.id}')"><div class="img">${c.img.startsWith('http')?'<img src="'+c.img+'">':c.img}</div><div class="body"><div class="name">${c.name}</div><div class="meta"><span class="tag">${c.cat}</span><span>毛利${c.margin}</span></div></div></div>`).join('')
+  el.innerHTML = list.map(c=>`<div class="card" onclick="openDetail('${c.id}')"><div class="img">${c.img.startsWith('http')?'<img src="'+c.img+'">':c.img}</div><div class="body" style="position:relative"><div class="name">${c.name}</div><div class="meta"><span class="tag">${c.cat}</span><span>毛利${c.margin}</span></div><span onclick="event.stopPropagation();toggleFav('${c.id}')" style="position:absolute;top:-2px;right:2px;font-size:16px;cursor:pointer">${isFav(c.id)?'⭐':'☆'}</span></div></div>`).join('')
 }
 
 function openDetail(id){
