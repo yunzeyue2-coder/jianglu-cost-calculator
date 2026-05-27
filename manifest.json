@@ -1,20 +1,20 @@
 {
-  "name": "卡库",
-  "short_name": "卡库",
+  "name": "咔库",
+  "short_name": "咔库",
   "description": "食品产品卡库 · 配方·SOP·毛利·场景",
   "start_url": "/jianglu-cost-calculator/card.html",
   "display": "standalone",
-  "background_color": "#f8f7f4",
+  "background_color": "#c8a96e",
   "theme_color": "#1a1a1a",
   "orientation": "portrait",
   "icons": [
     {
-      "src": "/jianglu-cost-calculator/images/icon-192.png",
+      "src": "/jianglu-cost-calculator/images/kaku-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/jianglu-cost-calculator/images/icon-512.png",
+      "src": "/jianglu-cost-calculator/images/kaku-512.png",
       "sizes": "512x512",
       "type": "image/png"
     }

@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-<title>卡库 · 产品卡</title>
+<title>咔库 · 产品卡</title>
 <link rel="manifest" href="/jianglu-cost-calculator/manifest.json">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="卡库">
-<link rel="apple-touch-icon" href="/jianglu-cost-calculator/images/icon-192.png">
+<meta name="apple-mobile-web-app-title" content="咔库">
+<link rel="apple-touch-icon" href="/jianglu-cost-calculator/images/kaku-192.png">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans SC",sans-serif;background:#f8f7f4;color:#1a1a1a;line-height:1.5;-webkit-font-smoothing:antialiased}
@@ -102,17 +102,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans SC",s
 <!-- login page -->
 <div class="login-page active" id="loginPage">
   <div class="login-logo">📇</div>
-  <div class="login-title">卡库</div>
+  <div class="login-title">咔库</div>
   <div class="login-sub">输入手机号即可体验 · 无需注册</div>
   <input class="login-input" id="phoneInput" placeholder="手机号" type="tel" autocomplete="off">
-  <div class="login-btn" onclick="doLogin()">进入卡库</div>
+  <div class="login-btn" onclick="doLogin()">进入咔库</div>
   <div class="login-note">当前为免费体验阶段<br>已有账号？<a href="#" onclick="showLogin()">换个号码登录</a></div>
 </div>
 
 <!-- app -->
 <div id="appArea" style="display:none">
 <div class="hd">
-  <h1>卡库</h1>
+  <h1>咔库</h1>
   <div class="hd-r">
     <span id="userDisplay" class="user"></span>
     <span class="btn" onclick="logout()">退出</span>
@@ -144,7 +144,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans SC",s
 
 <div class="modal" id="subModal">
   <div class="modal-inner">
-    <h2>订阅卡库</h2>
+    <h2>订阅咔库</h2>
     <p>解锁全部产品卡，每日更新</p>
     <div class="plan">
       <div class="plan-item active" onclick="selectPlan(this,'monthly')">
