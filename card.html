@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>卡库 · 产品卡</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans SC",sans-serif;background:#f8f7f4;color:#1a1a1a;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:420px;margin:0 auto;padding:0 12px}
+
+/* header */
+.hd{display:flex;align-items:center;justify-content:space-between;padding:16px 0 10px;position:sticky;top:0;background:#f8f7f4;z-index:10}
+.hd h1{font-size:18px;font-weight:600;letter-spacing:2px}
+.hd .right{display:flex;gap:12px;align-items:center}
+.hd .right .icon{font-size:18px;cursor:pointer;color:#666;text-decoration:none}
+.hd .right .icon:hover{color:#1a1a1a}
+
+/* search */
+.sb{display:flex;gap:8px;padding:8px 0 12px}
+.sb input{flex:1;padding:10px 14px;border:1px solid #e0ddd8;border-radius:20px;font-size:14px;outline:none;background:#fff;transition:border .2s;font-family:inherit}
+.sb input:focus{border-color:#1a1a1a}
+.sb input::placeholder{color:#bbb}
+.sb .sbtn{padding:10px 16px;border:none;border-radius:20px;background:#1a1a1a;color:#fff;font-size:13px;cursor:pointer;font-family:inherit}
+
+/* chips */
+.chips{display:flex;gap:6px;overflow-x:auto;padding:0 0 12px;-webkit-overflow-scrolling:touch}
+.chips::-webkit-scrollbar{display:none}
+.chip{padding:6px 14px;border:1px solid #e0ddd8;border-radius:16px;font-size:12px;white-space:nowrap;cursor:pointer;background:#fff;transition:.15s;flex-shrink:0;color:#666}
+.chip:hover{border-color:#1a1a1a;color:#1a1a1a}
+.chip.active{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
+.chip.fire::after{content:' 🔥';font-size:10px}
+.chip.new::after{content:' 🆕';font-size:10px}
+
+/* card grid */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding-bottom:80px}
+.card{background:#fff;border-radius:10px;overflow:hidden;cursor:pointer;transition:.15s;box-shadow:0 1px 3px rgba(0,0,0,.04);border:1px solid #f0eee8}
+.card:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.06)}
+.card .img{width:100%;aspect-ratio:16/10;background:#f0eee8;display:flex;align-items:center;justify-content:center;font-size:28px;color:#ccc;position:relative;overflow:hidden}
+.card .img img{width:100%;height:100%;object-fit:cover}
+.card .badge{position:absolute;top:6px;left:6px;font-size:9px;padding:2px 6px;border-radius:4px;font-weight:500}
+.badge-new{background:#ff4d4f;color:#fff}
+.badge-fire{background:#ff6b00;color:#fff}
+.badge-top{background:#1a1a1a;color:#fff}
+.card .body{padding:10px}
+.card .name{font-size:13px;font-weight:500;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.card .meta{font-size:11px;color:#999;display:flex;gap:6px;align-items:center}
+.card .meta .tag{background:#f5f3ef;padding:1px 6px;border-radius:3px;font-size:10px}
+.card .price{font-weight:600;color:#1a1a1a;font-size:13px;margin-left:auto}
+
+/* subscribe banner */
+.sub-banner{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #f0eee8;padding:12px 16px;max-width:420px;margin:0 auto;display:flex;align-items:center;gap:12px;z-index:100}
+.sub-banner .text{flex:1;font-size:12px;color:#666}
+.sub-banner .text strong{color:#1a1a1a;font-weight:600}
+.sub-btn{padding:10px 24px;background:#1a1a1a;color:#fff;border:none;border-radius:20px;font-size:13px;font-weight:500;cursor:pointer;font-family:inherit;transition:.15s}
+.sub-btn:hover{background:#333}
+
+/* page states */
+.page{display:none}
+
+/* card detail page */
+.detail{padding:0 0 100px}
+.d-back{display:inline-flex;align-items:center;gap:4px;font-size:12px;color:#666;cursor:pointer;padding:12px 0 8px}
+.d-back:hover{color:#1a1a1a}
+.d-img{width:100%;aspect-ratio:16/10;background:#f0eee8;border-radius:10px;overflow:hidden;margin-bottom:14px;display:flex;align-items:center;justify-content:center;font-size:40px;color:#ccc}
+.d-img img{width:100%;height:100%;object-fit:cover}
+.d-title{font-size:18px;font-weight:600;margin-bottom:2px}
+.d-tags{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+.d-tags span{font-size:11px;background:#f5f3ef;padding:2px 8px;border-radius:4px;color:#666}
+.d-price{font-size:15px;font-weight:600;margin-bottom:14px}
+.d-price span{font-size:12px;color:#999;font-weight:400}
+.d-section{margin-bottom:14px}
+.d-h{font-size:12px;font-weight:600;margin-bottom:6px;color:#888;letter-spacing:1px}
+.d-p{font-size:13px;color:#444;line-height:1.7}
+.d-list{list-style:none;padding:0}
+.d-list li{font-size:13px;color:#444;padding:5px 0;border-bottom:1px solid #f0eee8;display:flex;gap:8px}
+.d-list li::before{content:'·';color:#ccc}
+.d-locked{text-align:center;padding:30px 0;color:#999;font-size:13px}
+.d-locked .lock-btn{display:inline-block;padding:10px 32px;background:#1a1a1a;color:#fff;border:none;border-radius:20px;font-size:14px;cursor:pointer;margin-top:10px;font-family:inherit}
+
+/* subscribe modal */
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:flex-end;justify-content:center}
+.modal.active{display:flex}
+.modal-inner{background:#fff;border-radius:16px 16px 0 0;padding:24px 16px 32px;max-width:420px;width:100%}
+.modal-inner h2{font-size:16px;font-weight:600;margin-bottom:4px}
+.modal-inner p{font-size:12px;color:#999;margin-bottom:20px}
+.plan{display:flex;gap:8px;margin-bottom:14px}
+.plan-item{flex:1;border:1px solid #e0ddd8;border-radius:10px;padding:14px;text-align:center;cursor:pointer;transition:.15s}
+.plan-item:hover{border-color:#1a1a1a}
+.plan-item.active{border-color:#1a1a1a;background:#fafaf8}
+.plan-item .p1{font-size:12px;color:#666;margin-bottom:4px}
+.plan-item .p2{font-size:18px;font-weight:600}
+.plan-item .p3{font-size:11px;color:#999;margin-top:2px}
+.plan-item .badge-select{display:none}
+.plan-item.active .badge-select{display:block;color:#1a1a1a;font-size:12px;margin-top:6px}
+.pay-btn{width:100%;padding:14px;background:#1a1a1a;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:500;cursor:pointer;font-family:inherit}
+.pay-btn:hover{background:#333}
+.modal-close{text-align:center;padding:12px 0 0;font-size:12px;color:#999;cursor:pointer}
+
+/* empty */
+.empty{text-align:center;padding:60px 20px;color:#ccc;font-size:14px}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<!-- header -->
+<div class="hd">
+  <h1>卡库</h1>
+  <div class="right">
+    <span class="icon" onclick="showSearch()">🔍</span>
+    <span class="icon" onclick="openSubscribe()">👤</span>
+  </div>
+</div>
+
+<!-- browse page -->
+<div id="page-browse" class="page" style="display:block">
+  <div class="sb" id="searchBar" style="display:none">
+    <input id="searchInput" placeholder="搜产品名/品类/原料…" onkeydown="if(event.key=='Enter')search()" autocomplete="off">
+    <div class="sbtn" onclick="search()">搜</div>
+  </div>
+
+  <div class="chips" id="chips"></div>
+
+  <div class="grid" id="grid"></div>
+
+  <div class="sub-banner">
+    <div class="text">已有 <strong id="cardCount">0</strong> 张产品卡，每日更新</div>
+    <div class="sub-btn" onclick="openSubscribe()">订阅</div>
+  </div>
+</div>
+
+<!-- detail page -->
+<div id="page-detail" class="page">
+  <div class="detail" id="detailContent"></div>
+</div>
+
+<!-- subscribe modal -->
+<div class="modal" id="subModal">
+  <div class="modal-inner">
+    <h2>订阅卡库</h2>
+    <p>解锁全部产品卡，每日更新</p>
+    <div class="plan">
+      <div class="plan-item active" onclick="selectPlan(this,'monthly')">
+        <div class="p1">月度</div>
+        <div class="p2">¥19.9</div>
+        <div class="p3">续订自动扣</div>
+        <div class="badge-select">✓</div>
+      </div>
+      <div class="plan-item" onclick="selectPlan(this,'yearly')">
+        <div class="p1">年度</div>
+        <div class="p2">¥199</div>
+        <div class="p3">相当于¥16.6/月</div>
+      </div>
+      <div class="plan-item" onclick="selectPlan(this,'lifetime')">
+        <div class="p1">永久</div>
+        <div class="p2">¥499</div>
+        <div class="p3">一次付款终身用</div>
+      </div>
+    </div>
+    <div class="pay-btn" onclick="alert('支付接入中，稍后开通')">立即订阅</div>
+    <div class="modal-close" onclick="closeSubscribe()">稍后再说</div>
+  </div>
+</div>
+
+</div>
+
+<script>
+// Demo data
+const CATS = ['全部','🔥 火爆','🆕 新卡','酱卤','冷饮','烘焙','小吃','调理']
+const allCards = [
+  {id:'CD-001',name:'脆皮冰淇淋块',cat:'冷饮',tag:'新',img:'🍦',scene:'夜市/学校',margin:'65%'},
+  {id:'XC-002',name:'椒麻鸡',cat:'酱卤',tag:'火',img:'🐔',scene:'抖音/下酒',margin:'45%'},
+  {id:'CD-003',name:'脆脆冰芯糕',cat:'冷饮',tag:'新',img:'🍨',scene:'夜市/夏季',margin:'60%'},
+  {id:'CD-004',name:'芒果糯米饭杯',cat:'冷饮',tag:'',img:'🥭',scene:'夜市/甜品',margin:'55%'},
+  {id:'HB-005',name:'手撕红糖馒头',cat:'烘焙',tag:'',img:'🥟',scene:'早餐/连锁',margin:'50%'},
+  {id:'HB-006',name:'爆汁牛肉饼',cat:'烘焙',tag:'火',img:'🥩',scene:'早餐/摊车',margin:'55%'},
+  {id:'XC-007',name:'茶香鸡（整只）',cat:'酱卤',tag:'',img:'🐓',scene:'门市/餐饮',margin:'32%'},
+  {id:'XC-008',name:'酱卤猪蹄',cat:'酱卤',tag:'火',img:'🐖',scene:'门市/夜市',margin:'40%'},
+  {id:'XC-009',name:'五香牛肉',cat:'酱卤',tag:'',img:'🐄',scene:'门市/礼盒',margin:'35%'},
+  {id:'SN-010',name:'脆皮炸鲜奶',cat:'小吃',tag:'新',img:'🥛',scene:'夜市/炸串摊',margin:'60%'},
+  {id:'SN-011',name:'狼牙土豆',cat:'小吃',tag:'火',img:'🥔',scene:'夜市/学校',margin:'70%'},
+  {id:'SN-012',name:'烤面筋串',cat:'小吃',tag:'',img:'🍢',scene:'夜市/路边',margin:'65%'},
+  {id:'HB-013',name:'古法鸡蛋糕',cat:'烘焙',tag:'',img:'🥚',scene:'早餐/超市',margin:'45%'},
+  {id:'CD-014',name:'双皮奶（碗装）',cat:'冷饮',tag:'',img:'🍮',scene:'甜品店/外卖',margin:'55%'},
+  {id:'XC-015',name:'卤鸭锁骨',cat:'酱卤',tag:'',img:'🦆',scene:'零食/电商',margin:'42%'},
+]
+let curCat = '全部'
+let subscribed = false
+let currentCard = null
+
+// Init
+document.getElementById('cardCount').textContent = allCards.length
+
+function renderChips(){
+  const el = document.getElementById('chips')
+  el.innerHTML = CATS.map(c => `<div class="chip${c===curCat?' active':''}${c.includes('🔥')?' fire':''}${c.includes('🆕')?' new':''}" onclick="filter('${c}')">${c}</div>`).join('')
+}
+
+function filter(cat){
+  curCat = cat
+  renderChips()
+  renderGrid()
+}
+
+function renderGrid(){
+  const el = document.getElementById('grid')
+  let list = allCards
+
+  if(curCat === '🔥 火爆') list = allCards.filter(c => c.tag === '火')
+  else if(curCat === '🆕 新卡') list = allCards.filter(c => c.tag === '新')
+  else if(curCat !== '全部') list = allCards.filter(c => c.cat === curCat)
+
+  if(!list.length){
+    el.innerHTML = '<div class="empty">暂无产品卡</div>'
+    return
+  }
+
+  el.innerHTML = list.map(c => `
+    <div class="card" onclick="openDetail('${c.id}')">
+      <div class="img">
+        ${c.img}
+        ${c.tag==='新'?'<span class="badge badge-new">新</span>':''}
+        ${c.tag==='火'?'<span class="badge badge-fire">🔥</span>':''}
+      </div>
+      <div class="body">
+        <div class="name">${c.name}</div>
+        <div class="meta">
+          <span class="tag">${c.cat}</span>
+          <span>毛利${c.margin}</span>
+        </div>
+      </div>
+    </div>
+  `).join('')
+}
+
+function showSearch(){
+  const el = document.getElementById('searchBar')
+  el.style.display = el.style.display === 'none' ? 'flex' : 'none'
+  if(el.style.display === 'flex') document.getElementById('searchInput').focus()
+}
+
+function search(){
+  const q = document.getElementById('searchInput').value.trim().toLowerCase()
+  if(!q) return renderGrid()
+
+  const el = document.getElementById('grid')
+  const list = allCards.filter(c => c.name.includes(q) || c.cat.includes(q))
+  if(!list.length){el.innerHTML='<div class="empty">未找到"'+q+'"</div>';return}
+  el.innerHTML = list.map(c => `
+    <div class="card" onclick="openDetail('${c.id}')">
+      <div class="img">${c.img}</div>
+      <div class="body">
+        <div class="name">${c.name}</div>
+        <div class="meta"><span class="tag">${c.cat}</span><span>毛利${c.margin}</span></div>
+      </div>
+    </div>
+  `).join('')
+}
+
+function openDetail(id){
+  currentCard = allCards.find(c => c.id === id)
+  if(!currentCard) return
+
+  document.getElementById('page-browse').style.display = 'none'
+  document.getElementById('page-detail').style.display = 'block'
+
+  document.getElementById('detailContent').innerHTML = `
+    <div class="d-back" onclick="closeDetail()">← 返回</div>
+    <div class="d-img">${currentCard.img}</div>
+    <div class="d-title">${currentCard.name}</div>
+    <div class="d-tags"><span>${currentCard.cat}</span><span>毛利${currentCard.margin}</span><span>${currentCard.scene}</span></div>
+    <div class="d-price">${subscribed?'已订阅 ✅':'¥19.9'}<span> ${subscribed?'':'单张购买或订阅解锁全部'}</span></div>
+    ${subscribed ? `
+      <div class="d-section"><div class="d-h">配方</div><div class="d-p">淡奶油100g · 酸奶80g · 炼乳15g · 奥利奥碎15g×2 · 巧克力酱适量</div></div>
+      <div class="d-section"><div class="d-h">SOP</div><ul class="d-list"><li>淡奶油+炼乳打至6-7成发</li><li>加入酸奶拌匀，分两份</li><li>分别拌入黑色/粉色奥利奥碎</li><li>挤入模具冷冻8h+</li><li>插竹签浸巧克力酱2秒</li></ul></div>
+      <div class="d-section"><div class="d-h">售卖场景</div><div class="d-p">${currentCard.scene} · 单份8-12元 · 配送或摊位模式</div></div>
+      <div class="d-section"><div class="d-h">毛利参考</div><div class="d-p">成本约3-4元/份 · 建议零售8-12元 · 毛利60-65%</div></div>
+    ` : `
+      <div class="d-locked">
+        <div>🔒 已锁定</div>
+        <div style="font-size:11px;color:#ccc;margin:6px 0">订阅后查看完整配方+SOP+毛利测算</div>
+        <div class="lock-btn" onclick="openSubscribe()">订阅 ¥19.9/月起</div>
+      </div>
+    `}
+    <div style="font-size:10px;color:#ccc;margin-top:20px;padding-top:12px;border-top:1px solid #f0eee8;line-height:1.6">
+      免责声明：原料/人工/零售价因地区和时间存在差异，本卡仅供参考。
+      请实地考察比对后再投入。本卡整理自公开资料与行业经验。
+    </div>
+  `
+}
+
+function closeDetail(){
+  document.getElementById('page-detail').style.display = 'none'
+  document.getElementById('page-browse').style.display = 'block'
+}
+
+function openSubscribe(){document.getElementById('subModal').classList.add('active')}
+function closeSubscribe(){document.getElementById('subModal').classList.remove('active')}
+function selectPlan(el,p){document.querySelectorAll('.plan-item').forEach(e=>e.classList.remove('active'));el.classList.add('active')}
+
+// Init
+renderChips()
+renderGrid()
+</script>
+</body>
+</html>
