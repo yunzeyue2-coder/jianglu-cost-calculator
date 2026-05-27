@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>潜卤 · 酱卤机会研判</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#f5f5f0;color:#1a1a1a;padding:16px;max-width:480px;margin:0 auto}
+.header{text-align:center;padding:24px 0 16px}
+.header h1{font-size:22px;font-weight:700;letter-spacing:2px}
+.header .sub{font-size:12px;color:#888;margin-top:4px}
+.nav{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}
+.nav-item{padding:8px 16px;border:1px solid #ddd;border-radius:20px;font-size:13px;cursor:pointer;background:#fff;transition:.2s}
+.nav-item.active{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
+.nav-item:hover:not(.active){border-color:#999}
+.chapter{display:none}
+.chapter.active{display:block}
+.section-title{font-size:16px;font-weight:600;margin:20px 0 12px;padding-left:8px;border-left:3px solid #1a1a1a}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.card{background:#fff;border-radius:8px;padding:16px;cursor:pointer;transition:.2s;border:1px solid #eee}
+.card:hover{border-color:#1a1a1a;transform:translateY(-1px)}
+.card .emoji{font-size:24px;margin-bottom:6px}
+.card .name{font-size:14px;font-weight:500}
+.card .count{font-size:11px;color:#999;margin-top:4px}
+.sub-card{background:#fff;border-radius:8px;padding:12px 16px;margin:6px 0;cursor:pointer;border:1px solid #eee;display:flex;justify-content:space-between;align-items:center;transition:.2s}
+.sub-card:hover{border-color:#1a1a1a}
+.sub-card .name{font-size:13px}
+.sub-card .arrow{color:#ccc;font-size:14px}
+.breadcrumb{font-size:12px;color:#999;padding:8px 0;margin-bottom:8px;border-bottom:1px solid #eee}
+.breadcrumb span{cursor:pointer}
+.breadcrumb span:hover{color:#1a1a1a}
+.back{display:inline-block;padding:6px 12px;font-size:12px;color:#666;cursor:pointer;margin-bottom:12px;border:1px solid #ddd;border-radius:4px;background:#fff}
+.back:hover{color:#1a1a1a;border-color:#1a1a1a}
+.product-list{display:flex;flex-direction:column;gap:8px}
+.product-item{background:#fff;border-radius:8px;padding:14px 16px;border:1px solid #eee;cursor:pointer;transition:.2s}
+.product-item:hover{border-color:#1a1a1a}
+.product-item .name{font-size:14px;font-weight:500}
+.product-item .meta{font-size:11px;color:#999;margin-top:4px}
+.pricing{background:#fafaf5;border-radius:8px;padding:16px;margin:16px 0;border:1px solid #e8e8e0}
+.pricing .price{font-size:18px;font-weight:700;color:#1a1a1a}
+.pricing .note{font-size:11px;color:#999;margin-top:6px}
+.pay-btn{display:block;width:100%;padding:14px;background:#1a1a1a;color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:500;cursor:pointer;margin-top:12px;transition:.2s}
+.pay-btn:hover{background:#333}
+.process{background:#fff;border-radius:8px;padding:16px;margin:12px 0}
+.process-step{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #f0f0eb}
+.process-step:last-child{border:none}
+.process-step .step-num{width:24px;height:24px;background:#1a1a1a;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0}
+.process-step .step-text{font-size:13px;line-height:1.6}
+.process-step .step-detail{font-size:12px;color:#666;margin-top:2px}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>潜卤</h1>
+  <div class="sub">酱卤老兵 · 酱卤机会研判</div>
+</div>
+
+<div class="nav" id="nav">
+  <div class="nav-item active" data-chapter="raw">鲜卤·冷藏</div>
+  <div class="nav-item" data-chapter="sauce">酱卤</div>
+  <div class="nav-item" data-chapter="snack">休闲卤味</div>
+  <div class="nav-item" data-chapter="season">调理·调味</div>
+</div>
+
+<div id="content">
+  <!-- 品类选择层级 -->
+  <div id="level-category" class="chapter active">
+    <div class="section-title">选择原料</div>
+    <div class="row" id="category-grid">
+      <div class="card" data-type="chicken"><div class="emoji">🐔</div><div class="name">鸡类</div><div class="count">整鸡 · 鸡副</div></div>
+      <div class="card" data-type="duck"><div class="emoji">🦆</div><div class="name">鸭类</div><div class="count">整鸭 · 鸭副</div></div>
+      <div class="card" data-type="pig"><div class="emoji">🐖</div><div class="name">猪类</div><div class="count">整猪 · 分割品</div></div>
+      <div class="card" data-type="cow"><div class="emoji">🐄</div><div class="name">牛类</div><div class="count">整牛 · 分割品</div></div>
+    </div>
+  </div>
+
+  <!-- 原料形态层级 -->
+  <div id="level-form" class="chapter">
+    <div class="breadcrumb" id="bread-form"><span onclick="showCategory()">鲜卤·冷藏</span> › <span id="bread-form-type"></span></div>
+    <div class="section-title">选择形态</div>
+    <div id="form-list"></div>
+  </div>
+
+  <!-- 产品列表层级 -->
+  <div id="level-product" class="chapter">
+    <div class="breadcrumb" id="bread-product"><span onclick="showCategory()">鲜卤·冷藏</span> › <span id="bread-product-type"></span> › <span id="bread-product-form"></span></div>
+    <div class="section-title">产品</div>
+    <div class="product-list" id="product-list"></div>
+  </div>
+
+  <!-- 产品详情页 -->
+  <div id="level-detail" class="chapter">
+    <div class="back" onclick="showProductList()">← 返回</div>
+    <h2 id="detail-title" style="font-size:18px;margin:8px 0 4px"></h2>
+    <div style="font-size:12px;color:#666;margin-bottom:12px" id="detail-tags"></div>
+
+    <div class="pricing">
+      <div class="price" id="detail-price"></div>
+      <div class="note" id="detail-note"></div>
+      <button class="pay-btn" id="pay-btn">支付后展开完整工艺</button>
+    </div>
+
+    <div id="process-container">
+      <div class="section-title" style="margin-top:24px">工艺流程</div>
+      <div class="process" id="process-list"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const state = { chapter: 'raw', type: '', form: '', paid: false }
+
+const categories = {
+  chicken: { name: '鸡类', forms: {
+    whole: { name: '整鸡', products: [
+      { id:'tea-chicken', name:'茶香鸡', price:'单品 ¥39', priceFull:'茶香鸡 · 完整工艺方案 ¥199', cat:'鲜卤·冷藏 | 鸡类·整鸡', note:'含完整配方+工艺参数+CCP+品控标准', process:[
+        '原料验收（三黄鸡，80只/锅，合格供应商）',
+        '领料拆包（核对品项和数量，拆外箱及包装膜）',
+        '解冻清洗（冷水化冰，温水≤50℃，严禁热水化冰）',
+        '腌制（0-4℃冷藏库，12h；可选干腌/炒盐腌）',
+        '油炸（170℃入锅→169℃出锅，三黄鸡需炸）',
+        '卤制（料包A+B+铁观音茶梗，全程小火保皮）',
+        '关火焖汁（熄火浸泡30min，入味+汁水回吸）',
+        '摊晾（0-10℃，中心温度≤15℃）',
+        '包装（真空封口，车间≤15℃，无漏气）',
+        '金探→入库（0-4℃冷藏储存）'
+      ] },
+      { id:'baiwei-chicken', name:'百味鸡', price:'单品 ¥39', priceFull:'百味鸡 · 完整工艺方案 ¥199', cat:'鲜卤·冷藏 | 鸡类·整鸡', note:'', process:['待填充'] },
+      { id:'tengjiao-chicken', name:'藤椒鸡', price:'单品 ¥39', priceFull:'藤椒鸡 · 完整工艺方案 ¥199', cat:'鲜卤·冷藏 | 鸡类·整鸡', note:'', process:['待填充'] }
+    ]},
+    parts: { name: '鸡副', products: [
+      { id:'fengzhua', name:'泡椒凤爪', price:'单品 ¥29', priceFull:'泡椒凤爪 · 完整工艺方案 ¥159', cat:'鲜卤·冷藏 | 鸡类·鸡副', note:'', process:['待填充'] },
+      { id:'yujian', name:'干煸鸭舌', price:'单品 ¥29', priceFull:'干煸鸭舌 · 完整工艺方案 ¥159', cat:'鲜卤·冷藏 | 鸡类·鸡副', note:'', process:['待填充'] }
+    ]}
+  }},
+  duck: { name: '鸭类', forms: { whole: { name: '整鸭', products: [] }, parts: { name: '鸭副', products: [] }}},
+  pig: { name: '猪类', forms: { whole: { name: '整猪', products: [] }, parts: { name: '分割品', products: [] }}},
+  cow: { name: '牛类', forms: { whole: { name: '整牛', products: [] }, parts: { name: '分割品', products: [] }}}
+}
+
+// Navigation
+document.querySelectorAll('.nav-item').forEach(el => {
+  el.addEventListener('click', () => {
+    document.querySelectorAll('.nav-item').forEach(e => e.classList.remove('active'))
+    el.classList.add('active')
+    state.chapter = el.dataset.chapter
+    showCategory()
+  })
+})
+
+function showCategory() {
+  hideAll()
+  document.getElementById('level-category').classList.add('active')
+}
+
+function showForm(type) {
+  state.type = type
+  const c = categories[type]
+  if(!c) return
+  
+  document.getElementById('bread-form-type').textContent = c.name
+  const list = document.getElementById('form-list')
+  list.innerHTML = Object.entries(c.forms).map(([k,v]) =>
+    `<div class="sub-card" onclick="showProducts('${type}','${k}')">
+      <span class="name">${v.name}</span>
+      <span class="arrow">${v.products.length > 0 ? v.products.length+'个 ›' : '›'}</span>
+    </div>`
+  ).join('')
+  
+  hideAll()
+  document.getElementById('level-form').classList.add('active')
+}
+
+function showProducts(type, form) {
+  state.type = type; state.form = form
+  const c = categories[type]; const f = c.forms[form]
+  
+  document.getElementById('bread-product-type').textContent = c.name
+  document.getElementById('bread-product-form').textContent = f.name
+  
+  const list = document.getElementById('product-list')
+  list.innerHTML = f.products.map(p =>
+    `<div class="product-item" onclick="showDetail('${p.id}','${type}','${form}')">
+      <div class="name">${p.name}</div>
+      <div class="meta">${p.price} · 含工艺流程</div>
+    </div>`
+  ).join('')
+  
+  hideAll()
+  document.getElementById('level-product').classList.add('active')
+}
+
+function showDetail(id, type, form) {
+  const c = categories[type]; const f = c.forms[form]
+  const p = f.products.find(x => x.id === id)
+  if(!p) return
+  
+  document.getElementById('detail-title').textContent = p.name
+  document.getElementById('detail-tags').textContent = p.cat
+  document.getElementById('detail-price').textContent = state.paid ? '已解锁 ✅' : p.priceFull
+  document.getElementById('detail-note').textContent = state.paid ? '工艺方案已全部解锁' : '支付后展开完整配方参数+CCP点+品控标准'
+  document.getElementById('pay-btn').textContent = state.paid ? '已支付' : '支付 ¥' + (p.priceFull.match(/\d+/)?.[0] || '199')
+  
+  const list = document.getElementById('process-list')
+  list.innerHTML = p.process.map((step, i) =>
+    `<div class="process-step">
+      <div class="step-num">${i+1}</div>
+      <div>
+        <div class="step-text">${step.split('（')[0]}</div>
+        ${state.paid ? '<div class="step-detail">'+step+'</div>' : '<div class="step-detail" style="color:#ccc">🔒 支付后展开参数详情</div>'}
+      </div>
+    </div>`
+  ).join('')
+  
+  hideAll()
+  document.getElementById('level-detail').classList.add('active')
+}
+
+document.getElementById('pay-btn').addEventListener('click', () => {
+  state.paid = true
+  // Re-render current detail
+  if(state.type && state.form) {
+    showDetail(
+      document.getElementById('detail-title').textContent.includes('茶香鸡') ? 'tea-chicken' : '',
+      state.type, state.form
+    )
+  }
+})
+
+function hideAll() {
+  document.querySelectorAll('.chapter').forEach(e => e.classList.remove('active'))
+}
+
+function showProductList() {
+  showProducts(state.type, state.form)
+}
+
+// Init
+document.querySelector('.card')?.click()
+document.querySelectorAll('.card').forEach(el => {
+  el.addEventListener('click', () => showForm(el.dataset.type))
+})
+</script>
+</body>
+</html>
