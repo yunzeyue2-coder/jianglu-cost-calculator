@@ -105,6 +105,7 @@ const CARDS = [
 const CATS = ['全部','鲜制肉品','面点','冷饮','小吃','调味料','汤品']
 let cur='全部'
 
+function sub(){alert('订阅即将开通')}
 function r(){
   let list = cur==='全部' ? CARDS : CARDS.filter(x=>x.c===cur)
   const qv = document.getElementById('q').value.trim().toLowerCase()
