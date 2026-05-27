@@ -4,7 +4,7 @@
   "description": "食品产品卡库 · 配方·SOP·毛利·场景",
   "start_url": "/jianglu-cost-calculator/card.html",
   "display": "standalone",
-  "background_color": "#c8a96e",
+  "background_color": "#f8f7f4",
   "theme_color": "#1a1a1a",
   "orientation": "portrait",
   "icons": [
