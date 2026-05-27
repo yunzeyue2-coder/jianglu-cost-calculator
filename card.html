@@ -4,241 +4,110 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <title>咔库 · 产品卡</title>
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <link rel="manifest" href="/jianglu-cost-calculator/manifest.json">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="咔库">
 <link rel="apple-touch-icon" href="/jianglu-cost-calculator/images/kaku-192.png">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans SC",sans-serif;background:#f8f7f4;color:#1a1a1a;line-height:1.5;-webkit-font-smoothing:antialiased}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;background:#f8f7f4;color:#1a1a1a}
 .wrap{max-width:420px;margin:0 auto;padding:0 12px}
-.hd{display:flex;align-items:center;justify-content:space-between;padding:16px 0 10px;position:sticky;top:0;background:#f8f7f4;z-index:10}
-.hd h1{font-size:18px;font-weight:600;letter-spacing:2px}
-.hd-r{display:flex;gap:8px;align-items:center}
-.hd-r .btn{font-size:11px;padding:5px 10px;border:1px solid #e0ddd8;border-radius:14px;cursor:pointer;background:#fff;transition:.15s;font-family:inherit;color:#666}
-.hd-r .btn:hover{border-color:#1a1a1a;color:#1a1a1a}
-.hd-r .user{font-size:11px;color:#999}
-
-.sb{display:flex;gap:8px;padding:8px 0 12px}
-.sb input{flex:1;padding:10px 14px;border:1px solid #e0ddd8;border-radius:20px;font-size:14px;outline:none;background:#fff;transition:border .2s;font-family:inherit}
+.hd{display:flex;align-items:center;justify-content:space-between;padding:16px 0;position:sticky;top:0;background:#f8f7f4;z-index:10}
+.hd h1{font-size:17px;font-weight:600;letter-spacing:2px}
+.sb{display:flex;gap:8px;padding:0 0 10px}
+.sb input{flex:1;padding:9px 14px;border:1px solid #ddd;border-radius:20px;font-size:13px;outline:none;background:#fff;font-family:inherit}
 .sb input:focus{border-color:#1a1a1a}
-.sb input::placeholder{color:#bbb}
-.sbtn{padding:10px 16px;border:none;border-radius:20px;background:#1a1a1a;color:#fff;font-size:13px;cursor:pointer;font-family:inherit}
-
-.chips{display:flex;gap:6px;overflow-x:auto;padding:0 0 12px;-webkit-overflow-scrolling:touch}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:0 0 10px}
 .chips::-webkit-scrollbar{display:none}
-.chip{padding:6px 14px;border:1px solid #e0ddd8;border-radius:16px;font-size:12px;white-space:nowrap;cursor:pointer;background:#fff;transition:.15s;flex-shrink:0;color:#666}
-.chip:hover{border-color:#1a1a1a;color:#1a1a1a}
+.chip{padding:5px 12px;border:1px solid #ddd;border-radius:14px;font-size:12px;white-space:nowrap;cursor:pointer;background:#fff;flex-shrink:0;color:#666}
 .chip.active{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
-
-
-.grid{display:none;grid-template-columns:1fr 1fr;gap:8px;padding-bottom:80px}
-.grid.active{display:grid}
-.card{background:#fff;border-radius:10px;overflow:hidden;cursor:pointer;transition:.15s;box-shadow:0 1px 3px rgba(0,0,0,.04);border:1px solid #f0eee8}
-.card:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.06)}
-.card .img{width:100%;aspect-ratio:16/10;background:#f0eee8;display:flex;align-items:center;justify-content:center;font-size:28px;color:#ccc;position:relative;overflow:hidden}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding-bottom:80px}
+.card{background:#fff;border-radius:10px;overflow:hidden;cursor:pointer;border:1px solid #eee}
+.card .img{width:100%;aspect-ratio:16/10;background:#eee;display:flex;align-items:center;justify-content:center;font-size:32px;position:relative;overflow:hidden}
 .card .img img{width:100%;height:100%;object-fit:cover}
-.card .badge{position:absolute;top:6px;left:6px;font-size:9px;padding:2px 6px;border-radius:4px;font-weight:500}
+.badge{position:absolute;top:5px;left:5px;font-size:9px;padding:2px 6px;border-radius:3px;font-weight:500}
 .badge-new{background:#52c41a;color:#fff}
-.badge-fire{background:#ff6b00;color:#fff}
-.card .body{padding:10px}
-.card .name{font-size:13px;font-weight:500;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.card .meta{font-size:11px;color:#999;display:flex;gap:6px;align-items:center}
+.card .body{padding:8px 10px}
+.card .name{font-size:13px;font-weight:500}
+.card .meta{font-size:11px;color:#999;display:flex;gap:6px;align-items:center;margin-top:2px}
 .card .meta .tag{background:#f5f3ef;padding:1px 6px;border-radius:3px;font-size:10px}
-.sub-banner{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #f0eee8;padding:12px 16px;max-width:420px;margin:0 auto;display:flex;align-items:center;gap:12px;z-index:100}
-.sub-banner .text{flex:1;font-size:12px;color:#666}
-.sub-banner .text strong{color:#1a1a1a;font-weight:600}
-.sub-btn{padding:10px 24px;background:#1a1a1a;color:#fff;border:none;border-radius:20px;font-size:13px;font-weight:500;cursor:pointer;font-family:inherit}
-.sub-btn:hover{background:#333}
-.detail{display:none;padding:0 0 100px}
+
+/* detail overlaid */
+.detail{display:none;position:fixed;inset:0;background:#fff;z-index:50;overflow-y:auto;padding:0 12px 40px;max-width:420px;margin:0 auto}
 .detail.active{display:block}
-.d-back{display:inline-flex;align-items:center;gap:4px;font-size:12px;color:#666;cursor:pointer;padding:12px 0 8px}
-.d-img{width:100%;aspect-ratio:16/10;background:#f0eee8;border-radius:10px;overflow:hidden;margin-bottom:14px;display:flex;align-items:center;justify-content:center;font-size:40px;color:#ccc}
+.d-top{display:flex;align-items:center;gap:8px;padding:14px 0;border-bottom:1px solid #eee;margin-bottom:14px}
+.d-back{font-size:20px;cursor:pointer;color:#666;line-height:1}
+.d-title{font-size:16px;font-weight:500}
+.d-img{width:100%;aspect-ratio:16/10;background:#eee;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:48px;margin-bottom:14px}
 .d-img img{width:100%;height:100%;object-fit:cover}
-.d-title{font-size:18px;font-weight:600;margin-bottom:2px}
-.d-tags{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
-.d-tags span{font-size:11px;background:#f5f3ef;padding:2px 8px;border-radius:4px;color:#666}
-.d-section{margin-bottom:14px}
-.d-h{font-size:12px;font-weight:600;margin-bottom:6px;color:#888;letter-spacing:1px}
-.d-p{font-size:13px;color:#444;line-height:1.7}
-.d-list{list-style:none;padding:0}
-.d-list li{font-size:13px;color:#444;padding:5px 0;border-bottom:1px solid #f0eee8;display:flex;gap:8px}
-.d-list li::before{content:'·';color:#ccc}
+.d-meta{font-size:12px;color:#999;margin-bottom:12px;display:flex;gap:10px}
+.d-meta span{background:#f5f3ef;padding:2px 8px;border-radius:4px}
+.d-sec{margin-bottom:14px}
+.d-h{font-size:11px;font-weight:600;color:#888;letter-spacing:1px;margin-bottom:6px}
+.d-p{font-size:13px;color:#444;line-height:1.6;white-space:pre-wrap}
+table{width:100%;border-collapse:collapse;font-size:12px;margin:6px 0}
+td{padding:4px 6px;border-bottom:1px solid #eee;color:#555}
+td:first-child{color:#888;width:35%}
 .d-locked{text-align:center;padding:30px 0;color:#999;font-size:13px}
-.empty{text-align:center;padding:60px 20px;color:#ccc;font-size:14px}
-.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:flex-end;justify-content:center}
-.modal.active{display:flex}
-.modal-inner{background:#fff;border-radius:16px 16px 0 0;padding:24px 16px 32px;max-width:420px;width:100%}
-.modal-inner h2{font-size:16px;font-weight:600;margin-bottom:4px}
-.modal-inner p{font-size:12px;color:#999;margin-bottom:20px}
-.plan{display:flex;gap:8px;margin-bottom:14px}
-.plan-item{flex:1;border:1px solid #e0ddd8;border-radius:10px;padding:14px;text-align:center;cursor:pointer;transition:.15s}
-.plan-item:hover{border-color:#1a1a1a;plan-item.active{border-color:#1a1a1a;background:#fafaf8}
-.plan-item .p1{font-size:12px;color:#666;margin-bottom:4px}
-.plan-item .p2{font-size:18px;font-weight:600}
-.plan-item .p3{font-size:11px;color:#999;margin-top:2px}
-.pay-btn{width:100%;padding:14px;background:#1a1a1a;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:500;cursor:pointer;font-family:inherit}
-.pay-btn:hover{background:#333}
-.modal-close{text-align:center;padding:12px 0 0;font-size:12px;color:#999;cursor:pointer}
+.sub-btn{display:inline-block;padding:10px 28px;background:#1a1a1a;color:#fff;border:none;border-radius:20px;font-size:13px;cursor:pointer;margin-top:8px}
+.ftr{bottom:0;position:fixed;max-width:420px;width:calc(100% - 24px);background:#fff;border-top:1px solid #eee;padding:10px 12px;text-align:center;font-size:11px;color:#999}
 </style>
 </head>
 <body>
 
 <div class="wrap">
-
-
-
-<!-- app -->
-<div id="appArea">
-<div class="hd">
-  <h1>咔库</h1>
-
-</div>
-
-<div class="sb" id="searchBar">
-  <input id="searchInput" placeholder="搜产品名/品类" onkeydown="if(event.key=='Enter')doSearch()" autocomplete="off">
-  <div class="sbtn" onclick="doSearch()">搜</div>
-</div>
-
+<div class="hd"><h1>咔库</h1><span style="font-size:12px;color:#999">11张</span></div>
+<div class="sb"><input id="q" placeholder="搜产品名" onkeyup="f()"></div>
 <div class="chips" id="chips"></div>
-<div class="grid active" id="grid"></div>
-
-<div class="sub-banner">
-  <div class="text">已有 <strong id="cardCount">0</strong> 张产品卡 · 免费体验中</div>
+<div class="grid" id="grid"></div>
+<div class="ftr">每张卡均含配方·SOP·毛利·设备·替代方案</div>
 </div>
 
-<div class="detail" id="detailPage">
-  <div class="d-back" onclick="closeDetail()">← 返回</div>
-  <div class="d-img" id="dImg">🍦</div>
-  <div class="d-title" id="dTitle"></div>
-  <div class="d-tags" id="dTags"></div>
-  <div id="dBody"></div>
-  <!-- 互动区（预留） -->
-  <div style="margin-top:16px;padding-top:12px;border-top:1px solid #f0eee8">
-    <div style="font-size:11px;color:#999;margin-bottom:8px">💬 出摊人交流区</div>
-    <div style="text-align:center;padding:16px 0;background:#fafaf8;border-radius:8px;font-size:12px;color:#ccc">
-      已有 <strong>0</strong> 人实践了这个配方<br>
-      <span style="font-size:11px">随着用户增多，这里会出现出摊人的真实反馈和联系方式</span>
-    </div>
-  </div>
-  <div style="font-size:10px;color:#ccc;margin-top:20px;padding-top:12px;border-top:1px solid #f0eee8;line-height:1.6">
-    免责声明：原料/人工/零售价因地区和时间存在差异，本卡仅供参考。请实地考察比对后再投入。
-  </div>
-</div>
-
-<div class="modal" id="subModal">
-  <div class="modal-inner">
-    <h2>订阅咔库</h2>
-    <p>解锁全部产品卡，每日更新</p>
-    <div class="plan">
-      <div class="plan-item active" onclick="selectPlan(this,'monthly')">
-        <div class="p1">月度</div><div class="p2">¥19.9</div><div class="p3">续订自动扣</div>
-      </div>
-      <div class="plan-item" onclick="selectPlan(this,'yearly')">
-        <div class="p1">年度</div><div class="p2">¥199</div><div class="p3">相当于¥16.6/月</div>
-      </div>
-      <div class="plan-item" onclick="selectPlan(this,'lifetime')">
-        <div class="p1">永久</div><div class="p2">¥499</div><div class="p3">一次付款终身用</div>
-      </div>
-    </div>
-    <div class="pay-btn" onclick="alert('支付即将开通，敬请期待')">立即订阅</div>
-    <div class="modal-close" onclick="closeSub()">稍后再说</div>
-  </div>
-</div>
-</div>
-
+<div class="detail" id="detail">
+  <div class="d-top"><span class="d-back" onclick="c()">✕</span><span class="d-title" id="dn"></span></div>
+  <div class="d-img" id="di"></div>
+  <div class="d-meta" id="dm"></div>
+  <div id="db"></div>
 </div>
 
 <script>
-const IMG_BASE = 'https://yunzeyue2-coder.github.io/jianglu-cost-calculator/images/'
-const IMG_BASE = 'https://yunzeyue2-coder.github.io/jianglu-cost-calculator/images/'
-const allCards = [
-  {id:'CD-001',name:'脆皮冰淇淋块',cat:'冷饮',tag:'新',img:IMG_BASE+'cd001.jpg',scene:'夜市/学校',margin:'65%'},
-  {id:'TL-001',name:'商用万能脆皮裹粉',cat:'调味料',tag:'新',img:IMG_BASE+'tl001.jpg',scene:'炸串/炸鸡',margin:'80%'},
-  {id:'XC-001',name:'脆皮烤鸭（商用版）',cat:'鲜制肉品',tag:'新',img:IMG_BASE+'xc001.jpg',scene:'熟食档口/夜市',margin:'42-51%'},
-  {id:'XC-002',name:'大盘鸡（大排档版）',cat:'鲜制肉品',tag:'新',img:IMG_BASE+'xc002.jpg',scene:'排档/宵夜',margin:'53-65%'},
-  {id:'XC-003',name:'德州扒鸡',cat:'鲜制肉品',tag:'新',img:IMG_BASE+'xc003.jpg',scene:'熟食/礼盒',margin:'55-62%'},
-  {id:'XC-004',name:'吊烧牛肉',cat:'鲜制肉品',tag:'新',img:IMG_BASE+'xc004.jpg',scene:'川湘菜/排档',margin:'55-67%'},
-  {id:'XC-005',name:'吊烧乳鸽',cat:'鲜制肉品',tag:'新',img:IMG_BASE+'xc005.jpg',scene:'粤式酒楼',margin:'61-71%'},
-  {id:'SN-001',name:'大排档泡椒毛豆',cat:'小吃',tag:'新',img:IMG_BASE+'sn001.jpg',scene:'排档/夜市',margin:'75-81%'},
-  {id:'HB-001',name:'大碱馒头',cat:'面点',tag:'新',img:IMG_BASE+'hb001.jpg',scene:'早市/社区',margin:'70-77%'},
-  {id:'HB-002',name:'大素包（老面版）',cat:'面点',tag:'新',img:IMG_BASE+'hb002.jpg',scene:'早餐/社区',margin:'63-72%'},
-  {id:'TP-001',name:'单县羊肉汤',cat:'汤品',tag:'新',img:IMG_BASE+'tp001.jpg',scene:'餐馆/早餐',margin:'64-68%'},
+const IMG = 'https://yunzeyue2-coder.github.io/jianglu-cost-calculator/images/'
+const CARDS = [
+  {i:'CD-001',n:'脆皮冰淇淋块',c:'冷饮',m:'65%',p:IMG+'cd001.jpg',s:'夜市/学校'},
+  {i:'TL-001',n:'商用万能脆皮裹粉',c:'调味料',m:'80%',p:IMG+'tl001.jpg',s:'炸串/炸鸡'},
+  {i:'XC-001',n:'脆皮烤鸭',c:'鲜制肉品',m:'42-51%',p:IMG+'xc001.jpg',s:'熟食档口'},
+  {i:'XC-002',n:'大盘鸡（大排档版）',c:'鲜制肉品',m:'53-65%',p:IMG+'xc002.jpg',s:'排档/宵夜'},
+  {i:'XC-003',n:'德州扒鸡',c:'鲜制肉品',m:'55-62%',p:IMG+'xc003.jpg',s:'熟食/礼盒'},
+  {i:'XC-004',n:'吊烧牛肉',c:'鲜制肉品',m:'55-67%',p:IMG+'xc004.jpg',s:'川湘菜'},
+  {i:'XC-005',n:'吊烧乳鸽',c:'鲜制肉品',m:'61-71%',p:IMG+'xc005.jpg',s:'粤式酒楼'},
+  {i:'SN-001',n:'大排档泡椒毛豆',c:'小吃',m:'75-81%',p:IMG+'sn001.jpg',s:'排档/夜市'},
+  {i:'HB-001',n:'大碱馒头',c:'面点',m:'70-77%',p:IMG+'hb001.jpg',s:'早市/社区'},
+  {i:'HB-002',n:'大素包（老面版）',c:'面点',m:'63-72%',p:IMG+'hb002.jpg',s:'早餐/社区'},
+  {i:'TP-001',n:'单县羊肉汤',c:'汤品',m:'64-68%',p:IMG+'tp001.jpg',s:'餐馆/早餐'},
 ]
+const CATS = ['全部','鲜制肉品','面点','冷饮','小吃','调味料','汤品']
+let cur='全部'
 
-// Favorites
-function toggleFav(id){
-  let f = JSON.parse(localStorage.getItem('kaku_fav')||'[]')
-  if(f.includes(id)){f=f.filter(x=>x!==id)}else{f.push(id)}
-  localStorage.setItem('kaku_fav',JSON.stringify(f))
-  renderGrid()
-}
-function isFav(id){return JSON.parse(localStorage.getItem('kaku_fav')||'[]').includes(id)}
-let curCat = '全部', currentCard = null
-
-// Loginconst CATS = ['全部','⭐ 收藏','🔥 火爆','🆕 新卡','鲜制肉品','冷饮','烘焙','小吃','调味料','面点','汤品']
-
-function init(){
-  document.getElementById('cardCount').textContent = allCards.length
-  renderChips(); renderGrid()
-}
-
-function renderChips(){
-  document.getElementById('chips').innerHTML = CATS.map(c => 
-    `<div class="chip${c===curCat?' active':''}${c.includes('🔥')?' fire':''}${c.includes('🆕')?' new':''}" onclick="filter('${c}')">${c}</div>`
-  ).join('')
-}
-
-function filter(cat){curCat=cat;renderChips();renderGrid()}
-
-function renderGrid(){
-  let list = allCards
-  if(curCat==='⭐ 收藏'){
-    const favs=JSON.parse(localStorage.getItem('kaku_fav')||'[]')
-    list=allCards.filter(c=>favs.includes(c.id))
-  }else if(curCat==='🔥 火爆') list=allCards.filter(c=>c.tag==='火')
-  else if(curCat==='🆕 新卡') list=allCards.filter(c=>c.tag==='新')
-  else if(curCat!=='全部') list=allCards.filter(c=>c.cat===curCat)
-
+function r(){
+  let list = cur==='全部' ? CARDS : CARDS.filter(x=>x.c===cur)
+  const qv = document.getElementById('q').value.trim().toLowerCase()
+  if(qv) list = list.filter(x=>x.n.includes(qv))
   const el = document.getElementById('grid')
-  if(!list.length){el.innerHTML='<div style="padding:60px 20px;text-align:center;color:#ccc;grid-column:1/-1">暂无产品卡</div>';return}
-  el.innerHTML = list.map(c=>`
-    <div class="card" onclick="openDetail('${c.id}')">
-      <div class="img">${c.img.startsWith('http')?'<img src="'+c.img+'">':c.img}${c.tag==='新'?'<span class="badge badge-new">新</span>':''}${c.tag==='火'?'<span class="badge badge-fire">🔥</span>':''}</div>
-      <div class="body" style="position:relative"><div class="name">${c.name}</div><div class="meta"><span class="tag">${c.cat}</span><span>毛利${c.margin}</span></div><span onclick="event.stopPropagation();toggleFav('${c.id}')" style="position:absolute;top:-2px;right:2px;font-size:16px;cursor:pointer">${isFav(c.id)?'⭐':'☆'}</span></div>
-    </div>`
-  ).join('')
-  el.closest('.grid').classList.add('active')
+  el.innerHTML = list.map(x => `<div class="card" onclick="o('${x.i}')"><div class="img">${x.p.startsWith('http')?'<img src="'+x.p+'">':'🍽'}<span class="badge badge-new">新</span></div><div class="body"><div class="name">${x.n}</div><div class="meta"><span class="tag">${x.c}</span><span>毛利${x.m}</span></div></div></div>`).join('')
+  document.getElementById('chips').innerHTML = CATS.map(c => `<div class="chip${c===cur?' active':''}" onclick="cur='${c}';r()">${c}</div>`).join('')
 }
 
-function doSearch(){
-  const q = document.getElementById('searchInput').value.trim().toLowerCase()
-  if(!q) return renderGrid()
-  const list = allCards.filter(c=>c.name.includes(q)||c.cat.includes(q))
-  const el = document.getElementById('grid')
-  if(!list.length){el.innerHTML='<div style="padding:60px 20px;text-align:center;color:#ccc;grid-column:1/-1">未找到"'+q+'"</div>';return}
-  el.innerHTML = list.map(c=>`<div class="card" onclick="openDetail('${c.id}')"><div class="img">${c.img.startsWith('http')?'<img src="'+c.img+'">':c.img}</div><div class="body" style="position:relative"><div class="name">${c.name}</div><div class="meta"><span class="tag">${c.cat}</span><span>毛利${c.margin}</span></div><span onclick="event.stopPropagation();toggleFav('${c.id}')" style="position:absolute;top:-2px;right:2px;font-size:16px;cursor:pointer">${isFav(c.id)?'⭐':'☆'}</span></div></div>`).join('')
+function o(id){
+  const x = CARDS.find(c=>c.i===id); if(!x) return
+  document.getElementById('detail').classList.add('active')
+  document.getElementById('dn').textContent = x.n
+  document.getElementById('di').innerHTML = x.p.startsWith('http')?'<img src="'+x.p+'">':'🍽'
+  document.getElementById('dm').innerHTML = `<span>${x.c}</span><span>毛利${x.m}</span><span>${x.s}</span>`
+  document.getElementById('db').innerHTML = '<div class="d-locked"><div>🔒 完整配方+SOP+防御层已就位</div><div style="font-size:11px;color:#ccc;margin:8px 0">订阅后自动解锁全部内容</div><div class="sub-btn">开通订阅 ¥19.9/月</div></div>'
 }
-
-function openDetail(id){
-  currentCard = allCards.find(c=>c.id===id)
-  if(!currentCard) return
-  document.querySelector('.grid').classList.remove('active')
-  document.getElementById('detailPage').classList.add('active')
-  document.getElementById('dImg').innerHTML = currentCard.img.startsWith('http')?'<img src="'+currentCard.img+'">':currentCard.img
-  document.getElementById('dTitle').textContent = currentCard.name
-  document.getElementById('dTags').innerHTML = `<span>${currentCard.cat}</span><span>毛利${currentCard.margin}</span><span>${currentCard.scene}</span>`
-  document.getElementById('dBody').innerHTML = `<div class="d-locked"><div>🔒 完整配方+SOP已就位</div><div style="font-size:11px;color:#ccc;margin:8px 0">订阅后自动解锁全部内容</div><div class="sub-btn" onclick="openSub()">开通订阅</div></div>`
-}
-function closeDetail(){document.getElementById('detailPage').classList.remove('active');document.querySelector('.grid').classList.add('active')}
-function openSub(){document.getElementById('subModal').classList.add('active')}
-function closeSub(){document.getElementById('subModal').classList.remove('active')}
-function selectPlan(el,p){document.querySelectorAll('.plan-item').forEach(e=>e.classList.remove('active'));el.classList.add('active')}
-
-init()
+function c(){document.getElementById('detail').classList.remove('active')}
+function f(){r()}
+r()
 </script>
-
 </body>
 </html>
