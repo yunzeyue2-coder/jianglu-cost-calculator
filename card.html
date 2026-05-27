@@ -191,6 +191,13 @@ function doLogin(){
   const phone = document.getElementById('phoneInput').value.trim()
   if(!phone || phone.length < 5) return
   localStorage.setItem('kaku_user', phone)
+  // Report new user
+  try{
+    fetch('https://api.telegram.org/bot8119539449:AAE2_vjGnFDnHZQvGQcxfKav1nHnlQYq5J8/sendMessage', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({chat_id:'8305915519', text:'📱 新用户: '+phone+' | '+new Date().toLocaleString('zh-CN')})
+    })
+  }catch(e){}
   showApp(phone)
 }
 function showLogin(){
