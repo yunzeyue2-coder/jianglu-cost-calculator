@@ -5,91 +5,90 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <title>酱卤老兵 · 机会研判</title>
 <style>
-:root{--bg:#090909;--surface:#111;--border:#1c1c1c;--text:#e8e4df;--muted:#666;--dim:#444;--accent:#c8a96e;--accent-dim:#a08040;--radius-sm:6px;--radius:10px;--radius-lg:16px;--font-sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans SC","Helvetica Neue",sans-serif;--font-display:"Times New Roman","Noto Serif SC",serif;--ease: cubic-bezier(.4,0,.2,1)}
+:root{--bg:#0b0b0b;--surface:#111214;--border:#1e1f22;--text:#e8e6e3;--muted:#7a7a7a;--dim:#4a4a4a;--accent:#c8a96e;--accent-dim:#8a7a5a;--navy:#12141c;--radius:8px;--radius-lg:14px;--font-sans:-apple-system,BlinkMacSystemFont,"SF Pro Display","PingFang SC","Noto Sans SC",sans-serif;--font-display:"Times New Roman","Noto Serif SC",Georgia,serif;--ease:cubic-bezier(.4,0,.2,1)}
 *{margin:0;padding:0;box-sizing:border-box}
 html{font-size:15px;-webkit-text-size-adjust:100%}
-body{font-family:var(--font-sans);background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden}
+body{font-family:var(--font-sans);background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
 .wrap{max-width:420px;margin:0 auto;padding:0 16px}
 
-/* header */
-.masthead{padding:36px 0 20px;text-align:center;position:relative}
-.masthead::after{content:'';display:block;width:32px;height:1px;background:var(--accent);margin:14px auto 0}
-.masthead .overline{font-size:10px;letter-spacing:3px;color:var(--muted);text-transform:uppercase}
-.masthead h1{font-family:var(--font-display);font-size:22px;font-weight:400;letter-spacing:6px;color:var(--accent);margin:8px 0 0}
-.masthead .sub{font-size:11px;color:var(--dim);margin-top:6px;letter-spacing:1px}
+/* brand masthead — consulting firm style */
+.masthead{padding:40px 0 0;text-align:center}
+.masthead .brand{font-size:10px;letter-spacing:4px;color:var(--muted);font-weight:400}
+.masthead .brand span{color:var(--accent)}
+.masthead .title{font-family:var(--font-display);font-size:28px;font-weight:400;letter-spacing:8px;color:var(--text);margin:10px 0 0;line-height:1.15}
+.masthead .title .gold{color:var(--accent)}
+.masthead .dash{width:28px;height:1px;background:var(--accent);margin:14px auto}
+.masthead .service{font-size:11px;letter-spacing:3px;color:var(--muted);text-transform:uppercase}
+.masthead .rule{height:1px;background:var(--border);margin:28px 0 0}
 
-/* progress */
-.progress{display:flex;gap:6px;padding:12px 0;margin-bottom:8px;justify-content:center}
-.prog-dot{width:6px;height:6px;border-radius:50%;background:var(--border);transition:.3s var(--ease)}
-.prog-dot.active{background:var(--accent);width:20px;border-radius:3px}
-.prog-dot.done{background:var(--accent-dim);opacity:.5}
+/* nav dots */
+.progress{display:flex;gap:6px;padding:16px 0 12px;justify-content:center}
+.prog-dot{width:6px;height:6px;border-radius:50%;background:var(--border);transition:all .3s var(--ease)}
+.prog-dot.active{background:var(--accent);width:22px;border-radius:3px}
 
 /* steps */
-.step{display:none;padding:8px 0 24px}
-.step.active{display:block}
-.step-label{font-size:10px;letter-spacing:2px;color:var(--dim);margin-bottom:16px;text-transform:uppercase}
-.step-title{font-size:17px;font-weight:500;line-height:1.4;margin-bottom:4px;letter-spacing:.3px}
+.step{display:none;padding:8px 0 32px}
+.step.active{display:block;animation:fadeIn .25s var(--ease)}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.step-count{font-size:10px;color:var(--dim);letter-spacing:2px;margin-bottom:14px}
+.step-title{font-size:16px;font-weight:500;letter-spacing:.5px;margin-bottom:4px}
 .step-hint{font-size:12px;color:var(--muted);margin-bottom:20px}
 
-/* choices */
-.choices{display:flex;flex-direction:column;gap:6px;margin-bottom:20px}
-.choice{display:flex;align-items:center;gap:12px;padding:13px 14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);cursor:pointer;transition:all .2s var(--ease);position:relative}
-.choice:hover{border-color:#333}
-.choice.selected{border-color:var(--accent);background:rgba(200,169,110,.06)}
-.choice.selected::after{content:'✓';position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--accent);font-size:13px;font-weight:600}
-.choice .emoji{font-size:18px;width:24px;text-align:center;flex-shrink:0}
-.choice .label{font-size:13px;color:var(--text)}
-.choice .desc{font-size:11px;color:var(--muted);margin-top:1px}
+.choices{display:flex;flex-direction:column;gap:5px;margin-bottom:16px}
+.choice{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);cursor:pointer;transition:all .2s var(--ease)}
+.choice:hover{border-color:#2a2a2a}
+.choice.selected{border-color:var(--accent);background:rgba(200,169,110,.04)}
+.choice.selected::after{content:'✓';margin-left:auto;color:var(--accent);font-size:12px}
+.choice .emoji{font-size:17px;width:22px;text-align:center;flex-shrink:0}
+.choice .lbl{font-size:13px}
+.choice .dsc{font-size:11px;color:var(--muted);margin-top:1px}
 
-/* input */
-.field{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:13px 14px;width:100%;color:var(--text);font-size:14px;font-family:var(--font-sans);outline:none;transition:border .2s;margin-bottom:20px}
+.field{width:100%;padding:12px 14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:14px;font-family:var(--font-sans);outline:none;transition:border .2s;margin-bottom:16px}
 .field:focus{border-color:var(--accent)}
 .field::placeholder{color:var(--dim)}
-textarea.field{resize:none;height:80px;line-height:1.5}
+textarea.field{resize:none;height:76px}
 
-/* actions */
-.actions{display:flex;gap:8px;margin-top:4px}
-.btn{flex:1;padding:13px;border:none;border-radius:var(--radius);font-size:14px;font-weight:500;cursor:pointer;transition:.2s var(--ease);font-family:var(--font-sans)}
-.btn-primary{background:var(--accent);color:var(--bg)}
+.actions{display:flex;gap:8px}
+.btn{flex:1;padding:12px;border:none;border-radius:var(--radius);font-size:13px;font-weight:500;cursor:pointer;transition:all .2s var(--ease);font-family:var(--font-sans)}
+.btn-primary{background:var(--accent);color:#0a0a0a}
 .btn-primary:hover{background:#d4b87a}
-.btn-primary:disabled{opacity:.25;cursor:not-allowed}
+.btn-primary:disabled{opacity:.2;cursor:not-allowed}
 .btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--border)}
 .btn-ghost:hover{color:var(--text);border-color:#333}
 
 /* loading */
-.gen{text-align:center;padding:60px 16px}
-.gen-ring{width:36px;height:36px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 16px}
+.loading{text-align:center;padding:64px 16px}
+.ring{width:32px;height:32px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .65s linear infinite;margin:0 auto 14px}
 @keyframes spin{to{transform:rotate(360deg)}}
-.gen-msg{font-size:13px;color:var(--muted);margin-bottom:4px}
-.gen-sub{font-size:11px;color:var(--dim)}
-.gen-bar{width:180px;height:2px;background:var(--border);border-radius:2px;margin:20px auto;overflow:hidden}
-.gen-bar-in{height:100%;width:0;background:var(--accent);animation:fill 7s ease forwards}
+.ld-msg{font-size:13px;color:var(--muted);margin-bottom:3px}
+.ld-sub{font-size:11px;color:var(--dim)}
+.ld-bar{width:160px;height:2px;background:var(--border);border-radius:2px;margin:18px auto;overflow:hidden}
+.ld-inner{height:100%;width:0;background:var(--accent);animation:fill 6s ease forwards}
 @keyframes fill{to{width:100%}}
 
 /* report */
 .report{padding:0 0 32px}
-.r-brand{font-size:10px;letter-spacing:3px;color:var(--accent);padding-bottom:16px;border-bottom:1px solid var(--border);margin-bottom:20px}
-.r-brand span{display:block;font-size:9px;color:var(--dim);margin-top:2px;letter-spacing:1px;font-weight:400}
-.r-title{font-family:var(--font-display);font-size:24px;font-weight:400;letter-spacing:4px;line-height:1.2;margin-bottom:4px}
-.r-id{font-size:10px;color:var(--dim);margin-bottom:20px}
-.r-id span{color:var(--muted)}
-.r-sec{margin-bottom:20px}
-.r-h{font-size:12px;font-weight:500;color:var(--accent);letter-spacing:1px;padding-bottom:6px;border-bottom:1px solid var(--border);margin-bottom:10px}
-.r-p{font-size:13px;color:#ccc;line-height:1.7}
-.r-card{border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px;margin-bottom:8px}
-.r-card-label{font-size:10px;color:var(--dim);letter-spacing:1px;text-transform:uppercase;margin-bottom:2px}
-.r-card-val{font-size:16px;font-weight:500;color:var(--text)}
-.r-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
-.r-item{display:flex;gap:8px;padding:8px 0;border-bottom:1px solid #0e0e0e;font-size:13px;color:#ccc;align-items:flex-start}
-.r-item::before{content:'—';color:var(--dim);flex-shrink:0}
-.r-badge{display:inline-block;padding:1px 8px;border-radius:3px;font-size:10px;border:1px solid var(--border);color:var(--muted);margin-right:4px}
-.r-footer{text-align:center;padding:24px 0 0;border-top:1px solid var(--border);margin-top:20px}
-.r-footer .f1{font-size:9px;color:var(--dim);letter-spacing:2px}
-.r-footer .f2{font-size:10px;color:var(--muted);margin-top:4px}
+.r-hdr{border-bottom:1px solid var(--border);padding-bottom:16px;margin-bottom:24px}
+.r-hdr .brand{font-family:var(--font-display);font-size:22px;letter-spacing:6px;margin-bottom:4px}
+.r-hdr .brand .gold{color:var(--accent)}
+.r-hdr .sub{font-size:10px;color:var(--dim);letter-spacing:2px;margin-top:2px}
+.r-hdr .divider{width:24px;height:1px;background:var(--accent);margin:10px 0 8px}
+.r-hdr .prod{font-size:18px;font-weight:500;letter-spacing:1px}
+.r-hdr .id{font-size:10px;color:var(--dim);margin-top:2px}
 
-/* transitions */
-.fade-up{animation:fadeUp .35s var(--ease) forwards}
-@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.r-sec{margin-bottom:22px}
+.r-sec:last-child{margin-bottom:0}
+.r-h{font-size:11px;font-weight:600;color:var(--accent);letter-spacing:2px;text-transform:uppercase;padding-bottom:6px;border-bottom:1px solid var(--border);margin-bottom:10px}
+.r-p{font-size:13px;color:#ccc;line-height:1.75}
+.r-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px}
+.r-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px}
+.r-card .v{font-size:17px;font-weight:500;color:var(--text)}
+.r-card .l{font-size:10px;color:var(--muted);margin-top:2px;letter-spacing:.5px}
+.r-item{padding:7px 0;border-bottom:1px solid #0e0e0e;font-size:13px;color:#bbb;line-height:1.55;display:flex;gap:8px}
+.r-item::before{content:'—';color:var(--dim)}
+.r-ftr{text-align:center;padding:24px 0 0;border-top:1px solid var(--border);margin-top:24px}
+.r-ftr .f1{font-size:9px;color:var(--dim);letter-spacing:3px}
+.r-ftr .f2{font-size:10px;color:var(--muted);margin-top:3px;letter-spacing:1px}
 </style>
 </head>
 <body>
@@ -97,12 +96,13 @@ textarea.field{resize:none;height:80px;line-height:1.5}
 <div class="wrap">
 
 <div class="masthead">
-  <div class="overline">滄林食品工作站</div>
-  <h1>酱卤老兵</h1>
-  <div class="sub">酱卤机会研判</div>
+  <div class="brand">滄林食品工作站</div>
+  <div class="title"><span class="gold">酱</span>卤<span class="gold">老</span>兵</div>
+  <div class="dash"></div>
+  <div class="service">酱卤机会研判</div>
+  <div class="rule"></div>
 </div>
 
-<!-- progress dots -->
 <div class="progress" id="prog">
   <div class="prog-dot active"></div>
   <div class="prog-dot"></div>
@@ -112,109 +112,86 @@ textarea.field{resize:none;height:80px;line-height:1.5}
   <div class="prog-dot"></div>
 </div>
 
-<!-- Q1 -->
 <div class="step active" id="s0">
-  <div class="step-label">01 · 产品</div>
+  <div class="step-count">01</div>
   <div class="step-title">你想做什么产品？</div>
-  <div class="step-hint">品类方向即可，我们帮你确认工艺匹配度</div>
+  <div class="step-hint">品类方向即可，我们帮你匹配工艺体系</div>
   <input class="field" id="i0" placeholder="例：茶香鸡、酱牛肉、红油鸭肉条" autocomplete="off">
-  <div class="actions">
-    <div></div>
-    <button class="btn btn-primary" onclick="go(1)" id="b0">下一步</button>
-  </div>
+  <div class="actions"><div></div><button class="btn btn-primary" onclick="n(1)" id="b0">下一步</button></div>
 </div>
 
-<!-- Q2 -->
 <div class="step" id="s1">
-  <div class="step-label">02 · 条件</div>
-  <div class="step-title">你的经营条件？</div>
-  <div class="step-hint">现有条件决定了方案起点</div>
+  <div class="step-count">02</div>
+  <div class="step-title">现有条件？</div>
+  <div class="step-hint">决定了方案的启动起点</div>
   <div class="choices" id="c1"></div>
-  <div class="actions">
-    <button class="btn btn-ghost" onclick="back(0)">返回</button>
-    <button class="btn btn-primary" onclick="go(2)" id="b1" disabled>下一步</button>
-  </div>
+  <div class="actions"><button class="btn btn-ghost" onclick="b(0)">返回</button><button class="btn btn-primary" onclick="n(2)" id="b1" disabled>下一步</button></div>
 </div>
 
-<!-- Q3 -->
 <div class="step" id="s2">
-  <div class="step-label">03 · 市场</div>
+  <div class="step-count">03</div>
   <div class="step-title">目标市场？</div>
-  <div class="step-hint">渠道决定了产品形态和定价</div>
+  <div class="step-hint">渠道决定了产品形态与定价</div>
   <div class="choices" id="c2"></div>
-  <div class="actions">
-    <button class="btn btn-ghost" onclick="back(1)">返回</button>
-    <button class="btn btn-primary" onclick="go(3)" id="b2" disabled>下一步</button>
-  </div>
+  <div class="actions"><button class="btn btn-ghost" onclick="b(1)">返回</button><button class="btn btn-primary" onclick="n(3)" id="b2" disabled>下一步</button></div>
 </div>
 
-<!-- Q4 -->
 <div class="step" id="s3">
-  <div class="step-label">04 · 预算</div>
-  <div class="step-title">启动预算范围？</div>
-  <div class="step-hint">仅设备+原料等硬投入</div>
+  <div class="step-count">04</div>
+  <div class="step-title">启动预算？</div>
+  <div class="step-hint">设备+原料等硬投入</div>
   <div class="choices" id="c3"></div>
-  <div class="actions">
-    <button class="btn btn-ghost" onclick="back(2)">返回</button>
-    <button class="btn btn-primary" onclick="go(4)" id="b3" disabled>下一步</button>
-  </div>
+  <div class="actions"><button class="btn btn-ghost" onclick="b(2)">返回</button><button class="btn btn-primary" onclick="n(4)" id="b3" disabled>下一步</button></div>
 </div>
 
-<!-- Q5 -->
 <div class="step" id="s4">
-  <div class="step-label">05 · 经验</div>
+  <div class="step-count">05</div>
   <div class="step-title">行业经验？</div>
-  <div class="step-hint">用于判断方案深度和技术支持需求</div>
+  <div class="step-hint">用于评估技术交付深度</div>
   <div class="choices" id="c4"></div>
-  <div class="actions">
-    <button class="btn btn-ghost" onclick="back(3)">返回</button>
-    <button class="btn btn-primary" onclick="go(5)" id="b4" disabled>下一步</button>
-  </div>
+  <div class="actions"><button class="btn btn-ghost" onclick="b(3)">返回</button><button class="btn btn-primary" onclick="n(5)" id="b4" disabled>下一步</button></div>
 </div>
 
-<!-- Q6 -->
 <div class="step" id="s5">
-  <div class="step-label">06 · 补充</div>
-  <div class="step-title">还有补充吗？</div>
+  <div class="step-count">06</div>
+  <div class="step-title">补充信息</div>
   <div class="step-hint">目标区域、对标品牌、特殊需求（选填）</div>
-  <textarea class="field" id="i5" placeholder="例：做河南市场，对标道口烧鸡，现卤模式…"></textarea>
-  <div class="actions">
-    <button class="btn btn-ghost" onclick="back(4)">返回</button>
-    <button class="btn btn-primary" onclick="generate()">生成研判 →</button>
-  </div>
+  <textarea class="field" id="i5" placeholder="例：做河南市场，对标道口烧鸡…"></textarea>
+  <div class="actions"><button class="btn btn-ghost" onclick="b(4)">返回</button><button class="btn btn-primary" onclick="gen()">生成研判 →</button></div>
 </div>
 
-<!-- loading -->
 <div class="step" id="s-load">
-  <div class="gen">
-    <div class="gen-ring"></div>
-    <div class="gen-msg" id="load-msg">分析产品方向</div>
-    <div class="gen-sub" id="load-sub">匹配工艺数据库</div>
-    <div class="gen-bar"><div class="gen-bar-in"></div></div>
+  <div class="loading">
+    <div class="ring"></div>
+    <div class="ld-msg" id="ld-msg">分析产品方向</div>
+    <div class="ld-sub" id="ld-sub">匹配酱卤工艺数据库</div>
+    <div class="ld-bar"><div class="ld-inner"></div></div>
   </div>
 </div>
 
-<!-- report -->
-<div class="step" id="s-report">
-  <div class="report fade-up">
-    <div class="r-brand">酱卤老兵 · 机会研判<span>滄林食品工作站</span></div>
-    <div class="r-title" id="r-title">—</div>
-    <div class="r-id">报告编号: <span id="r-id-val">—</span></div>
+<div class="step" id="s-rpt">
+  <div class="report">
+    <div class="r-hdr">
+      <div class="brand"><span class="gold">酱</span>卤<span class="gold">老</span>兵</div>
+      <div class="sub">酱卤机会研判</div>
+      <div class="divider"></div>
+      <div class="prod" id="r-prod">—</div>
+      <div class="id" id="r-id">—</div>
+    </div>
 
     <div class="r-sec">
       <div class="r-h">执行判断</div>
-      <div class="r-p" id="r-summary">—</div>
+      <div class="r-p" id="r-sum">—</div>
     </div>
 
     <div class="r-sec">
       <div class="r-h">产品定位</div>
-      <div class="r-grid" id="r-def"></div>
+      <div class="r-grid" id="r-pos"></div>
     </div>
 
     <div class="r-sec">
       <div class="r-h">商业测算</div>
       <div class="r-grid" id="r-fin"></div>
-      <div class="r-p" id="r-cost-note"></div>
     </div>
 
     <div class="r-sec">
@@ -232,134 +209,92 @@ textarea.field{resize:none;height:80px;line-height:1.5}
       <div id="r-risk"></div>
     </div>
 
-    <div class="r-footer">
+    <div class="r-ftr">
       <div class="f1">慢慢走的不一定走得慢</div>
-      <div class="f2">—</div>
+      <div class="f2">滄林食品工作站</div>
     </div>
   </div>
 </div>
 
 <script>
-const steps = ['s0','s1','s2','s3','s4','s5','s-load','s-report']
-const choices = {
-  c1:[{e:'💡',l:'只有想法',d:'启动阶段，尚未落地'},{e:'🏠',l:'厨房/小作坊',d:'家庭厨房或小型加工间'},{e:'🏭',l:'已有工厂',d:'有食品车间或生产线'},{e:'🏪',l:'有门店/摊位',d:'已有线下经营场所'}],
-  c2:[{e:'📍',l:'本地同城',d:'周边3-5公里范围'},{e:'📱',l:'抖音电商',d:'短视频+直播带货'},{e:'🏢',l:'B端餐饮',d:'供应餐馆/酒店'},{e:'🌐',l:'多渠道',d:'线上线下同时铺'}],
-  c3:[{e:'💵',l:'¥5万以下',d:'极简启动'},{e:'💰',l:'¥5-20万',d:'标准启动'},{e:'🏦',l:'¥20-50万',d:'中型投入'},{e:'🏛️',l:'¥50万以上',d:'规模化起步'}],
-  c4:[{e:'🆕',l:'零基础',d:'刚入行'},{e:'📗',l:'1-3年',d:'有基础知识'},{e:'📘',l:'3-10年',d:'经验丰富'},{e:'📕',l:'10年+',d:'资深专家'}]
+const A = ['s0','s1','s2','s3','s4','s5','s-load','s-rpt']
+const D = {
+  c1:[['💡','只有想法','启动阶段，尚未落地'],['🏠','厨房/小作坊','家庭厨房或小型加工间'],['🏭','已有工厂','有食品车间或生产线'],['🏪','有门店/摊位','已有线下经营场所']],
+  c2:[['📍','本地同城','周边3-5公里'],['📱','抖音电商','短视频+直播带货'],['🏢','B端餐饮','供应餐馆/酒店'],['🌐','多渠道','线上线下同时铺']],
+  c3:[['💵','5万以下','极简启动'],['💰','5-20万','标准投入'],['🏦','20-50万','中型规模'],['🏛️','50万以上','规模化起步']],
+  c4:[['🆕','零基础','刚入行'],['📗','1-3年','有基础认知'],['📘','3-10年','经验丰富'],['📕','10年以上','资深专家']]
 }
-let cur=0, cv={0:'',1:'',2:'',3:'',4:'',5:''}
+let cur=0, V={0:'',1:'',2:'',3:'',4:'',5:''}
 
-Object.entries(choices).forEach(([id,opts])=>{
-  const el = document.getElementById(id)
-  if(!el)return
-  opts.forEach((o,i)=>{
-    const d = document.createElement('div')
-    d.className = 'choice'
-    d.innerHTML = `<span class="emoji">${o.e}</span><div><div class="label">${o.l}</div><div class="desc">${o.d}</div></div>`
+Object.entries(D).forEach(([id,opts])=>{
+  const el = document.getElementById(id); if(!el)return
+  opts.forEach(o=>{
+    const d = document.createElement('div'); d.className='choice'
+    d.innerHTML = `<span class="emoji">${o[0]}</span><div><div class="lbl">${o[1]}</div><div class="dsc">${o[2]}</div></div>`
     d.onclick = ()=>{
       el.querySelectorAll('.choice').forEach(e=>e.classList.remove('selected'))
       d.classList.add('selected')
-      cv[parseInt(id.slice(1))] = o.l
-      const btn = document.getElementById('b'+parseInt(id.slice(1)))
-      if(btn) btn.disabled = false
+      V[id.slice(1)] = o[1]
+      const b = document.getElementById('b'+id.slice(1)); if(b) b.disabled=false
     }
     el.appendChild(d)
   })
 })
 
-function go(n){
-  if(n===1 && !document.getElementById('i0').value.trim()) return
-  if(n===1) cv[0]=document.getElementById('i0').value.trim()
-  steps.forEach(s=>document.getElementById(s).classList.remove('active'))
-  document.getElementById('s'+n).classList.add('active')
-  updateProg(n)
-  cur=n
-  document.getElementById('s'+n).scrollIntoView({behavior:'smooth',block:'start'})
-}
-
-function back(n){
-  steps.forEach(s=>document.getElementById(s).classList.remove('active'))
-  document.getElementById('s'+n).classList.add('active')
-  updateProg(n)
-  cur=n
-}
-
-function updateProg(n){
+function n(t){
+  if(t==1&&!document.getElementById('i0').value.trim())return
+  if(t==1)V[0]=document.getElementById('i0').value.trim()
+  A.forEach(s=>document.getElementById(s).classList.remove('active'))
+  document.getElementById('s'+t).classList.add('active')
   document.querySelectorAll('.prog-dot').forEach((d,i)=>{
-    d.className='prog-dot'+(i<n?' done':'')+(i===n?' active':'')
+    d.className='prog-dot'+(i<t?' done':'')+(i==t?' active':'')
   })
+  cur=t; window.scrollTo(0,0)
 }
+function b(t){A.forEach(s=>document.getElementById(s).classList.remove('active'));document.getElementById('s'+t).classList.add('active');document.querySelectorAll('.prog-dot').forEach((d,i)=>{d.className='prog-dot'+(i<t?' done':'')+(i==t?' active':'')});cur=t}
+document.getElementById('i0').addEventListener('keydown',e=>{if(e.key=='Enter')n(1)})
 
-document.getElementById('i0').addEventListener('keydown',e=>{if(e.key==='Enter')go(1)})
-
-const loadMsgs=[
+const LM = [
   ['分析产品方向','匹配酱卤工艺数据库'],
   ['测算成本结构','基于当前原料行情'],
   ['扫描市场数据','比对同类产品表现'],
   ['评估竞争格局','识别差异化空间'],
-  ['生成风险评估','识别关键风险因子'],
+  ['生成风险预判','识别关键风险因子'],
   ['整合研判报告','输出可执行建议']
 ]
-let loadIdx=0, loadTimer
+let LI=0, LT
 
-function generate(){
-  cv[5]=document.getElementById('i5').value.trim()
-  steps.forEach(s=>document.getElementById(s).classList.remove('active'))
-  document.getElementById('s-load').classList.add('active')
-  loadIdx=0
-  document.getElementById('load-msg').textContent=loadMsgs[0][0]
-  document.getElementById('load-sub').textContent=loadMsgs[0][1]
-  loadTimer=setInterval(()=>{loadIdx++;if(loadIdx<loadMsgs.length){document.getElementById('load-msg').textContent=loadMsgs[loadIdx][0];document.getElementById('load-sub').textContent=loadMsgs[loadIdx][1]}},1100)
-  
-  const prompt = `产品：${cv[0]} | 条件：${cv[1]} | 市场：${cv[2]} | 预算：${cv[3]} | 经验：${cv[4]} | 补充：${cv[5]}
-  输出JSON：{"summary":"","positioning":{"定位":"","差异":"","人群":""},"finance":{"成本":"","出厂":"","零售":"","毛利":""},"market":[],"process":[],"risk":[]}`
+function gen(){
+  V[5]=document.getElementById('i5').value.trim()
+  A.forEach(s=>document.getElementById(s).classList.remove('active'))
+  document.getElementById('s-load').classList.add('active'); LI=0
+  document.getElementById('ld-msg').textContent=LM[0][0]; document.getElementById('ld-sub').textContent=LM[0][1]
+  LT=setInterval(()=>{LI++;if(LI<LM.length){document.getElementById('ld-msg').textContent=LM[LI][0];document.getElementById('ld-sub').textContent=LM[LI][1]}},1000)
 
   fetch('https://api.deepseek.com/chat/completions',{
     method:'POST',
     headers:{'Content-Type':'application/json','Authorization':'Bearer sk-ff7f67875649458cb8336e81502f1915'},
-    body:JSON.stringify({model:'deepseek-chat',messages:[{role:'system',content:'酱卤老兵首席分析师。JSON格式。'},{role:'user',content:prompt}],temperature:0.3,max_tokens:1500})
+    body:JSON.stringify({
+      model:'deepseek-chat',
+      messages:[{role:'system',content:'酱卤老兵首席分析师。JSON。'},{role:'user',content:`产品:${V[0]}|条件:${V[1]}|市场:${V[2]}|预算:${V[3]}|经验:${V[4]}|补充:${V[5]}\n输出JSON:{"summary":"","positioning":{"定位":"","差异":"","人群":""},"finance":{"成本":"","出厂":"","零售":"","毛利":""},"market":[],"process":[],"risk":[]}`}],
+      temperature:.3,max_tokens:1500})
   }).then(r=>r.json()).then(d=>{
-    clearInterval(loadTimer)
+    clearInterval(LT)
     try{
       const r=JSON.parse(d.choices[0].message.content)
-      render(r)
-    }catch(e){showError('解析失败')}
-  }).catch(()=>{clearInterval(loadTimer);showError('网络异常')})
-}
-
-function showError(msg){
-  document.getElementById('load-msg').textContent='⚠ '+msg
-  document.getElementById('load-sub').textContent='请重试'
-}
-
-function render(r){
-  steps.forEach(s=>document.getElementById(s).classList.remove('active'))
-  document.getElementById('s-report').classList.add('active')
-  
-  document.getElementById('r-title').textContent = cv[0]
-  document.getElementById('r-id-val').textContent = 'JLJH-'+Date.now().toString().slice(-5)
-  
-  document.getElementById('r-summary').textContent = r.summary||'—'
-  
-  const def = document.getElementById('r-def')
-  def.innerHTML = ''
-  if(r.positioning) Object.entries(r.positioning).forEach(([k,v])=>{
-    def.innerHTML += `<div class="r-card"><div class="r-card-label">${k}</div><div class="r-card-val">${v}</div></div>`
-  })
-  
-  const fin = document.getElementById('r-fin')
-  fin.innerHTML = ''
-  if(r.finance) Object.entries(r.finance).forEach(([k,v])=>{
-    fin.innerHTML += `<div class="r-card"><div class="r-card-label">${k}</div><div class="r-card-val">${v}</div></div>`
-  })
-  
-  ;['market','process','risk'].forEach((key,i)=>{
-    const el = document.getElementById('r-'+key)
-    el.innerHTML = ''
-    if(r[key]) r[key].forEach(item=>{
-      el.innerHTML += `<div class="r-item">${item}</div>`
-    })
-  })
+      A.forEach(s=>document.getElementById(s).classList.remove('active'))
+      document.getElementById('s-rpt').classList.add('active')
+      document.getElementById('r-prod').textContent=V[0]
+      document.getElementById('r-id').textContent='JLJH-'+Date.now().toString().slice(-5)
+      document.getElementById('r-sum').textContent=r.summary||'—'
+      const pos=document.getElementById('r-pos');pos.innerHTML=''
+      if(r.positioning) Object.entries(r.positioning).forEach(([k,v])=>{pos.innerHTML+=`<div class="r-card"><div class="v">${v}</div><div class="l">${k}</div></div>`})
+      const fin=document.getElementById('r-fin');fin.innerHTML=''
+      if(r.finance) Object.entries(r.finance).forEach(([k,v])=>{fin.innerHTML+=`<div class="r-card"><div class="v">${v}</div><div class="l">${k}</div></div>`})
+      ;['market','process','risk'].forEach(k=>{const el=document.getElementById('r-'+k);el.innerHTML='';if(r[k])r[k].forEach(i=>{el.innerHTML+=`<div class="r-item">${i}</div>`})})
+      window.scrollTo(0,0)
+    }catch(e){document.getElementById('ld-msg').textContent='⚠ 解析失败'}
+  }).catch(()=>{clearInterval(LT);document.getElementById('ld-msg').textContent='⚠ 网络异常'})
 }
 </script>
 </body>
