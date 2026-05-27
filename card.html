@@ -100,24 +100,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans SC",s
 
 <div class="wrap">
 
-<!-- login page -->
-<div class="login-page active" id="loginPage">
-  <div class="login-logo">📇</div>
-  <div class="login-title">咔库</div>
-  <div class="login-sub">输入手机号即可体验 · 无需注册</div>
-  <input class="login-input" id="phoneInput" placeholder="手机号" type="tel" autocomplete="off">
-  <div class="login-btn" onclick="doLogin()">进入咔库</div>
-  <div class="login-note">当前为免费体验阶段<br>已有账号？<a href="#" onclick="showLogin()">换个号码登录</a></div>
-</div>
+
 
 <!-- app -->
-<div id="appArea" style="display:none">
+<div id="appArea">
 <div class="hd">
   <h1>咔库</h1>
-  <div class="hd-r">
-    <span id="userDisplay" class="user"></span>
-    <span class="btn" onclick="logout()">退出</span>
-  </div>
+
 </div>
 
 <div class="sb" id="searchBar">
@@ -196,50 +185,7 @@ function toggleFav(id){
 function isFav(id){return JSON.parse(localStorage.getItem('kaku_fav')||'[]').includes(id)}
 let curCat = '全部', currentCard = null
 
-// Login
-function doLogin(){
-  const phone = document.getElementById('phoneInput').value.trim()
-  if(!phone || phone.length < 5) return
-  localStorage.setItem('kaku_user', phone)
-  // Report new user
-  try{
-    fetch('https://api.telegram.org/bot8119539449:AAE2_vjGnFDnHZQvGQcxfKav1nHnlQYq5J8/sendMessage', {
-      method:'POST', headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({chat_id:'8305915519', text:'📱 新用户: '+phone+' | '+new Date().toLocaleString('zh-CN')})
-    })
-  }catch(e){}
-  showApp(phone)
-}
-function showLogin(){
-  document.getElementById('phoneInput').value = ''
-  document.getElementById('phoneInput').focus()
-}
-function logout(){
-  const phone = prompt('输入原手机号可重新登录')
-  if(phone) {localStorage.setItem('kaku_user',phone); showApp(phone)}
-}
-
-function showApp(phone){
-  document.getElementById('loginPage').classList.remove('active')
-  document.getElementById('loginPage').style.display = 'none'
-  document.getElementById('appArea').style.display = 'block'
-  document.getElementById('userDisplay').textContent = phone.slice(0,3)+'****'+phone.slice(-4)
-  init()
-}
-
-// Auto-login check
-(function(){
-  const saved = localStorage.getItem('kaku_user')
-  if(saved && saved.length > 5){
-    document.getElementById('loginPage').classList.remove('active')
-    document.getElementById('loginPage').style.display = 'none'
-    document.getElementById('appArea').style.display = 'block'
-    document.getElementById('userDisplay').textContent = saved.slice(0,3)+'****'+saved.slice(-4)
-    init()
-  }
-})()
-
-const CATS = ['全部','⭐ 收藏','🔥 火爆','🆕 新卡','鲜制肉品','冷饮','烘焙','小吃','调味料','面点']
+// Loginconst CATS = ['全部','⭐ 收藏','🔥 火爆','🆕 新卡','鲜制肉品','冷饮','烘焙','小吃','调味料','面点']
 
 function init(){
   document.getElementById('cardCount').textContent = allCards.length
@@ -297,6 +243,8 @@ function closeDetail(){document.getElementById('detailPage').classList.remove('a
 function openSub(){document.getElementById('subModal').classList.add('active')}
 function closeSub(){document.getElementById('subModal').classList.remove('active')}
 function selectPlan(el,p){document.querySelectorAll('.plan-item').forEach(e=>e.classList.remove('active'));el.classList.add('active')}
+
+init()
 </script>
 
 </body>
