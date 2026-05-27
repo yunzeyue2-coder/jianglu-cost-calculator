@@ -120,7 +120,7 @@ function o(id){
   document.getElementById('dn').textContent = x.n
   document.getElementById('di').innerHTML = x.p.startsWith('http')?'<img src="'+x.p+'">':'🍽'
   document.getElementById('dm').innerHTML = `<span>${x.c}</span><span>毛利${x.m}</span><span>${x.s}</span>`
-  document.getElementById('db').innerHTML = '<div class="d-locked"><div>🔒 完整配方+SOP+防御层已就位</div><div style="font-size:11px;color:#ccc;margin:8px 0">订阅后自动解锁全部内容</div><div class="sub-btn" onclick="alert('支付即将开通')">开通订阅 ¥19.9/月</div></div>'
+  document.getElementById('db').innerHTML = '<div class="d-locked"><div>🔒 完整配方+SOP+防御层已就位</div><div style="font-size:11px;color:#ccc;margin:8px 0">订阅后自动解锁全部内容</div><div class="sub-btn"  onclick="sub()">开通订阅 ¥19.9/月</div></div>'
 }
 function c(){document.getElementById('detail').classList.remove('active')}
 function f(){r()}
