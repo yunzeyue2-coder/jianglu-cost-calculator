@@ -3,286 +3,178 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-<title>酱卤产品成本核算报价表</title>
+<title>潜卤 · 酱卤老兵 · 酱卤机会研判</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;background:#f5f7fa;color:#111;font-size:14px;line-height:1.5;padding-bottom:100px}
-.hd{background:linear-gradient(135deg,#1e3a5f,#2563eb);color:#fff;padding:18px 16px 14px;position:sticky;top:0;z-index:100}
-.hd h1{font-size:17px;font-weight:700}
-.hd p{font-size:11px;opacity:.8;margin-top:2px}
-.nav{display:flex;background:#fff;border-bottom:1px solid #e2e8f0;position:sticky;top:56px;z-index:99;overflow-x:auto;gap:0}
-.nav a{flex:0 0 auto;padding:10px 12px;font-size:11px;font-weight:600;color:#64748b;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;text-decoration:none}
-.nav a.act{color:#2563eb;border-color:#2563eb}
-.sec{padding:10px 12px;max-width:500px;margin:0 auto}
-.card{background:#fff;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.06);padding:14px;margin-bottom:10px}
-.ct{font-size:14px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.ct .b{font-size:10px;background:#eff6ff;color:#2563eb;padding:1px 7px;border-radius:99px;font-weight:600}
-label{display:block;font-size:11px;font-weight:600;color:#64748b;margin-bottom:2px}
-input,select{width:100%;padding:7px 8px;border:1.5px solid #e2e8f0;border-radius:7px;font-size:13px;outline:none;background:#fff}
-input:focus,select:focus{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.1)}
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:6px}
-.dr{display:grid;gap:3px;padding:7px 0;border-bottom:1px solid #f1f5f9}
-.dr:last-child{border-bottom:none}
-.dr.i3{grid-template-columns:2fr .8fr .8fr .8fr .8fr .8fr auto}
-.dr.i2{grid-template-columns:2.5fr .8fr .8fr .8fr .8fr auto}
-.dh{display:grid;gap:3px;padding:4px 0 6px;border-bottom:2px solid #e2e8f0;color:#64748b;font-size:10px;font-weight:600}
-.dh span{text-align:center}
-.dh span:first-child{text-align:left}
-.dh.i3{grid-template-columns:2fr .8fr .8fr .8fr .8fr .8fr auto}
-.dh.i2{grid-template-columns:2.5fr .8fr .8fr .8fr .8fr auto}
-.dr .am{font-weight:700;font-size:13px;text-align:right;color:#2563eb;padding-top:14px}
-.dr .am .pct{font-weight:400;color:#64748b;font-size:10px}
-.dr .del{background:none;border:none;color:#ef4444;font-size:20px;cursor:pointer;padding-top:12px}
-.btn{display:inline-flex;align-items:center;justify-content:center;padding:9px 16px;border:none;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer;width:100%;transition:opacity .12s}
-.btn:active{opacity:.7}
-.bp{background:#2563eb;color:#fff}
-.bs{background:#16a34a;color:#fff}
-.bo{background:#fff;color:#2563eb;border:1.5px solid #2563eb}
-.br{background:#fff;color:#ef4444;border:1.5px solid #ef4444}
-.mt{margin-top:8px}
-.sg{display:grid;grid-template-columns:1fr 1fr;gap:6px}
-.si{background:#f8fafc;border-radius:7px;padding:10px;text-align:center}
-.si .l{font-size:11px;color:#64748b;margin-bottom:2px}
-.si .v{font-size:17px;font-weight:800}
-.si .v.p{color:#2563eb}.si .v.s{color:#16a34a}.si .v.d{color:#ef4444}
-.si.f{grid-column:1/-1}
-.cb{margin:6px 0}
-.cb .r{display:flex;justify-content:space-between;padding:4px 0;font-size:12px;border-bottom:1px solid #f1f5f9}
-.cb .r:last-child{border-bottom:none}
-.ch{display:flex;height:22px;border-radius:99px;overflow:hidden;margin:6px 0 10px}
-.ch .seg{display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;transition:width .3s;min-width:0}
-.ft{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #e2e8f0;padding:7px 12px;display:flex;gap:6px;z-index:100}
-.ft .btn{flex:1}
-.sm{font-size:11px;color:#94a3b8}
-@media(min-width:520px){.sec{margin:0 auto}}
-@media print{.hd,.nav,.ft{display:none}.sec{max-width:none;padding:0}.card{break-inside:avoid;box-shadow:none;border:1px solid #e2e8f0}}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#f5f5f0;color:#1a1a1a;padding:16px;max-width:480px;margin:0 auto}
+.header{text-align:center;padding:24px 0 12px;border-bottom:2px solid #1a1a1a;margin-bottom:16px}
+.header h1{font-size:24px;font-weight:700;letter-spacing:4px}
+.header .sub{font-size:12px;color:#888;margin-top:2px}
+.header .tagline{font-size:11px;color:#aaa;margin-top:4px}
+.nav{display:flex;gap:6px;margin:12px 0;overflow-x:auto;padding-bottom:4px}
+.nav-item{padding:7px 14px;border:1px solid #ddd;border-radius:20px;font-size:12px;cursor:pointer;background:#fff;white-space:nowrap;transition:.15s}
+.nav-item.active{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
+.layer{display:none}
+.layer.active{display:block}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.card{background:#fff;border-radius:8px;padding:14px;cursor:pointer;border:1px solid #eee;transition:.12s}
+.card:hover{border-color:#1a1a1a;transform:translateY(-1px)}
+.card .emoji{font-size:22px;margin-bottom:4px}
+.card .name{font-size:13px;font-weight:500}
+.card .count{font-size:11px;color:#999;margin-top:2px}
+.sub-card{background:#fff;border-radius:8px;padding:11px 14px;margin:5px 0;display:flex;justify-content:space-between;align-items:center;border:1px solid #eee;cursor:pointer;transition:.12s}
+.sub-card:hover{border-color:#1a1a1a}
+.sub-card .name{font-size:13px}
+.sub-card .arrow{color:#aaa;font-size:13px}
+.bread{font-size:11px;color:#999;padding:6px 0;margin-bottom:6px;border-bottom:1px solid #eee}
+.bread span{cursor:pointer}
+.bread span:hover{color:#1a1a1a}
+.btn-back{display:inline-block;padding:5px 10px;font-size:11px;color:#666;cursor:pointer;border:1px solid #ddd;border-radius:4px;margin-bottom:10px;background:#fff}
+.product-row{display:flex;flex-direction:column;gap:6px}
+.prod-item{background:#fff;border-radius:8px;padding:12px 14px;border:1px solid #eee;cursor:pointer}
+.prod-item .name{font-size:13px;font-weight:500}
+.prod-item .meta{font-size:11px;color:#999;margin-top:2px}
+.prod-item .tag{display:inline-block;font-size:10px;padding:1px 6px;border-radius:4px;margin-left:6px}
+.tag-green{background:#e8f5e9;color:#2e7d32}
+.price-box{background:#fafaf5;border-radius:8px;padding:14px;margin:12px 0;border:1px solid #e8e8e0}
+.price-box .amount{font-size:20px;font-weight:700}
+.price-box .note{font-size:11px;color:#888;margin-top:4px}
+.btn-pay{width:100%;padding:13px;background:#1a1a1a;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;margin-top:10px;transition:.12s}
+.proc-step{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid #f0f0eb}
+.proc-step:last-child{border:none}
+.proc-num{width:22px;height:22px;background:#1a1a1a;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;flex-shrink:0;margin-top:1px}
+.proc-text{font-size:12px;line-height:1.5}
+.proc-detail{font-size:11px;color:#666;margin-top:2px}
+.locked{color:#ccc;font-size:11px}
+.section-title{font-size:14px;font-weight:600;margin:16px 0 10px;padding-left:8px;border-left:3px solid #1a1a1a}
 </style>
 </head>
 <body>
-<div class="hd">
-  <h1>📋 酱卤产品成本核算报价表</h1>
-  <p>净料率 → 配方投料 → 出品率 → 包材/制费/物流 → 毛利率 → 饼图/雷达图对比</p>
+
+<div class="header">
+  <h1>潜 卤</h1>
+  <div class="sub">酱卤老兵 · 酱卤机会研判</div>
+  <div class="tagline">看见水面之下的力量</div>
 </div>
-<div class="nav" id="nav">
-  <a class="act" onclick="goTo('sec-base')">🏢</a>
-  <a onclick="goTo('sec-main')">🥩</a>
-  <a onclick="goTo('sec-aux')">🧂</a>
-  <a onclick="goTo('sec-product')">📊</a>
-  <a onclick="goTo('sec-pkg')">📦</a>
-  <a onclick="goTo('sec-mfg')">🔧</a>
-  <a onclick="goTo('sec-log')">🚚</a>
-  <a onclick="goTo('sec-price')">💰</a>
-</div>
-<div class="sec" id="sec-base">
-  <div class="card"><div class="ct">🏢 基本信息</div>
-    <div class="g2"><div><label>供应商</label><input id="f_supplier" value="河南臻卤源生物科技" oninput="sa()"></div><div><label>产品名称</label><input id="f_name" value="麻辣鸭肉条" oninput="sa()"></div></div>
-    <div class="g2"><div><label>包装规格</label><input id="f_spec" value="125g" oninput="sa()"></div><div><label>交货周期</label><input id="f_lead" placeholder="天" oninput="sa()"></div></div>
-    <div class="g2"><div><label>起订量（件）</label><input type="number" id="f_moq" oninput="sa()"></div><div><label>起送量（件）</label><input type="number" id="f_msq" oninput="sa()"></div></div>
-  </div>
-</div>
-<div class="sec" id="sec-main">
-  <div class="card"><div class="ct">🥩 主料（原料）<span class="b">含水率·净料率</span></div><div class="dh i3"><span>原料名称</span><span>单位</span><span>采购单价</span><span>净料率%</span><span>投料量g</span><span>单件成本</span><span></span></div><div id="main-rows"></div><button class="btn bo mt" onclick="addMain()">＋ 添加主料</button></div>
-  <div class="card" id="sec-aux"><div class="ct">🧂 辅料（调味料/添加物）<span class="b">可增减</span></div><div class="dh i2"><span>辅料名称</span><span>单位</span><span>采购单价</span><span>用量(g)</span><span>合计(元/件)</span><span></span></div><div id="aux-rows"></div><button class="btn bo mt" onclick="addAux()">＋ 添加辅料</button></div>
-  <div class="card" id="sec-product"><div class="ct">📊 出品率与原料成本</div>
-    <div class="g2"><div><label>产品出品率（%）</label><input type="number" id="f_yield" value="60" step="1" min="1" max="100" oninput="calc()"></div><div><label>单件成品重（g）</label><input type="number" id="f_weight" step="1" min="1" oninput="calc()"></div></div>
-    <div class="cb" id="raw-summary"><p class="sm">填写后自动计算</p></div></div>
-</div>
-<div class="sec" id="sec-pkg">
-  <div class="card"><div class="ct">📦 包装费用 <span class="b">可增减</span></div><div class="dh i2"><span>物料名称</span><span>单位</span><span>采购单价</span><span>用量</span><span>小计(含损耗)</span><span></span></div><div id="pkg-rows"></div><button class="btn bo mt" onclick="addPkg()">＋ 添加包装物料</button></div>
-  <div class="card"><div class="ct">🧮 包装合计</div><div id="pkg-summary"><p class="sm">添加后自动计算</p></div></div>
-</div>
-<div class="sec" id="sec-mfg">
-  <div class="card"><div class="ct">🔧 制造成本</div>
-    <div class="g2"><div><label>人工（元/件）</label><input type="number" id="f_labor" step="0.01" value="0" oninput="calc()"></div><div><label>能耗·水电气（元/件）</label><input type="number" id="f_energy" step="0.01" value="0" oninput="calc()"></div></div>
-    <div class="g2"><div><label>设备折旧（元/件）</label><input type="number" id="f_depr" step="0.01" value="0" oninput="calc()"></div><div><label>其他制费（元/件）</label><input type="number" id="f_other" step="0.01" value="0" oninput="calc()"><input id="f_other_note" placeholder="如：辐照杀菌" style="margin-top:3px;font-size:11px" oninput="sa()"></div></div></div>
-</div>
-<div class="sec" id="sec-log">
-  <div class="card"><div class="ct">🚚 物流费用</div>
-    <div class="g2"><div><label>运费（元/件）</label><input type="number" id="f_freight" step="0.01" value="0" oninput="calc()"></div><div><label>运费税率（%）</label><input type="number" id="f_freight_tax" step="0.5" value="0" oninput="calc()"></div></div>
-    <div><label>备注</label><input id="f_log_note" placeholder="物流方式/区域" style="margin-top:3px" oninput="sa()"></div></div>
-</div>
-<div class="sec" id="sec-price">
-  <div class="card"><div class="ct">📈 成本总览</div>
-    <div class="sg" id="cost-totals">
-      <div class="si"><div class="l">原料成本/件</div><div class="v p" id="t_raw">0.00</div></div>
-      <div class="si"><div class="l">包装成本/件</div><div class="v p" id="t_pkg">0.00</div></div>
-      <div class="si"><div class="l">制造成本/件</div><div class="v" id="t_mfg">0.00</div></div>
-      <div class="si"><div class="l">物流成本/件</div><div class="v" id="t_log">0.00</div></div>
-      <div class="si f"><div class="l">💡 总成本 / 件</div><div class="v s" id="t_total" style="font-size:22px">0.00</div></div>
-    </div></div>
-  <div class="card"><div class="ct">📊 成本结构仪表盘 · 饼图 + 雷达图对比</div>
-    <div id="chart-panel"><p class="sm">完成数据后自动生成</p></div></div>
-  <div class="card"><div class="ct">💵 报价与毛利率</div>
-    <div class="g2"><div><label>不含税拟售价（元/件）</label><input type="number" id="f_sell" step="0.01" placeholder="手动或用毛利率算" oninput="calcPrice()"></div><div><label>产品适用税率（%）</label><input type="number" id="f_tax" value="9" step="0.5" oninput="calcPrice()"></div></div>
-    <div class="g2 mt"><div><label>目标毛利率（%）</label><input type="number" id="f_margin" value="30" step="0.5" oninput="calcPrice()"></div><div></div></div>
-    <div class="sg mt">
-      <div class="si"><div class="l">不含税出厂价</div><div class="v p" id="p_exf">0.00</div></div>
-      <div class="si"><div class="l">含税出厂价</div><div class="v" id="p_txf">0.00</div></div>
-      <div class="si"><div class="l">产品毛利率</div><div class="v s" id="p_margin">0%</div></div>
-      <div class="si"><div class="l">含税到仓价</div><div class="v s" id="p_delv">0.00</div></div>
-    </div></div>
-  <div class="card"><div class="ct">📋 导出报价单</div>
-    <div style="display:flex;gap:6px;flex-wrap:wrap">
-      <button class="btn bp" onclick="exportText()" style="flex:1;min-width:110px">📋 复制</button>
-      <button class="btn bs" onclick="exportCSV()" style="flex:1;min-width:110px">📥 CSV</button></div>
-    <button class="btn br mt" onclick="resetAll()">🗑️ 重置</button>
-    <div style="text-align:center;margin-top:14px;padding-top:12px;border-top:1px solid #e2e8f0;font-size:11px;color:#94a3b8">
-      虾哥·滄林团队 · 酱卤肉制品全链路成本核算报价工具 🦞<br>
-      数据自动保存本地 | 可导出文本/CSV
-    </div></div>
-</div>
-<div class="ft">
-  <button class="btn bp" onclick="goTo('sec-price');calc();calcPrice()">📈 看报价+图表</button>
-  <button class="btn bo" onclick="goTo('sec-main')">🥩 原料</button>
-</div>
+
+<div class="nav" id="navBar"></div>
+
+<div id="contentArea"></div>
+
 <script>
-var U=['Kg','g','L','ml','个','包','箱','件','片','条'];
-var S={main:[{n:'鸭胸肉',u:'Kg',p:12,nr:75,us:250},{n:'牛肝',u:'Kg',p:8,nr:85,us:200}],
-  aux:[{n:'大豆油、料油',u:'Kg',p:8,us:25},{n:'香辛料',u:'Kg',p:15,us:10},{n:'复合调味料',u:'Kg',p:12,us:30}],
-  pkg:[{n:'真空袋（铝箔）',u:'个',p:.23,us:1,lo:2},{n:'彩色包装袋',u:'个',p:.23,us:1,lo:2},{n:'外包装箱',u:'个',p:.1,us:.25,lo:1}],
-  supplier:'河南臻卤源生物科技',name:'麻辣鸭肉条',spec:'125g',lead:'',moq:'',msq:'',
-  yield:60,weight:'',labor:0,energy:0,depr:0,other:0,otherNote:'',freight:0,freightTax:0,logNote:'',sell:'',tax:9,margin:30};
-// 酱卤行业标准占比（正常产品）
-var NORM = {raw:58, pkg:15, mfg:17, log:10};
-function $(i){return document.getElementById(i)}
-function es(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML}
-function nv(v){return parseFloat(v)||0}
-function sa(){try{['supplier','name','spec','lead','moq','msq','yield','weight','labor','energy','depr','other','otherNote','freight','freightTax','logNote','sell','tax','margin'].forEach(function(k){var e=$('f_'+k);if(e)S[k]=e.type==='number'?nv(e.value):e.value});localStorage.setItem('qv3',JSON.stringify(S))}catch(e){}}
-function ld(){try{var d=localStorage.getItem('qv3');if(d){var p=JSON.parse(d);if(p.main&&p.main.length){Object.assign(S,p);return true}}}catch(e){}return false}
-function getPcts(){var r=0;S.main.forEach(function(x){r+=x.p/(x.nr/100)*x.us/1000});var a=0;S.aux.forEach(function(x){a+=x.p*x.us/1000});var y=S.yield/100||1,ra=(r+a)/y;
-  var p=0;S.pkg.forEach(function(x){p+=x.p*x.us*(1+(x.lo||0)/100)});var m=S.labor+S.energy+S.depr+S.other,l=S.freight*(1+S.freightTax/100),t=ra+p+m+l;
-  return t>0?{raw:ra/t*100,pkg:p/t*100,mfg:m/t*100,log:l/t*100,total:t,rawV:ra,pkgV:p,mfgV:m,logV:l}:null}
-function calc(){
-  S.yield=nv($('f_yield').value);S.weight=nv($('f_weight').value);S.labor=nv($('f_labor').value);S.energy=nv($('f_energy').value);
-  S.depr=nv($('f_depr').value);S.other=nv($('f_other').value);S.freight=nv($('f_freight').value);S.freightTax=nv($('f_freight_tax').value);
-  var r=0;S.main.forEach(function(x){r+=x.p/(x.nr/100)*x.us/1000});var a=0;S.aux.forEach(function(x){a+=x.p*x.us/1000});
-  var y=S.yield/100,ra=y>0?(r+a)/y:r+a;var p=0;S.pkg.forEach(function(x){p+=x.p*x.us*(1+(x.lo||0)/100)});
-  var m=S.labor+S.energy+S.depr+S.other,l=S.freight*(1+S.freightTax/100),t=ra+p+m+l;
-  $('raw-summary').innerHTML='<div class="cb"><div class="r"><span>原料+辅料总投料</span><span>¥'+(r+a).toFixed(2)+'</span></div><div class="r"><span>出品率 '+S.yield+'% 折算</span><span>¥'+ra.toFixed(2)+'</span></div><div class="r" style="font-weight:700;color:#2563eb"><span>原料成本/件</span><span>¥'+ra.toFixed(2)+'</span></div></div>';
-  $('pkg-summary').innerHTML='<div class="cb"><div class="r" style="font-weight:700;color:#2563eb"><span>包装合计/件</span><span>¥'+p.toFixed(2)+'</span></div></div>';
-  $('t_raw').textContent='¥'+ra.toFixed(2);$('t_pkg').textContent='¥'+p.toFixed(2);$('t_mfg').textContent='¥'+m.toFixed(2);$('t_log').textContent='¥'+l.toFixed(2);$('t_total').textContent='¥'+t.toFixed(2);
-  drawCharts();calcPrice(t);sa();renderAll()}
-function drawCharts(){
-  var pcts=getPcts();
-  if(!pcts){$('chart-panel').innerHTML='<p class="sm">完成数据后生成</p>';return}
-  var c=['#2563eb','#16a34a','#d97706','#8b5cf6'],ls=['原料','包装','制费','物流'];
-  var vals=[pcts.raw,pcts.pkg,pcts.mfg,pcts.log],nvs=[NORM.raw,NORM.pkg,NORM.mfg,NORM.log];
-  // -- Pie chart: SVG --
-  var cx=110,cy=110,r=90;
-  var total=vals.reduce(function(a,b){return a+b},0);
-  var pie='<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center">';
-  pie+='<div style="text-align:center"><div style="font-size:11px;font-weight:600;color:#64748b;margin-bottom:4px">实际成本饼图</div><svg width="220" height="220" viewBox="0 0 220 220">';
-  var angle=-90; // start at top
-  vals.forEach(function(v,i){
-    var pct=v/total,ang=pct*360;
-    if(ang<0.1)return;
-    var a1=angle*Math.PI/180,a2=(angle+ang)*Math.PI/180;
-    var x1=cx+r*Math.cos(a1),y1=cy+r*Math.sin(a1);
-    var x2=cx+r*Math.cos(a2),y2=cy+r*Math.sin(a2);
-    var lg=ang>180?1:0;
-    pie+='<path d="M'+cx+','+cy+' L'+x1.toFixed(1)+','+y1.toFixed(1)+' A'+r+','+r+' 0 '+lg+',1 '+x2.toFixed(1)+','+y2.toFixed(1)+' Z" fill="'+c[i]+'" opacity="0.92"/>';
-    var midA=(angle+ang/2)*Math.PI/180;
-    var lx=cx+(r*0.6)*Math.cos(midA),ly=cy+(r*0.6)*Math.sin(midA);
-    if(pct>0.05)pie+='<text x="'+lx.toFixed(1)+'" y="'+ly.toFixed(1)+'" fill="#fff" font-size="11" font-weight="700" text-anchor="middle" dominant-baseline="central">'+Math.round(pct*100)+'%</text>';
-    angle+=ang;
+const DATA = {
+  raw: {
+    name:'鲜卤·冷藏', emoji:'🥩',
+    items: {
+      chicken:{name:'鸡类',emoji:'🐔',forms:{
+        whole:{name:'整鸡',products:[
+          {id:'tea-chicken',name:'茶香鸡',desc:'鲜卤·鸡类·整鸡',price:'¥199',
+           process:['原料验收（三黄鸡，合格供应商）','领料拆包（核对品项和数量）','解冻清洗（冷水/≤50℃温水）','腌制（0-4℃，12h；可选干腌/炒盐腌）','油炸（170℃入锅，三黄鸡需炸）','卤制（料包A+B+铁观音茶梗，小火保皮）','关火焖汁（熄火30min）','摊晾（0-10℃，中心≤15℃）','包装（真空封口）','金探→入库（0-4℃冷藏）'],
+           detail:['原料：三黄鸡白条 ¥155-185/件（8-10只）','出成率：70-72%','单只净重：450-500g','执行标准：GB/T 23586','老母鸡版本：不油炸，卤制时间+20min']},
+          {id:'baiwei-chicken',name:'百味鸡',desc:'鲜卤·鸡类·整鸡',price:'¥199',process:['待滄林填充'],detail:[]},
+          {id:'tengjiao-chicken',name:'藤椒鸡',desc:'鲜卤·鸡类·整鸡',price:'¥199',process:['待滄林填充'],detail:[]}
+        ]},
+        parts:{name:'鸡副',products:[
+          {id:'fengzhua',name:'泡椒凤爪',desc:'鲜卤·鸡类·鸡副',price:'¥159',process:['待填充'],detail:[]}
+        ]}
+      }},
+      duck:{name:'鸭类',emoji:'🦆',forms:{whole:{name:'整鸭',products:[]},parts:{name:'鸭副',products:[]}}},
+      pig:{name:'猪类',emoji:'🐖',forms:{whole:{name:'整猪',products:[]},parts:{name:'分割品',products:[]}}},
+      cow:{name:'牛类',emoji:'🐄',forms:{whole:{name:'整牛',products:[]},parts:{name:'分割品',products:[]}}}
+    }
+  },
+  sauce:{name:'酱卤',emoji:'🔥',items:{}},
+  snack:{name:'休闲卤味',emoji:'🧂',items:{}},
+  season:{name:'调理·调味',emoji:'🧪',items:{}}
+};
+
+const state = { chapter:'raw', type:'', form:'', product:null, paid:false };
+
+function render(){
+  const navBar = document.getElementById('navBar');
+  navBar.innerHTML = Object.entries(DATA).map(([k,v]) =>
+    `<div class="nav-item${state.chapter===k?' active':''}" onclick="switchChapter('${k}')">${v.emoji} ${v.name}</div>`
+  ).join('');
+  showCategory();
+}
+
+function switchChapter(k){ state.chapter=k; state.type=''; state.form=''; state.product=null;
+  document.querySelectorAll('.nav-item').forEach(e=>e.classList.remove('active'));
+  event.target.classList.add('active');
+  showCategory();
+}
+
+function showCategory(){
+  const ch = DATA[state.chapter];
+  let html = `<div class="section-title">选择原料</div><div class="grid-2">`;
+  Object.entries(ch.items).forEach(([k,v]) => {
+    let cnt = 0; Object.values(v.forms).forEach(f=>cnt+=f.products.length);
+    html += `<div class="card" onclick="showForm('${k}')"><div class="emoji">${v.emoji}</div><div class="name">${v.name}</div><div class="count">${cnt}品</div></div>`;
   });
-  pie+='</svg><div style="font-size:10px;margin-top:4px">';
-  vals.forEach(function(v,i){pie+='<span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:'+c[i]+';vertical-align:middle;margin:0 4px 0 8px"></span>'+ls[i]+' '});
-  pie+='</div></div>';
-  // -- Radar chart: SVG --
-  var rcx=110,rcy=110,rr=90;
-  // 4 axes: top, right, bottom, left
-  var angs=[-90,0,90,180]; // degrees
-  function pt(ang,pct,r){var a=ang*Math.PI/180;return{x:rcx+r*pct/100*Math.cos(a),y:rcy+r*pct/100*Math.sin(a)}}
-  pie+='<div style="text-align:center"><div style="font-size:11px;font-weight:600;color:#64748b;margin-bottom:4px">正常 vs 实际对比</div><svg width="220" height="220" viewBox="0 0 220 220">';
-  // Grid circles
-  for(var gi=20;gi<=100;gi+=20){
-    var gp=pt(angs[0],gi,rr),npts='';
-    angs.forEach(function(a){var p=pt(a,gi,rr);npts+=p.x.toFixed(1)+','+p.y.toFixed(1)+' '});
-    pie+='<polygon points="'+npts.trim()+'" fill="none" stroke="#e2e8f0" stroke-width="1"/>';
-    // Grid % labels
-    var lp=pt(angs[0],gi,rr);pie+='<text x="'+(lp.x+6)+'" y="'+(lp.y+3)+'" fill="#94a3b8" font-size="8">'+gi+'%</text>';
+  html += `</div>`;
+  document.getElementById('contentArea').innerHTML = html;
+}
+
+function showForm(type){
+  state.type = type; state.form = '';
+  const ch = DATA[state.chapter]; const item = ch.items[type];
+  let html = `<div class="bread"><span onclick="showCategory()">${ch.name}</span> › ${item.name}</div>
+    <div class="section-title">选择形态</div>`;
+  Object.entries(item.forms).forEach(([k,v]) => {
+    html += `<div class="sub-card" onclick="showProducts('${type}','${k}')">
+      <span class="name">${v.name}</span><span class="arrow">${v.products.length}品 ›</span></div>`;
+  });
+  document.getElementById('contentArea').innerHTML = html;
+}
+
+function showProducts(type, form){
+  state.type=type; state.form=form;
+  const ch=DATA[state.chapter]; const f=ch.items[type].forms[form];
+  let html = `<div class="bread"><span onclick="showCategory()">${ch.name}</span> › <span onclick="showForm('${type}')">${ch.items[type].name}</span> › ${f.name}</div>
+    <div class="section-title">产品列表</div><div class="product-row">`;
+  f.products.forEach(p => {
+    html += `<div class="prod-item" onclick="showDetail('${type}','${form}','${p.id}')">
+      <div class="name">${p.name} <span class="tag tag-green">${p.desc}</span></div>
+      <div class="meta">${p.price}</div></div>`;
+  });
+  html += `</div>`;
+  document.getElementById('contentArea').innerHTML = html;
+}
+
+function showDetail(type, form, id){
+  const f=DATA[state.chapter].items[type].forms[form];
+  const p = f.products.find(x=>x.id===id);
+  if(!p) return;
+  let html = `<div class="btn-back" onclick="showProducts('${type}','${form}')">← 返回</div>
+    <h2 style="font-size:17px;margin:0 0 2px">${p.name}</h2>
+    <div style="font-size:11px;color:#888;margin-bottom:10px">${p.desc}</div>
+    <div class="price-box">
+      <div class="amount">${state.paid ? '✅ 已解锁' : p.price}</div>
+      <div class="note">${state.paid ? '完整工艺方案已全部展开' : '含完整配方参数+CCP点+品控标准'}</div>
+      <button class="btn-pay" onclick="unlock()">${state.paid ? '已支付' : '支付 ¥'+p.price.replace('¥','')}</button>
+    </div>
+    <div class="section-title">工艺流程</div>`;
+  p.process.forEach((step,i)=>{
+    html += `<div class="proc-step"><div class="proc-num">${i+1}</div><div>
+      <div class="proc-text">${step.split('（')[0]}</div>
+      ${state.paid ? '<div class="proc-detail">'+step+'</div>' : '<div class="locked">🔒 支付后展开</div>'}
+    </div></div>`;
+  });
+  if(state.paid && p.detail.length){
+    html += `<div class="section-title">关键参数</div>`;
+    p.detail.forEach(d=>{html+=`<div style="font-size:12px;padding:4px 0;border-bottom:1px solid #f0f0eb">${d}</div>`;});
   }
-  // Axis lines
-  angs.forEach(function(a,i){
-    var ep=pt(a,100,rr);pie+='<line x1="'+rcx+'" y1="'+rcy+'" x2="'+ep.x.toFixed(1)+'" y2="'+ep.y.toFixed(1)+'" stroke="#cbd5e1" stroke-width="1"/>';
-    var lp=pt(a,105,rr);pie+='<text x="'+lp.x.toFixed(1)+'" y="'+(lp.y+4)+'" fill="#64748b" font-size="10" font-weight="600" text-anchor="middle">'+ls[i]+'</text>';
-  });
-  // Normal polygon (green dashed)
-  var npts='';angs.forEach(function(a,i){var p=pt(a,nvs[i],rr);npts+=p.x.toFixed(1)+','+p.y.toFixed(1)+' '});
-  pie+='<polygon points="'+npts.trim()+'" fill="rgba(22,163,74,0.15)" stroke="#16a34a" stroke-width="2" stroke-dasharray="5,3"/>';
-  // Actual polygon (blue solid)
-  var apts='';angs.forEach(function(a,i){var p=pt(a,vals[i],rr);apts+=p.x.toFixed(1)+','+p.y.toFixed(1)+' '});
-  pie+='<polygon points="'+apts.trim()+'" fill="rgba(37,99,235,0.18)" stroke="#2563eb" stroke-width="2.5"/>';
-  // Legend
-  pie+='</svg><div style="font-size:10px;margin-top:4px"><span style="display:inline-block;width:12px;height:3px;border-radius:2px;background:#16a34a;vertical-align:middle;margin-right:3px"></span>正常产品 <span style="display:inline-block;width:12px;height:3px;border-radius:2px;background:#2563eb;vertical-align:middle;margin:0 0 0 10px"></span>实际产品</div></div>';
-  pie+='</div>'; // end flex
-  // Detailed breakdown below charts
-  pie+='<div class="cb" style="margin-top:8px">';
-  pie+='<div class="r" style="font-weight:600"><span>成本项</span><span>金额/件 占比 正常参考</span></div>';
-  var allItems=[{l:'原料',v:pcts.rawV,pct:vals[0],norm:NORM.raw,c:'#2563eb'},
-    {l:'包装',v:pcts.pkgV,pct:vals[1],norm:NORM.pkg,c:'#16a34a'},
-    {l:'制费',v:pcts.mfgV,pct:vals[2],norm:NORM.mfg,c:'#d97706'},
-    {l:'物流',v:pcts.logV,pct:vals[3],norm:NORM.log,c:'#8b5cf6'}];
-  allItems.forEach(function(x){
-    var diff=x.pct-x.norm;
-    var dStr=(diff>0?'↑':'↓')+Math.abs(diff).toFixed(1)+'%';
-    var dClr=diff>0?'#ef4444':'#16a34a';
-    pie+='<div class="r"><span><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:'+x.c+';vertical-align:middle;margin-right:4px"></span>'+x.l+'</span><span>¥'+x.v.toFixed(2)+'　'+x.pct.toFixed(1)+'%　<span style="color:'+x.c+'">'+x.norm+'%</span> <span style="color:'+dClr+';font-weight:600">'+dStr+'</span></span></div>'});
-  pie+='</div>';
-  $('chart-panel').innerHTML=pie}
-function calcPrice(c){if(c===undefined){var p=getPcts();c=p?p.total:0}
-  S.sell=$('f_sell').value;S.tax=nv($('f_tax').value);S.margin=nv($('f_margin').value);
-  var e,mr;if(S.sell&&nv(S.sell)>0){e=nv(S.sell);mr=((e-c)/e*100).toFixed(1)+'%'}else{var m=S.margin/100;e=m>=1?0:c/(1-m);mr=S.margin+'%'}
-  var tx=e*(1+S.tax/100),dl=tx+S.freight*(1+S.freightTax/100);
-  $('p_exf').textContent='¥'+e.toFixed(2);$('p_txf').textContent='¥'+tx.toFixed(2);$('p_margin').textContent=mr;$('p_delv').textContent='¥'+dl.toFixed(2)}
-function rM(){var el=$('main-rows');el.innerHTML=S.main.map(function(r,i){
-  var np=r.p/(r.nr/100),c=np*r.us/1000;return'<div class="dr i3"><input value="'+es(r.n)+'" placeholder="原料名" onchange="uM('+i+',\'n\',this.value)"><select onchange="uM('+i+',\'u\',this.value)">'+U.map(function(u){return'<option value="'+u+'"'+(u===r.u?' selected':'')+'>'+u+'</option>'}).join('')+'</select><input type="number" step="0.01" min="0" value="'+r.p+'" placeholder="¥/Kg" onchange="uM('+i+',\'p\',nv(this.value))"><input type="number" step="0.1" min="0.1" max="100" value="'+r.nr+'" placeholder="净料率%" onchange="uM('+i+',\'nr\',nv(this.value))"><input type="number" step="1" min="0" value="'+r.us+'" placeholder="投料g" onchange="uM('+i+',\'us\',nv(this.value))"><span class="am">¥'+c.toFixed(2)+'</span><button class="del" onclick="dM('+i+')">×</button></div>'}).join('')}
-function rA(){var el=$('aux-rows');el.innerHTML=S.aux.map(function(r,i){var c=r.p*r.us/1000;return'<div class="dr i2"><input value="'+es(r.n)+'" placeholder="辅料" onchange="uA('+i+',\'n\',this.value)"><select onchange="uA('+i+',\'u\',this.value)">'+U.map(function(u){return'<option value="'+u+'"'+(u===r.u?' selected':'')+'>'+u+'</option>'}).join('')+'</select><input type="number" step="0.01" min="0" value="'+r.p+'" placeholder="¥/Kg" onchange="uA('+i+',\'p\',nv(this.value))"><input type="number" step="0.1" min="0" value="'+r.us+'" placeholder="用量g" onchange="uA('+i+',\'us\',nv(this.value))"><span class="am">¥'+c.toFixed(2)+'</span><button class="del" onclick="dA('+i+')">×</button></div>'}).join('')}
-function rP(){var el=$('pkg-rows');el.innerHTML=S.pkg.map(function(r,i){var c=r.p*r.us*(1+(r.lo||0)/100);return'<div class="dr i2"><input value="'+es(r.n)+'" placeholder="物料" onchange="uP('+i+',\'n\',this.value)"><select onchange="uP('+i+',\'u\',this.value)">'+U.map(function(u){return'<option value="'+u+'"'+(u===r.u?' selected':'')+'>'+u+'</option>'}).join('')+'</select><input type="number" step="0.01" min="0" value="'+r.p+'" placeholder="¥/个" onchange="uP('+i+',\'p\',nv(this.value))"><input type="number" step="0.1" min="0" value="'+r.us+'" placeholder="用量" onchange="uP('+i+',\'us\',nv(this.value))"><span class="am">¥'+c.toFixed(2)+'</span><button class="del" onclick="dP('+i+')">×</button></div>'}).join('')}
-function rfS(){$('f_supplier').value=S.supplier;$('f_name').value=S.name;$('f_spec').value=S.spec;$('f_lead').value=S.lead||'';$('f_moq').value=S.moq||'';$('f_msq').value=S.msq||'';
-  $('f_yield').value=S.yield;$('f_weight').value=S.weight||'';$('f_labor').value=S.labor;$('f_energy').value=S.energy;$('f_depr').value=S.depr;$('f_other').value=S.other;$('f_other_note').value=S.otherNote||'';
-  $('f_freight').value=S.freight;$('f_freight_tax').value=S.freightTax;$('f_log_note').value=S.logNote||'';$('f_sell').value=S.sell||'';$('f_tax').value=S.tax;$('f_margin').value=S.margin}
-function addMain(){S.main.push({n:'',u:'Kg',p:0,nr:80,us:0});rM();calc()}
-function dM(i){if(S.main.length<=1)return;S.main.splice(i,1);rM();calc()}
-function uM(i,f,v){S.main[i][f]=v;calc()}
-function addAux(){S.aux.push({n:'',u:'Kg',p:0,us:0});rA();calc()}
-function dA(i){if(S.aux.length<=0)return;S.aux.splice(i,1);rA();calc()}
-function uA(i,f,v){S.aux[i][f]=v;calc()}
-function addPkg(){S.pkg.push({n:'',u:'个',p:0,us:0,lo:0});rP();calc()}
-function dP(i){if(S.pkg.length<=0)return;S.pkg.splice(i,1);rP();calc()}
-function uP(i,f,v){S.pkg[i][f]=v;calc()}
-function renderAll(){rM();rA();rP()}
-function goTo(i){document.getElementById(i).scrollIntoView({behavior:'smooth'});document.querySelectorAll('.nav a').forEach(function(x){x.classList.toggle('act',x.getAttribute('onclick').indexOf(i)>-1)})}
-function exportText(){
-  var nm=S.name||'未命名',sp=S.spec||'',sup=S.supplier||'';
-  var pcts=getPcts();if(!pcts){alert('请先填写数据');return}
-  var t=pcts.total,ra=pcts.rawV,p=pcts.pkgV,m=pcts.mfgV,l=pcts.logV;
-  var e,mr;if(S.sell&&nv(S.sell)>0){e=nv(S.sell);mr=((e-t)/e*100).toFixed(1)+'%'}else{var mg=S.margin/100;e=mg>=1?0:t/(1-mg);mr=S.margin+'%'}
-  var tx=e*(1+S.tax/100),dl=tx+S.freight*(1+S.freightTax/100);
-  var o='━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n产 品 报 价 单 · 酱卤成本核算\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n';
-  o+='供应商：'+sup+'\n产品：'+nm+'（'+sp+'）\n';if(S.lead)o+='交货周期：'+S.lead+'\n';if(S.moq)o+='起订量：'+S.moq+'件\n';
-  o+='\n【原料】\n';S.main.forEach(function(x){if(x.n){var c=x.p/(x.nr/100)*x.us/1000;o+='  '+x.n+' | ¥'+x.p+'/Kg × 净料'+x.nr+'% × '+x.us+'g = ¥'+c.toFixed(2)+'\n'}});
-  o+='\n【辅料】\n';S.aux.forEach(function(x){if(x.n){var c=x.p*x.us/1000;o+='  '+x.n+' | ¥'+x.p+'/Kg × '+x.us+'g = ¥'+c.toFixed(2)+'\n'}});
-  o+='\n出品率：'+S.yield+'% → 原料成本/件：¥'+ra.toFixed(2)+'\n';
-  o+='\n【包装】\n';S.pkg.forEach(function(x){if(x.n){var c=x.p*x.us*(1+(x.lo||0)/100);o+='  '+x.n+' | ¥'+x.p+' × '+x.us+'个 = ¥'+c.toFixed(2)+'\n'}});
-  o+='\n【制费】人工¥'+S.labor.toFixed(2)+' 能耗¥'+S.energy.toFixed(2)+' 折旧¥'+S.depr.toFixed(2)+' 其他¥'+S.other.toFixed(2)+(S.otherNote?'（'+S.otherNote+'）':'')+' = ¥'+m.toFixed(2)+'\n';
-  o+='【物流】¥'+S.freight.toFixed(2)+' = ¥'+l.toFixed(2)+'\n';
-  o+='\n━━━ 成本 & 报价 ━━━\n';
-  o+='成本总计：¥'+t.toFixed(2)+'/件\n不含税出厂价：¥'+e.toFixed(2)+'\n含税出厂价（'+S.tax+'%）：¥'+tx.toFixed(2)+'\n毛利率：'+mr+'\n含税到仓价：¥'+dl.toFixed(2)+'/件\n';
-  o+='\n━━━ 成本结构对比 ━━━\n';
-  var its=[{l:'原料',v:pcts.raw,n:NORM.raw},{l:'包装',v:pcts.pkg,n:NORM.pkg},{l:'制费',v:pcts.mfg,n:NORM.mfg},{l:'物流',v:pcts.log,n:NORM.log}];
-  its.forEach(function(x){var d=x.v-x.n;o+='  '+x.l+'：实际 '+x.v.toFixed(1)+'% / 正常 '+x.n+'%'+(d>0?' +'+d.toFixed(1)+'% ↑':d<0?' '+d.toFixed(1)+'% ↓':' 持平')+'\n'});
-  o+='━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n虾哥 · 酱卤肉制品全链路成本核算报价工具 🦞\n臻卤源生物 · 滄林团队出品\nhttps://yunzeyue2-coder.github.io/jianglu-cost-calculator/';
-  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(o).then(function(){alert('✅ 已复制')}).catch(function(){alert('复制失败')});else alert('📋\n\n'+o)}
-function exportCSV(){var nm=S.name||'未命名',c='产品,规格,成本项,单价,单位,用量/克,小计\n';
-  S.main.forEach(function(x){c+=nm+','+S.spec+',主料-'+x.n+','+x.p+','+x.u+','+x.us+','+(x.p/(x.nr/100)*x.us/1000).toFixed(4)+'\n'});
-  S.aux.forEach(function(x){c+=nm+','+S.spec+',辅料-'+x.n+','+x.p+','+x.u+','+x.us+','+(x.p*x.us/1000).toFixed(4)+'\n'});
-  c+=nm+','+S.spec+',人工,,,,,'+S.labor.toFixed(2)+'\n';c+=nm+','+S.spec+',能耗,,,,,'+S.energy.toFixed(2)+'\n';
-  c+=nm+','+S.spec+',折旧,,,,,'+S.depr.toFixed(2)+'\n';c+=nm+','+S.spec+',其他,,,,,'+S.other.toFixed(2)+'\n';
-  c+=nm+','+S.spec+',运费,,,,,'+S.freight.toFixed(2)+'\n';
-  var b=new Blob(['\ufeff'+c],{type:'text/csv;charset=utf-8'});var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=nm+'_报价单.csv';a.click();URL.revokeObjectURL(a.href)}
-function resetAll(){if(!confirm('确认重置所有数据？'))return;localStorage.removeItem('qv3');location.reload()}
-if(!ld()||!S.main.length){S.main=[{n:'鸭胸肉',u:'Kg',p:12,nr:75,us:250},{n:'牛肝',u:'Kg',p:8,nr:85,us:200}];S.aux=[{n:'大豆油、料油',u:'Kg',p:8,us:25},{n:'香辛料',u:'Kg',p:15,us:10},{n:'复合调味料',u:'Kg',p:12,us:30}];S.pkg=[{n:'真空袋（铝箔）',u:'个',p:.23,us:1,lo:2},{n:'彩色包装袋',u:'个',p:.23,us:1,lo:2},{n:'外包装箱',u:'个',p:.1,us:.25,lo:1}]}
-rfS();renderAll();calc();
-</script></body></html>
+  document.getElementById('contentArea').innerHTML = html;
+}
+
+function unlock(){ state.paid=true;
+  let ch=state.chapter, t=state.type, f=state.form;
+  const item=DATA[ch].items[t].forms[f].products;
+  if(item.length) showDetail(t,f,item[0].id);
+}
+
+render();
+</script>
+</body>
+</html>
