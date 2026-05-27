@@ -169,9 +169,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans SC",s
 <script>
 // Demo data
 const CATS = ['全部','🔥 火爆','🆕 新卡','酱卤','冷饮','烘焙','小吃','调理']
+const IMG_BASE = 'https://yunzeyue2-coder.github.io/jianglu-cost-calculator/images/'
 const allCards = [
-  {id:'CD-001',name:'脆皮冰淇淋块',cat:'冷饮',tag:'新',img:'🍦',scene:'夜市/学校',margin:'65%'},
-  {id:'XC-002',name:'椒麻鸡',cat:'酱卤',tag:'火',img:'🐔',scene:'抖音/下酒',margin:'45%'},
+  {id:'CD-001',name:'脆皮冰淇淋块',cat:'冷饮',tag:'新',img:IMG_BASE+'cd001.jpg',scene:'夜市/学校',margin:'65%'},
+  {id:'XC-002',name:'椒麻鸡',cat:'酱卤',tag:'火',img:'🍔',scene:'抖音/下酒',margin:'45%'},
   {id:'CD-003',name:'脆脆冰芯糕',cat:'冷饮',tag:'新',img:'🍨',scene:'夜市/夏季',margin:'60%'},
   {id:'CD-004',name:'芒果糯米饭杯',cat:'冷饮',tag:'',img:'🥭',scene:'夜市/甜品',margin:'55%'},
   {id:'HB-005',name:'手撕红糖馒头',cat:'烘焙',tag:'',img:'🥟',scene:'早餐/连锁',margin:'50%'},
@@ -220,7 +221,7 @@ function renderGrid(){
   el.innerHTML = list.map(c => `
     <div class="card" onclick="openDetail('${c.id}')">
       <div class="img">
-        ${c.img}
+        ${c.img.startsWith('http')?'<img src="'+c.img+'" alt="'+c.name+'">':c.img}
         ${c.tag==='新'?'<span class="badge badge-new">新</span>':''}
         ${c.tag==='火'?'<span class="badge badge-fire">🔥</span>':''}
       </div>
@@ -268,7 +269,7 @@ function openDetail(id){
 
   document.getElementById('detailContent').innerHTML = `
     <div class="d-back" onclick="closeDetail()">← 返回</div>
-    <div class="d-img">${currentCard.img}</div>
+    <div class="d-img">${currentCard.img.startsWith('http')?'<img src="'+currentCard.img+'" alt="'+currentCard.name+'">':currentCard.img}</div>
     <div class="d-title">${currentCard.name}</div>
     <div class="d-tags"><span>${currentCard.cat}</span><span>毛利${currentCard.margin}</span><span>${currentCard.scene}</span></div>
     <div class="d-price">${subscribed?'已订阅 ✅':'¥19.9'}<span> ${subscribed?'':'单张购买或订阅解锁全部'}</span></div>
