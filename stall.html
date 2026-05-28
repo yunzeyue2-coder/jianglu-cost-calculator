@@ -510,7 +510,7 @@ function render() {
         <div class="card-id">${r.id}</div>
         <div class="card-name">${escHtml(r.name)}</div>
         <div class="card-tier">${r.tier||'📘'}</div>
-        <div class="card-tags">${(r.tags||[]).map(t => '<span class="t">'+t+'</span>').join('')}</div>
+        <div class="card-tags">${(r.tags||[]).map(t => '<span class="t'+(t==='火爆'?' hot':'')+'">'+t+'</span>').join('')}</div>
         <div class="card-meta">
           <span class="card-cat">${escHtml(r.cat)}</span>
           <span class="card-status">${statusIcon}</span>
