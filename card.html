@@ -231,7 +231,7 @@ function o(id) {
   if(cd.常见问题) h += '<div class="d-sec"><div class="d-h">常见问题</div><div class="d-p">'+cd.常见问题+'</div></div>'
   if(cd.美食故事) h += '<div class="d-sec"><div class="d-h">场景故事</div><div class="d-p">'+cd.美食故事+'</div></div>'
   if(cd.仪式感) { h += '<div class="d-sec"><div class="d-h">仪式感</div><div class="d-p">'; cd.仪式感.forEach(function(s){ h += '▸ '+s+'\n' }); h += '</div></div>' }
-  if(cd.建议图片描述) h += '<div class="d-sec"><div class="d-h">图片Prompt</div><div class="d-p" style="font-size:11px;color:#888">'+cd.建议图片描述+'</div></div>'
+  /* 图片Prompt 已移除（内部用不展示）*/'
   h += '<div style="text-align:center;padding:20px 0 40px"><button class="sub-btn" onclick="sub()">订阅解锁完整版</button></div>'
   document.getElementById('db').innerHTML = h
   d.classList.add('active'); document.body.style.overflow='hidden'
