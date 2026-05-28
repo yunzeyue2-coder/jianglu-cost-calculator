@@ -1630,5 +1630,71 @@
       "夜宵",
       "佐餐"
     ]
+  },
+  "CD-013": {
+    "name": "炸鸡柳",
+    "配方": [
+      [
+        "鸡柳",
+        "1000g(批次)",
+        "-",
+        "主料，切条锁水"
+      ],
+      [
+        "乐宅客腌料",
+        "70g(批次)",
+        "-",
+        "入味锁水核心"
+      ],
+      [
+        "水",
+        "500g(批次)",
+        "-",
+        "抓拌吸收介质"
+      ],
+      [
+        "玉米淀粉",
+        "适量",
+        "-",
+        "裹粉第一层锁水"
+      ],
+      [
+        "面包糠",
+        "足量",
+        "-",
+        "糠衣外壳，酥脆来源"
+      ],
+      [
+        "孜然粉/辣椒面",
+        "适量",
+        "-",
+        "出锅复配调料"
+      ]
+    ],
+    "SOP": [
+      "鸡柳1000g+腌料70g+水500g，手抓搅拌5分钟至水分完全被肉质纤维吸收",
+      "冰箱冷藏腌制8小时",
+      "出摊前取出，加玉米淀粉抓拌均匀",
+      "投入面包糠盆中手工抓拌，使表面完全码上糠衣，手掌轻压贴合",
+      "顾客点单现场称重(约150g/份)入热油",
+      "炸3分钟至金黄，捞出控油网用力颠勺三次沥油",
+      "撒孜然粉+辣椒面，装袋出餐"
+    ],
+    "毛利": "成本¥3.20/份(150g) → 零售¥10.00 → 毛利68.0%",
+    "设备": "商用双通大功率电炸炉¥800-1200 / 不锈钢裹粉盆¥50-100 / 控油网勺¥30-60 / 台式电子秤¥80-150, 共计约¥1,500",
+    "替代": "乐宅客腌料→奥尔良腌料+少量小苏打(风味不同) / 面包糠→薯片碎(酥脆度略降)",
+    "变体": "麻辣鸡柳/椒盐鸡柳/柠檬鸡柳",
+    "常见问题": "Q:炸出来外壳脱落? A:面包糠没压实,或下锅时裹粉未回潮定型,需手掌轻压再静置2分钟",
+    "建议图片描述": "A close-up shot of golden-brown crispy fried chicken tenders (Ji Liu) piled high inside a retro paper snack bag, resting on a clean street food stall counter. A few pieces are perfectly broken in half, revealing the steaming, juicy white chicken meat inside under a super crunchy breadcrumb crust. Light sprinkles of chili powder and cumin are visible on the surface. Warm glowing night market ambient lighting, beautiful side backlight highlighting the crispy texture and rising steam, shallow depth of field, high-resolution action food photography, no text, no recipe.",
+    "美食故事": "下午五点半的夜市刚刚开张，油锅在燃气灶的催化下升起微微的热浪。放学的小学生和下班的年轻人瞬间将小小的推车摊位围得水泄不通。\n\n称好重量的鸡柳被顺势滑入滚烫的油锅中，瞬间激起密集的清脆响声，面包糠在外油的逼迫下迅速定型变硬。只需3分钟，一锅金黄酥脆的鸡柳便破油而出，当头撒上一把孜然粉与辣椒面，装进纸袋里还带着烫手的温度。用竹签挑起一根塞进嘴里，咔嚓一声，外壳酥脆到掉渣，里面的肉质却因为吸足了水分而鲜嫩爆汁，这种纯粹的油炸香气是街头深夜最难抗拒的抚慰。",
+    "仪式感": [
+      "面包糠必须现卖现裹，用手掌轻压确保糠衣牢固贴合，防止入锅脱油",
+      "炸好出锅时在控油网上用力颠勺三次，沥干多余油脂的同时让多重香料粉分布得更加均匀"
+    ],
+    "场景标签": [
+      "零食",
+      "夜宵",
+      "下酒"
+    ]
   }
 }
