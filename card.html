@@ -205,8 +205,6 @@ function chips() {
   document.getElementById('chips').innerHTML = d
 }
 function filter(c) { cur=c; 
-var cur='全部'
-const CATS=['全部','冷饮','小吃','汤品','调味料','面点','面食','饮品','鲜制肉品']
 chips(); render(document.getElementById('q').value) }
 // Open detail
 function o(id) {
@@ -243,8 +241,6 @@ function c() { document.getElementById('detail').classList.remove('active'); doc
 function share() { navigator.clipboard&&navigator.clipboard.writeText(window.location.href).then(function(){alert('链接已复制')}) }
 
 
-var cur='全部'
-const CATS=['全部','冷饮','小吃','汤品','调味料','面点','面食','饮品','鲜制肉品']
 chips(); render('')
 
 
