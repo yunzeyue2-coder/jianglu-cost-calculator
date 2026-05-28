@@ -423,6 +423,7 @@ body {
         <div class="detail-name" id="detailName"></div>
         <div class="detail-meta">
           <span class="detail-cat" id="detailCat"></span>
+          <span class="detail-tier" id="detailTier"></span>
           <span class="detail-status" id="detailStatus"></span>
         </div>
         <div class="note-tag" id="detailNote"></div>
@@ -507,6 +508,7 @@ function render() {
       <div class="card" data-id="${r.id}" onclick="showDetail('${r.id}')">
         <div class="card-id">${r.id}</div>
         <div class="card-name">${escHtml(r.name)}</div>
+        <div class="card-tier">${r.tier||'📘'}</div>
         <div class="card-meta">
           <span class="card-cat">${escHtml(r.cat)}</span>
           <span class="card-status">${statusIcon}</span>
@@ -524,6 +526,7 @@ function showDetail(id) {
   document.getElementById('detailId').textContent = `${r.id} · 原编号 #${r.num}`;
   document.getElementById('detailName').textContent = r.name;
   document.getElementById('detailCat').textContent = r.cat;
+  document.getElementById('detailTier').textContent = r.tier||'📘';
   document.getElementById('detailStatus').textContent = r.status;
   document.getElementById('detailNote').textContent = r.note || '';
   document.getElementById('detailContent').textContent = r.content;
