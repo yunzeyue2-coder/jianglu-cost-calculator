@@ -425,6 +425,7 @@ body {
           <span class="detail-cat" id="detailCat"></span>
           <span class="detail-tier" id="detailTier"></span>
           <span class="detail-status" id="detailStatus"></span>
+          <div class="detail-tags" id="detailTags"></div>
         </div>
         <div class="note-tag" id="detailNote"></div>
       </div>
@@ -509,6 +510,7 @@ function render() {
         <div class="card-id">${r.id}</div>
         <div class="card-name">${escHtml(r.name)}</div>
         <div class="card-tier">${r.tier||'📘'}</div>
+        <div class="card-tags">${(r.tags||[]).map(t => '<span class="t">'+t+'</span>').join('')}</div>
         <div class="card-meta">
           <span class="card-cat">${escHtml(r.cat)}</span>
           <span class="card-status">${statusIcon}</span>
@@ -529,6 +531,8 @@ function showDetail(id) {
   document.getElementById('detailTier').textContent = r.tier||'📘';
   document.getElementById('detailStatus').textContent = r.status;
   document.getElementById('detailNote').textContent = r.note || '';
+  const tagEl = document.getElementById('detailTags');
+  tagEl.innerHTML = (r.tags||[]).map(t => '<span class="tag-badge">'+t+'</span>').join('');
   document.getElementById('detailContent').textContent = r.content;
   document.getElementById('modalOverlay').classList.add('active');
   document.body.style.overflow = 'hidden';
