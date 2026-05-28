@@ -5133,5 +5133,74 @@
       "聚餐",
       "下酒"
     ]
+  },
+  "CD-040": {
+    "name": "凉拌虎皮椒",
+    "配方": [
+      [
+        "青椒",
+        "150g",
+        "-",
+        "主料，炸至表皮松起"
+      ],
+      [
+        "红椒",
+        "150g",
+        "-",
+        "主料，配色增甜"
+      ],
+      [
+        "葱",
+        "10g",
+        "-",
+        "增香点缀"
+      ],
+      [
+        "盐",
+        "5g",
+        "-",
+        "基咸"
+      ],
+      [
+        "酱油",
+        "3g",
+        "-",
+        "咸鲜调色"
+      ],
+      [
+        "老抽",
+        "5g",
+        "-",
+        "上色"
+      ],
+      [
+        "秘制辣椒油",
+        "30g",
+        "-",
+        "辣味核心，复合香辣"
+      ]
+    ],
+    "SOP": [
+      "青红椒分别切去两端蒂头，洗净备用",
+      "锅盛油烧热，下青红椒炸至表皮松起呈虎皮状时捞出",
+      "盛入盘内，加盐5g+酱油3g+老抽5g+秘制辣椒油30g",
+      "加入葱10g，拌匀即可"
+    ],
+    "毛利": "成本约¥2-3/份 → 零售¥8-12 → 毛利70-75%",
+    "设备": "炸锅 / 拌菜盆",
+    "替代": "秘制辣椒油→红油+花椒油(风味略简单) / 青红椒→杭椒(更辣)",
+    "变体": "凉拌虎皮椒皮蛋/虎皮椒拌木耳/虎皮椒拌牛肉",
+    "常见问题": "Q:虎皮出不来? A:油温不够高或炸的时间不够,高温快炸至表皮起泡即捞出。Q:太油腻? A:炸后可用厨房纸吸油再拌",
+    "建议图片描述": "A close-up of Chinese tiger-skin peppers (Hu Pi Jiao) blistered and charred, tossed in a rich red chili oil dressing with soy sauce and chopped green onions, served in a simple white bowl. The peppers show beautiful blackened blistered skin patterns. Warm rustic dinner table setting, soft overhead lighting, shallow depth of field, high-resolution food photography, no text, no recipe.",
+    "美食故事": "一份好的凉拌虎皮椒，关键在于辣椒炸得恰到好处——表皮起泡呈虎皮斑纹，但里面还保持着辣椒的脆嫩。\n\n浇上秘制辣椒油，咸鲜微辣，虎皮椒的焦香和辣椒油的复合香气交织在一起，简单却让人停不下筷子。",
+    "仪式感": [
+      "青红椒必须高温快炸至表皮起泡即捞出，保持内部脆嫩口感",
+      "炸好的辣椒趁热拌入调料，热椒更容易吸收酱汁"
+    ],
+    "场景标签": [
+      "佐餐",
+      "零食",
+      "下酒"
+    ]
   }
 }
