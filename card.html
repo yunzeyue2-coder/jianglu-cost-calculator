@@ -204,7 +204,10 @@ function chips() {
   CATS.forEach(function(c){ d += '<span class="chip'+(c==curcat?' active':'')+'" onclick="filter(\''+c+'\')">'+c+'</span>' })
   document.getElementById('chips').innerHTML = d
 }
-function filter(c) { cur=c; chips(); render(document.getElementById('q').value) }
+function filter(c) { cur=c; 
+var cur='全部'
+const CATS=['全部','冷饮','小吃','汤品','调味料','面点','面食','饮品','鲜制肉品']
+chips(); render(document.getElementById('q').value) }
 // Open detail
 function o(id) {
   var c = CARDS.find(function(x){return x.i==id}), cd = CD[id], d = document.getElementById('detail')
@@ -239,12 +242,18 @@ function o(id) {
 function c() { document.getElementById('detail').classList.remove('active'); document.body.style.overflow='' }
 function share() { navigator.clipboard&&navigator.clipboard.writeText(window.location.href).then(function(){alert('链接已复制')}) }
 
+
+var cur='全部'
+const CATS=['全部','冷饮','小吃','汤品','调味料','面点','面食','饮品','鲜制肉品']
 chips(); render('')
 
 
 
 // Load detail data from cards-data.json
 fetch('cards-data.json').then(function(r){return r.json()}).then(function(d){CD=d;console.log('咔库数据已加载')}).catch(function(e){console.log('数据加载失败:',e)})
+
+// Load card detail data
+fetch('cards-data.json').then(function(r){return r.json()}).then(function(d){CD=d}).catch(function(e){console.log('data load error:',e)})
 </script>
 </body>
 </html>
