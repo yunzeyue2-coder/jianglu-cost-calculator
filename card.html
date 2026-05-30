@@ -15,6 +15,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;backg
 .hd{display:flex;align-items:center;gap:8px;padding:14px 12px;position:sticky;top:0;background:#f8f7f4;z-index:10}
 .hd h1{font-size:20px;font-weight:700;letter-spacing:3px;color:#C0392B}
 .sec-title{font-size:15px;font-weight:700;color:#333;padding:16px 12px 6px;display:flex;align-items:center;gap:6px}
+.hero-scroll{display:flex;gap:12px;overflow-x:auto;padding:0 12px 8px;scrollbar-width:none;scroll-snap-type:x mandatory}
+.hero-scroll::-webkit-scrollbar{display:none}
+.hero-card{flex-shrink:0;width:200px;background:#fff;border-radius:14px;overflow:hidden;cursor:pointer;border:1px solid #eee;scroll-snap-align:start;transition:all 0.2s}
+.hero-card:active{transform:scale(0.97)}
+.hero-img{width:100%;height:140px;display:flex;align-items:center;justify-content:center;font-size:56px;background:linear-gradient(135deg,#fef6f2,#fff8f5)}
+.hero-bd{padding:10px 12px}
+.hero-nm{font-size:15px;font-weight:700;color:#333}
+.hero-mt{font-size:11px;color:#999;margin-top:3px}
 .sec-title .more{font-size:11px;color:#ccc;margin-left:auto}
 .sec-title .dot{display:inline-block;width:3px;height:14px;border-radius:2px;margin-right:6px}
 .scroll-x{display:flex;gap:10px;overflow-x:auto;padding:0 12px 8px;scrollbar-width:none}
@@ -53,6 +61,65 @@ td:first-child{color:#C0392B;width:30%;font-size:11px;font-weight:500}
 
 <div class="wrap">
 <div class="hd"><h1>咔库</h1><span style="font-size:12px;color:#999;font-weight:400">1041张</span><span style="flex:1"></span><span style="font-size:11px;color:#bbb">α版</span><span style="font-size:14px;cursor:pointer;color:#999" onclick="alert('搜索即将上线')">🔍</span></div>
+<div class="sec-title" style="padding-top:4px">🏆 当红爆款</div>
+<div class="hero-scroll" id="heroScroll">
+  <div class="hero-card" onclick="o('SY-001')">
+    <div class="hero-img">🍖</div>
+    <div class="hero-bd">
+      <div class="hero-nm">夜市羊肉串</div>
+      <div class="hero-mt">滋滋烤·深夜烟火 · 毛利65%</div>
+    </div>
+  </div>
+  <div class="hero-card" onclick="o('YC-001')">
+    <div class="hero-img">🍋</div>
+    <div class="hero-bd">
+      <div class="hero-nm">手打柠檬茶</div>
+      <div class="hero-mt">手打柠檬茶·手搓咖啡 · 毛利80%</div>
+    </div>
+  </div>
+  <div class="hero-card" onclick="o('SY-006')">
+    <div class="hero-img">🦪</div>
+    <div class="hero-bd">
+      <div class="hero-nm">蒜蓉烤生蚝</div>
+      <div class="hero-mt">滋滋烤·深夜烟火 · 毛利60%</div>
+    </div>
+  </div>
+  <div class="hero-card" onclick="o('SG-001')">
+    <div class="hero-img">🐟</div>
+    <div class="hero-bd">
+      <div class="hero-nm">凯里酸汤鱼</div>
+      <div class="hero-mt">沸腾锅·热辣江湖 · 毛利65%</div>
+    </div>
+  </div>
+  <div class="hero-card" onclick="o('LZ-013')">
+    <div class="hero-img">🐔</div>
+    <div class="hero-bd">
+      <div class="hero-nm">青花椒炒鸡</div>
+      <div class="hero-mt">滋滋烤·深夜烟火 · 毛利60%</div>
+    </div>
+  </div>
+  <div class="hero-card" onclick="o('SY-012')">
+    <div class="hero-img">🥟</div>
+    <div class="hero-bd">
+      <div class="hero-nm">烤冷面</div>
+      <div class="hero-mt">滋滋烤·深夜烟火 · 毛利80%</div>
+    </div>
+  </div>
+  <div class="hero-card" onclick="o('YC-003')">
+    <div class="hero-img">🧊</div>
+    <div class="hero-bd">
+      <div class="hero-nm">手搓冰粉</div>
+      <div class="hero-mt">手打柠檬茶·手搓咖啡 · 毛利80%</div>
+    </div>
+  </div>
+  <div class="hero-card" onclick="o('SY-017')">
+    <div class="hero-img">🐷</div>
+    <div class="hero-bd">
+      <div class="hero-nm">烤猪蹄</div>
+      <div class="hero-mt">滋滋烤·深夜烟火 · 毛利60%</div>
+    </div>
+  </div>
+</div>
 <div class="sec-title">🔥 热门推荐</div>
 <div class="rank-bar" id="rankBar"></div>
 <div class="sec-title"><span class="dot" style="background:#E8652D"></span>滋滋烤·深夜烟火<span class="more">41款</span></div><div class="scroll-x"><div class="cd" onclick="o('LZ-001')"><div class="img">🍽️</div><div class="bd"><div class="nm">炒鸡-001</div><div class="mt"><span class="tag">60%</span></div></div></div>
