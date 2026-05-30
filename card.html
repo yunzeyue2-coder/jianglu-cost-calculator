@@ -14,13 +14,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;backg
 .wrap{max-width:420px;margin:0 auto;padding:0 0 70px}
 .hd{display:flex;align-items:center;gap:8px;padding:14px 12px;position:sticky;top:0;background:#f8f7f4;z-index:10}
 .hd h1{font-size:20px;font-weight:700;letter-spacing:3px;color:#C0392B}
-
-/* Title bar */
 .sec-title{font-size:15px;font-weight:700;color:#333;padding:16px 12px 6px;display:flex;align-items:center;gap:6px}
-.sec-title .more{font-size:11px;color:#ccc;margin-left:auto;cursor:default}
+.sec-title .more{font-size:11px;color:#ccc;margin-left:auto}
 .sec-title .dot{display:inline-block;width:3px;height:14px;border-radius:2px;margin-right:6px}
-
-/* Horizontal scroll card row */
 .scroll-x{display:flex;gap:10px;overflow-x:auto;padding:0 12px 8px;scrollbar-width:none}
 .scroll-x::-webkit-scrollbar{display:none}
 .scroll-x .cd{flex-shrink:0;width:130px;background:#fff;border-radius:10px;overflow:hidden;cursor:pointer;border:1px solid #eee}
@@ -30,37 +26,36 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;backg
 .scroll-x .cd .nm{font-size:13px;font-weight:600;line-height:1.3;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
 .scroll-x .cd .mt{font-size:11px;color:#999;margin-top:2px}
 .scroll-x .cd .mt .tag{background:#f0ece6;color:#C0392B;padding:1px 5px;border-radius:3px;font-size:10px;font-weight:500}
-
-/* Rank bar */
 .rank-bar{display:flex;gap:8px;overflow-x:auto;padding:0 12px 4px;scrollbar-width:none}
 .rank-bar .rk{flex-shrink:0;padding:6px 14px;border-radius:18px;font-size:12px;white-space:nowrap;cursor:pointer;background:linear-gradient(135deg,#fef6f2,#fff);border:1px solid #f0e8de;color:#555}
 .rank-bar .rk:active{background:#E8652D;color:#fff;border-color:#E8652D}
 .rank-bar .rk .num{display:inline-block;width:16px;height:16px;line-height:16px;text-align:center;border-radius:50%;font-size:9px;font-weight:700;margin-right:4px}
+.ftr{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #eee;padding:6px;text-align:center;font-size:10px;color:#ccc;z-index:10}
 
 /* Detail */
 .detail{display:none;position:fixed;inset:0;background:#f8f7f4;z-index:50;overflow-y:auto;max-width:420px;margin:0 auto}
 .detail.active{display:block}
 .d-top{display:flex;align-items:center;padding:12px;background:#fff;border-bottom:1px solid #eee;position:sticky;top:0;z-index:5}
-.d-back{font-size:20px;cursor:pointer;color:#666;margin-right:8px}
-.d-sec{background:#fff;border-radius:10px;padding:12px;margin:8px 10px;border-left:3px solid #E8652D}
-.d-h{font-size:13px;font-weight:700;color:#C0392B;margin-bottom:4px}
-.d-p{font-size:13px;color:#444;line-height:1.6;white-space:pre-wrap}
+.d-back{font-size:20px;cursor:pointer;color:#666;margin-right:8px;line-height:1}
+.d-sec{background:#fff;border-radius:10px;padding:12px;margin:8px 10px;border-left:3px solid #E8652D;box-shadow:0 1px 2px rgba(0,0,0,0.03)}
+.d-h{font-size:13px;font-weight:700;color:#C0392B;margin-bottom:4px;letter-spacing:0.3px}
+.d-p{font-size:13px;color:#444;line-height:1.7;white-space:pre-wrap}
 table{width:100%;border-collapse:collapse;font-size:12px}
-td{padding:3px 5px;border-bottom:1px solid #eee;color:#555}
-td:first-child{color:#C0392B;width:30%;font-size:11px}
+td{padding:3px 5px;border-bottom:1px solid #eee;color:#555;line-height:1.5}
+td:first-child{color:#C0392B;width:30%;font-size:11px;font-weight:500}
 .sub-b{background:#C0392B;color:#fff;border:none;padding:10px 24px;border-radius:8px;font-size:14px;cursor:pointer;display:block;margin:12px auto}
-.ftr{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #eee;padding:6px;text-align:center;font-size:10px;color:#ccc;z-index:10}
+.msg-area{background:#fff;border-radius:10px;padding:12px;margin:8px 10px}
+.msg-input{width:100%;padding:8px 10px;border:1px solid #ddd;border-radius:6px;font-size:12px;outline:none;font-family:inherit;background:#f9f7f4;margin-bottom:6px}
+.msg-btn{background:#E8652D;color:#fff;border:none;padding:6px 16px;border-radius:6px;font-size:12px;cursor:pointer}
 </style>
 </head>
 <body>
 
 <div class="wrap">
-<div class="hd"><h1>咔库</h1><span style="font-size:12px;color:#999;font-weight:400">1041张</span><span style="flex:1"></span><span style="font-size:11px;color:#bbb">α版</span><span style="font-size:14px;cursor:pointer;color:#999;line-height:1" onclick="alert('即将上线')">🔍</span></div>
-
+<div class="hd"><h1>咔库</h1><span style="font-size:12px;color:#999;font-weight:400">1041张</span><span style="flex:1"></span><span style="font-size:11px;color:#bbb">α版</span><span style="font-size:14px;cursor:pointer;color:#999" onclick="alert('搜索即将上线')">🔍</span></div>
 <div class="sec-title">🔥 热门推荐</div>
 <div class="rank-bar" id="rankBar"></div>
-<div class="sec-title"><span class="dot" style="background:#E8652D"></span>滋滋烤·深夜烟火<span class="more">41款</span></div>
-<div class="scroll-x"><div class="cd" onclick="o('LZ-001')"><div class="img">🍽️</div><div class="bd"><div class="nm">炒鸡-001</div><div class="mt"><span class="tag">60%</span></div></div></div>
+<div class="sec-title"><span class="dot" style="background:#E8652D"></span>滋滋烤·深夜烟火<span class="more">41款</span></div><div class="scroll-x"><div class="cd" onclick="o('LZ-001')"><div class="img">🍽️</div><div class="bd"><div class="nm">炒鸡-001</div><div class="mt"><span class="tag">60%</span></div></div></div>
 <div class="cd" onclick="o('LZ-002')"><div class="img">🍽️</div><div class="bd"><div class="nm">炒鸡-002</div><div class="mt"><span class="tag">60%</span></div></div></div>
 <div class="cd" onclick="o('LZ-003')"><div class="img">🍽️</div><div class="bd"><div class="nm">炒鸡-003</div><div class="mt"><span class="tag">60%</span></div></div></div>
 <div class="cd" onclick="o('LZ-004')"><div class="img">🍽️</div><div class="bd"><div class="nm">炒鸡-004</div><div class="mt"><span class="tag">60%</span></div></div></div>
@@ -81,8 +76,7 @@ td:first-child{color:#C0392B;width:30%;font-size:11px}
 <div class="cd" onclick="o('SK-004')"><div class="img">🍽️</div><div class="bd"><div class="nm">烧烤蔬菜串</div><div class="mt"><span class="tag">—</span></div></div></div>
 <div class="cd" onclick="o('SK-005')"><div class="img">🍽️</div><div class="bd"><div class="nm">秘制飘香酱</div><div class="mt"><span class="tag">—</span></div></div></div>
 </div>
-<div class="sec-title"><span class="dot" style="background:#D4A017"></span>爆油炸·酥脆研究所<span class="more">19款</span></div>
-<div class="scroll-x"><div class="cd" onclick="o('RB-002')"><div class="img">🍽️</div><div class="bd"><div class="nm">天妇罗大虾</div><div class="mt"><span class="tag">—</span></div></div></div>
+<div class="sec-title"><span class="dot" style="background:#D4A017"></span>爆油炸·酥脆研究所<span class="more">19款</span></div><div class="scroll-x"><div class="cd" onclick="o('RB-002')"><div class="img">🍽️</div><div class="bd"><div class="nm">天妇罗大虾</div><div class="mt"><span class="tag">—</span></div></div></div>
 <div class="cd" onclick="o('RB-003')"><div class="img">🍽️</div><div class="bd"><div class="nm">日式炸猪排</div><div class="mt"><span class="tag">—</span></div></div></div>
 <div class="cd" onclick="o('RB-004')"><div class="img">🍽️</div><div class="bd"><div class="nm">刺身酱油</div><div class="mt"><span class="tag">—</span></div></div></div>
 <div class="cd" onclick="o('RB-005')"><div class="img">🍽️</div><div class="bd"><div class="nm">寿司醋</div><div class="mt"><span class="tag">—</span></div></div></div>
@@ -102,15 +96,13 @@ td:first-child{color:#C0392B;width:30%;font-size:11px}
 <div class="cd" onclick="o('ZJP-011')"><div class="img">🍽️</div><div class="bd"><div class="nm">整只炸鱿鱼</div><div class="mt"><span class="tag">60%</span></div></div></div>
 <div class="cd" onclick="o('ZJP-012')"><div class="img">🍽️</div><div class="bd"><div class="nm">跟一个做了八年炸鸡的摊主聊天</div><div class="mt"><span class="tag">—</span></div></div></div>
 </div>
-<div class="sec-title"><span class="dot" style="background:#8B4513"></span>老汤卤·现捞热卤<span class="more">5款</span></div>
-<div class="scroll-x"><div class="cd" onclick="o('HLT-001')"><div class="img">🍽️</div><div class="bd"><div class="nm">河南逍遥镇的胡辣汤</div><div class="mt"><span class="tag">60%</span></div></div></div>
+<div class="sec-title"><span class="dot" style="background:#8B4513"></span>老汤卤·现捞热卤<span class="more">5款</span></div><div class="scroll-x"><div class="cd" onclick="o('HLT-001')"><div class="img">🍽️</div><div class="bd"><div class="nm">河南逍遥镇的胡辣汤</div><div class="mt"><span class="tag">60%</span></div></div></div>
 <div class="cd" onclick="o('HLT-002')"><div class="img">🍽️</div><div class="bd"><div class="nm">胡辣汤-002</div><div class="mt"><span class="tag">60%</span></div></div></div>
 <div class="cd" onclick="o('HLT-003')"><div class="img">🍽️</div><div class="bd"><div class="nm">北京大酒店的胡辣汤</div><div class="mt"><span class="tag">60%</span></div></div></div>
 <div class="cd" onclick="o('HLT-004')"><div class="img">🍽️</div><div class="bd"><div class="nm">素胡辣汤不用肉但也好吃—</div><div class="mt"><span class="tag">65%</span></div></div></div>
 <div class="cd" onclick="o('HLT-005')"><div class="img">🍽️</div><div class="bd"><div class="nm">胡辣汤-005</div><div class="mt"><span class="tag">60%</span></div></div></div>
 </div>
-<div class="sec-title"><span class="dot" style="background:#C0392B"></span>沸腾锅·热辣江湖<span class="more">25款</span></div>
-<div class="scroll-x"><div class="cd" onclick="o('SG-001')"><div class="img">🍽️</div><div class="bd"><div class="nm">凯里酸汤鱼</div><div class="mt"><span class="tag">—</span></div></div></div>
+<div class="sec-title"><span class="dot" style="background:#C0392B"></span>沸腾锅·热辣江湖<span class="more">25款</span></div><div class="scroll-x"><div class="cd" onclick="o('SG-001')"><div class="img">🍽️</div><div class="bd"><div class="nm">凯里酸汤鱼</div><div class="mt"><span class="tag">—</span></div></div></div>
 <div class="cd" onclick="o('SG-002')"><div class="img">🍽️</div><div class="bd"><div class="nm">遵义酸汤鱼</div><div class="mt"><span class="tag">—</span></div></div></div>
 <div class="cd" onclick="o('SG-003')"><div class="img">🍽️</div><div class="bd"><div class="nm">老酸汤</div><div class="mt"><span class="tag">—</span></div></div></div>
 <div class="cd" onclick="o('SG-004')"><div class="img">🍽️</div><div class="bd"><div class="nm">酸汤-004</div><div class="mt"><span class="tag">—</span></div></div></div>
@@ -131,8 +123,7 @@ td:first-child{color:#C0392B;width:30%;font-size:11px}
 <div class="cd" onclick="o('SG-019')"><div class="img">🍽️</div><div class="bd"><div class="nm">鲜椒</div><div class="mt"><span class="tag">—</span></div></div></div>
 <div class="cd" onclick="o('SG-020')"><div class="img">🍽️</div><div class="bd"><div class="nm">糊辣椒蘸水</div><div class="mt"><span class="tag">—</span></div></div></div>
 </div>
-<div class="sec-title"><span class="dot" style="background:#7B9A45"></span>猛火蒸·现做现吃<span class="more">84款</span></div>
-<div class="scroll-x"><div class="cd" onclick="o('GBL-001')"><div class="img">🍽️</div><div class="bd"><div class="nm">GBL-001</div><div class="mt"><span class="tag">—</span></div></div></div>
+<div class="sec-title"><span class="dot" style="background:#7B9A45"></span>猛火蒸·现做现吃<span class="more">84款</span></div><div class="scroll-x"><div class="cd" onclick="o('GBL-001')"><div class="img">🍽️</div><div class="bd"><div class="nm">GBL-001</div><div class="mt"><span class="tag">—</span></div></div></div>
 <div class="cd" onclick="o('HB-001')"><div class="img">🍽️</div><div class="bd"><div class="nm">老蒲</div><div class="mt"><span class="tag">77%</span></div></div></div>
 <div class="cd" onclick="o('HB-002')"><div class="img">🍽️</div><div class="bd"><div class="nm">老蒲</div><div class="mt"><span class="tag">72%</span></div></div></div>
 <div class="cd" onclick="o('HB-003')"><div class="img">🍽️</div><div class="bd"><div class="nm">韭菜盒子分两种：烫面和发面</div><div class="mt"><span class="tag">76%</span></div></div></div>
@@ -153,8 +144,7 @@ td:first-child{color:#C0392B;width:30%;font-size:11px}
 <div class="cd" onclick="o('HB-018')"><div class="img">🍽️</div><div class="bd"><div class="nm">面点-018</div><div class="mt"><span class="tag">65%</span></div></div></div>
 <div class="cd" onclick="o('HB-019')"><div class="img">🍽️</div><div class="bd"><div class="nm">水煎包的底跟锅贴的底不同。锅贴</div><div class="mt"><span class="tag">75%</span></div></div></div>
 </div>
-<div class="sec-title"><span class="dot" style="background:#7BA23F"></span>暴打拌·酸辣开胃<span class="more">11款</span></div>
-<div class="scroll-x"><div class="cd" onclick="o('QS-001')"><div class="img">🍽️</div><div class="bd"><div class="nm">轻食-001</div><div class="mt"><span class="tag">70%</span></div></div></div>
+<div class="sec-title"><span class="dot" style="background:#7BA23F"></span>暴打拌·酸辣开胃<span class="more">11款</span></div><div class="scroll-x"><div class="cd" onclick="o('QS-001')"><div class="img">🍽️</div><div class="bd"><div class="nm">轻食-001</div><div class="mt"><span class="tag">70%</span></div></div></div>
 <div class="cd" onclick="o('QS-002')"><div class="img">🍽️</div><div class="bd"><div class="nm">轻食-002</div><div class="mt"><span class="tag">65%</span></div></div></div>
 <div class="cd" onclick="o('QS-003')"><div class="img">🍽️</div><div class="bd"><div class="nm">轻食-003</div><div class="mt"><span class="tag">65%</span></div></div></div>
 <div class="cd" onclick="o('QS-004')"><div class="img">🍽️</div><div class="bd"><div class="nm">轻食-004</div><div class="mt"><span class="tag">65%</span></div></div></div>
@@ -166,8 +156,7 @@ td:first-child{color:#C0392B;width:30%;font-size:11px}
 <div class="cd" onclick="o('QS-010')"><div class="img">🍽️</div><div class="bd"><div class="nm">轻食-010</div><div class="mt"><span class="tag">65%</span></div></div></div>
 <div class="cd" onclick="o('QS-011')"><div class="img">🍽️</div><div class="bd"><div class="nm">轻食-011</div><div class="mt"><span class="tag">—</span></div></div></div>
 </div>
-<div class="sec-title"><span class="dot" style="background:#D4A017"></span>手打柠檬茶·手搓咖啡<span class="more">12款</span></div>
-<div class="scroll-x"><div class="cd" onclick="o('YC-001')"><div class="img">🍽️</div><div class="bd"><div class="nm">夜市饮品之王，锤柠檬的动作本身</div><div class="mt"><span class="tag">80%</span></div></div></div>
+<div class="sec-title"><span class="dot" style="background:#D4A017"></span>手打柠檬茶·手搓咖啡<span class="more">12款</span></div><div class="scroll-x"><div class="cd" onclick="o('YC-001')"><div class="img">🍽️</div><div class="bd"><div class="nm">夜市饮品之王，锤柠檬的动作本身</div><div class="mt"><span class="tag">80%</span></div></div></div>
 <div class="cd" onclick="o('YC-002')"><div class="img">🍽️</div><div class="bd"><div class="nm">海南爆款</div><div class="mt"><span class="tag">80%</span></div></div></div>
 <div class="cd" onclick="o('YC-003')"><div class="img">🍽️</div><div class="bd"><div class="nm">西南夜市标配</div><div class="mt"><span class="tag">80%</span></div></div></div>
 <div class="cd" onclick="o('YC-004')"><div class="img">🍽️</div><div class="bd"><div class="nm">火锅烧烤摊必备解腻神器</div><div class="mt"><span class="tag">80%</span></div></div></div>
@@ -180,8 +169,7 @@ td:first-child{color:#C0392B;width:30%;font-size:11px}
 <div class="cd" onclick="o('YC-011')"><div class="img">🍽️</div><div class="bd"><div class="nm">酸甜配上蜂蜜</div><div class="mt"><span class="tag">75%</span></div></div></div>
 <div class="cd" onclick="o('YC-012')"><div class="img">🍽️</div><div class="bd"><div class="nm">台式夜市经典</div><div class="mt"><span class="tag">70%</span></div></div></div>
 </div>
-<div class="sec-title"><span class="dot" style="background:#999"></span>新中式小吃<span class="more">611款</span></div>
-<div class="scroll-x"><div class="cd" onclick="o('BF-001')"><div class="img">🍽️</div><div class="bd"><div class="nm">BF-001</div><div class="mt"><span class="tag">70%</span></div></div></div>
+<div class="sec-title"><span class="dot" style="background:#999"></span>新中式小吃<span class="more">611款</span></div><div class="scroll-x"><div class="cd" onclick="o('BF-001')"><div class="img">🍽️</div><div class="bd"><div class="nm">BF-001</div><div class="mt"><span class="tag">70%</span></div></div></div>
 <div class="cd" onclick="o('BYSF-001')"><div class="img">🍽️</div><div class="bd"><div class="nm">广西宾阳特色凉拌粉</div><div class="mt"><span class="tag">60%</span></div></div></div>
 <div class="cd" onclick="o('BZF-001')"><div class="img">🍽️</div><div class="bd"><div class="nm">BZF-001</div><div class="mt"><span class="tag">—</span></div></div></div>
 <div class="cd" onclick="o('CF-001')"><div class="img">🍽️</div><div class="bd"><div class="nm">CF-001</div><div class="mt"><span class="tag">70%</span></div></div></div>
@@ -213,29 +201,45 @@ td:first-child{color:#C0392B;width:30%;font-size:11px}
 var DET = {};
 fetch('data-det.json').then(function(r){return r.json()}).then(function(d){DET=d}).catch(function(){});
 
-// Open detail
 function o(id){
   var d=DET[id];
   if(!d){ document.getElementById('detail').classList.add('active'); document.getElementById('dn').textContent=id; document.getElementById('db').innerHTML='<div style="text-align:center;padding:40px;color:#bbb">加载中…</div>'; setTimeout(function(){if(DET[id]){document.getElementById('detail').classList.remove('active');o(id)}},3000); return }
   document.getElementById('dn').textContent=id;
   var h='';
-  if(d.f){h+='<div class="d-sec"><div class="d-h">配方</div><table>';d.f.forEach(function(r){h+='<tr><td>'+r[0]+'</td><td>'+r[1]+'</td><td style="color:#888;font-size:11px">'+r[2]+'</td></tr>'});h+='</table></div>'}
-  if(d.s){h+='<div class="d-sec"><div class="d-h">SOP</div><div class="d-p">';d.s.forEach(function(s){h+='<span style="color:#7B9A45;font-weight:700">●</span> '+s+'\n'});h+='</div></div>'}
-  if(d.m){h+='<div class="d-sec"><div class="d-h">💰 毛利率</div><div class="d-p">'+d.m+'</div></div>';(function(m){var cb='?',sp='?',mx;mx=m.match(/成本[约¥元]*([0-9.]+)/);if(mx)cb=mx[1];mx=m.match(/售价[约¥元]*([0-9.]+)/);if(mx)sp=mx[1];if(cb!='?'&&sp!='?'){var ra=((sp-cb)/sp*100).toFixed(1);h+='<div class="d-sec" style="border-left-color:#7B9A45"><div class="d-h">🧮 成本</div><div class="d-p">原料 ¥'+cb+' | 售价 ¥'+sp+' | 毛利率 '+ra+'%</div></div>'}})(d.m)}
+  // 配方
+  if(d.f){h+='<div class="d-sec"><div class="d-h">📋 配方</div><table>';d.f.forEach(function(r){h+='<tr><td>'+r[0]+'</td><td>'+r[1]+'</td><td style="color:#888;font-size:11px">'+r[2]+'</td></tr>'});h+='</table></div>'}
+  // SOP
+  if(d.s){h+='<div class="d-sec"><div class="d-h">🔧 制作工艺</div><div class="d-p">';d.s.forEach(function(s){h+='<span style="color:#7B9A45;font-weight:700;margin-right:3px">▸</span> '+s+'\n'});h+='</div></div>'}
+  // 毛利
+  if(d.m){h+='<div class="d-sec"><div class="d-h">💰 毛利模型</div><div class="d-p">'+d.m+'</div></div>';(function(m){var cb='?',sp='?',mx;mx=m.match(/成本[约¥元]*([0-9.]+)/);if(mx)cb=mx[1];mx=m.match(/售价[约¥元]*([0-9.]+)/);if(mx)sp=mx[1];if(cb!='?'&&sp!='?'){var ra=((sp-cb)/sp*100).toFixed(1);h+='<div class="d-sec" style="border-left-color:#7B9A45"><div class="d-h">🧮 成本计算器</div><div class="d-p">原料成本: ¥'+cb+' | 建议售价: ¥'+sp+' | 毛利率: '+ra+'%</div></div>'}})(d.m)}
+  // 保存
+  if(d.st)h+='<div class="d-sec"><div class="d-h">❄️ 保存方法</div><div class="d-p">'+d.st+'</div></div>'
+  // 设备
+  if(d.e)h+='<div class="d-sec"><div class="d-h">🔌 设备需求</div><div class="d-p">'+d.e+'</div></div>'
+  // 替代
+  if(d.r)h+='<div class="d-sec"><div class="d-h">🔄 替代方案</div><div class="d-p">'+d.r+'</div></div>'
+  // 变体
+  if(d.v)h+='<div class="d-sec"><div class="d-h">🎨 变体推荐</div><div class="d-p">'+d.v+'</div></div>'
+  // 常见问题
+  if(d.q){h+='<div class="d-sec"><div class="d-h">⚠️ 常见问题</div><div class="d-p">';var qs=d.q.split('\n');qs.forEach(function(s){if(s.trim())h+='<span style="color:#C0392B;margin-right:3px">•</span> '+s.trim()+'\n'});h+='</div></div>'}
+  // 仪式感
+  if(d.ri){h+='<div class="d-sec"><div class="d-h">✨ 仪式感</div><div class="d-p">';d.ri.forEach(function(s){h+='<span style="color:#D4A017;margin-right:3px">✦</span> '+s+'\n'});h+='</div></div>'}
+  // 场景故事
   if(d.t)h+='<div class="d-sec" style="border-left-color:#7B9A45"><div class="d-h">📖 场景故事</div><div class="d-p">'+d.t+'</div></div>'
-  h+='<div class="d-sec" style="border-left-color:#ccc;background:#f9f7f4"><div class="d-h" style="color:#999">📊 趋势</div><div style="height:60px;background:#f0ece6;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#bbb;font-size:11px">订阅后查看</div></div>'
-  h+='<button class="sub-b" onclick="alert(\'即将开通\')">订阅解锁完整版</button>'
+  // 图表
+  h+='<div class="d-sec" style="border-left-color:#ccc;background:#f9f7f4"><div class="d-h" style="color:#999">📊 毛利趋势图</div><div style="height:60px;background:#f0ece6;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#bbb;font-size:11px">订阅后可查看历史毛利率趋势</div></div>'
+  // 留言
+  h+='<div class="msg-area"><div class="d-h" style="font-size:12px;color:#666">💬 问题或反馈</div><input class="msg-input" placeholder="写点什么…"><button class="msg-btn" onclick="alert(\'已收到\')">发送</button></div>'
+  // 订阅
+  h+='<button class="sub-b" onclick="alert(\'即将开通\')">🔒 订阅解锁完整版</button>'
+  // 声明
+  h+='<div style="text-align:center;padding:4px 12px 20px;font-size:9px;color:#ccc;line-height:1.5">配方由滄林·小将团队收集验证 · 部分图片AI生成 · 数据仅供参考</div>'
   document.getElementById('db').innerHTML=h; document.getElementById('detail').classList.add('active'); document.body.style.overflow='hidden'
 }
 function c(){ document.getElementById('detail').classList.remove('active'); document.body.style.overflow='' }
 
-// Build rank
-(function(){
-  var t=[{n:"羊肉串",i:"SY-001"},{n:"手打柠檬茶",i:"YC-001"},{n:"烤生蚝",i:"SY-006"},{n:"烤冷面",i:"SY-012"},{n:"烤苕皮",i:"SY-013"},{n:"铁板鱿鱼",i:"SY-009"},{n:"酸汤鱼",i:"SG-001"},{n:"手搓冰粉",i:"YC-003"},{n:"烤猪蹄",i:"SY-017"},{n:"烤鸡架",i:"SY-016"},{n:"糖醋麻辣炒鸡",i:"LZ-014"},{n:"铁板豆腐",i:"SY-010"}];
-  var h='';
-  t.forEach(function(x,i){var c=i<3?'#E8652D':'#999';h+='<span class="rk" onclick="o(\''+x.i+'\')"><span class="num" style="background:'+c+';color:#fff">'+(i+1)+'</span>'+x.n+'</span>'});
-  document.getElementById('rankBar').innerHTML=h;
-})();
+// Rank bar
+(function(){var t=[{n:"羊肉串",i:"SY-001"},{n:"手打柠檬茶",i:"YC-001"},{n:"烤生蚝",i:"SY-006"},{n:"烤冷面",i:"SY-012"},{n:"烤苕皮",i:"SY-013"},{n:"铁板鱿鱼",i:"SY-009"},{n:"酸汤鱼",i:"SG-001"},{n:"手搓冰粉",i:"YC-003"},{n:"烤猪蹄",i:"SY-017"},{n:"烤鸡架",i:"SY-016"},{n:"糖醋麻辣炒鸡",i:"LZ-014"},{n:"铁板豆腐",i:"SY-010"}];var h='';t.forEach(function(x,i){var c=i<3?'#E8652D':'#999';h+='<span class="rk" onclick="o(\''+x.i+'\')"><span class="num" style="background:'+c+';color:#fff">'+(i+1)+'</span>'+x.n+'</span>'});document.getElementById('rankBar').innerHTML=h})();
 </script>
 </body>
 </html>
