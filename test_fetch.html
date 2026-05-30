@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head><title>Test</title></head>
+<body>
+<div id="result">Loading...</div>
+<script>
+console.log("Script starting");
+var CARDS = [];
+fetch('/cards-index.json').then(function(r){return r.json()}).then(function(d){
+  console.log("Fetched:", d.length);
+  CARDS = d;
+  document.getElementById('result').textContent = 'Loaded ' + d.length + ' cards';
+}).catch(function(e){
+  console.log("Error:", e.message);
+  document.getElementById('result').textContent = 'Error: ' + e.message;
+});
+console.log("Script done");
+</script>
+</body>
+</html>
