@@ -129,7 +129,7 @@ fetch('cards-index.json').then(function(r){return r.json()}).then(function(data)
   chips(); render('');
 }).catch(function(e){console.log('index error:',e); hideSplash()})
 // Convert compact array to objects
-var CARDS = CARDS_RAW.map(function(r){ return {i:r[0], n:r[1], c:CAT_NAMES[r[2]]||"新中式小吃", m:r[3], p:"", s:""} })
+
 
 const CATS = ['全部','滋滋烤·深夜烟火','爆油炸·酥脆研究所','老汤卤·现捞热卤','沸腾锅·热辣江湖','猛火蒸·现做现吃','文火煲·慢熬鲜香','暴打拌·酸辣开胃','手打柠檬茶·手搓咖啡','新中式小吃','延边酱菜','傣舂系列']
 var CAT_MAP = {
