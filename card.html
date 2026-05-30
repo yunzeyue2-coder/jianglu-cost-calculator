@@ -7,17 +7,29 @@
 <link rel="manifest" href="/jianglu-cost-calculator/manifest.json">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="咔库">
-<link rel="apple-touch-icon" href="/jianglu-cost-calculator/images/kaku-192.svg">
+<link rel="apple-touch-icon" href="/jianglu-cost-calculator/images/apple-touch-icon.png">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;background:#f8f7f4;color:#2c2c2c}
-.wrap{max-width:420px;margin:0 auto;padding:0 12px}
-.hd{display:flex;align-items:center;justify-content:space-between;padding:16px 0;position:sticky;top:0;background:#f8f7f4;z-index:10;font-size:18px;font-weight:700;letter-spacing:2px;color:#C0392B}
+
+/* Splash / loading state */
+#splash{position:fixed;inset:0;background:#f8f7f4;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.4s}
+#splash.hide{opacity:0;pointer-events:none}
+#splash .logo{width:76px;height:76px;background:linear-gradient(135deg,#E8652D,#C0392B);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:700;color:#fff;margin-bottom:12px}
+#splash .name{font-size:26px;font-weight:700;color:#333;letter-spacing:4px}
+#splash .sub{font-size:13px;color:#999;margin-top:6px}
+#splash .loader{width:22px;height:22px;margin-top:18px;border:2px solid #eee;border-top-color:#E8652D;border-radius:50%;animation:spin 0.7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.wrap{max-width:420px;margin:0 auto;padding:0 12px;display:none}
+.wrap.show{display:block}
+.hd{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+.hd h1{font-size:18px;font-weight:700;letter-spacing:2px;color:#C0392B}
 .sb{padding:0 0 8px}
 .sb input{width:100%;padding:10px 14px;border:1px solid #ddd;border-radius:20px;font-size:14px;outline:none;background:#fff;font-family:inherit}
 .sb input:focus{border-color:#E8652D}
 .chips{display:flex;gap:6px;overflow-x:auto;padding:0 0 8px;scrollbar-width:none}
-.chip{padding:6px 14px;border:1px solid #ddd;border-radius:16px;font-size:13px;white-space:nowrap;cursor:pointer;background:#fff;flex-shrink:0;color:#666;transition:all 0.2s}
+.chip{padding:6px 14px;border:1px solid #ddd;border-radius:16px;font-size:13px;white-space:nowrap;cursor:pointer;background:#fff;flex-shrink:0;color:#666}
 .chip.active{background:#E8652D;color:#fff;border-color:#E8652D}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding-bottom:80px}
 .card{background:#fff;border-radius:12px;overflow:hidden;cursor:pointer;border:1px solid #eee;transition:all 0.2s}
@@ -27,39 +39,42 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;backg
 .card .name{font-size:14px;font-weight:600;line-height:1.3;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 .card .meta{font-size:12px;color:#999;display:flex;gap:8px;margin-top:4px}
 .card .meta .tag{background:#f0ece6;color:#C0392B;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:500}
-.rank-bar{font-size:13px;font-weight:700;color:#C0392B;margin:0 0 8px;display:flex;gap:8px;overflow-x:auto;padding:4px 0;scrollbar-width:none}
+.rank-bar{display:flex;gap:6px;overflow-x:auto;margin:0 0 8px;padding:2px 0;scrollbar-width:none}
 .rank-item{background:linear-gradient(135deg,#fef6f2,#fff);padding:5px 12px;border-radius:16px;font-size:12px;white-space:nowrap;cursor:pointer;color:#555;flex-shrink:0;border:1px solid #f0e8de;transition:all 0.2s}
-.rank-item:active{background:#E8652D;color:#fff;border-color:#E8652D;transform:scale(0.95)}
-.ftr{bottom:0;position:fixed;max-width:420px;width:calc(100% - 24px);background:#fff;border-top:1px solid #eee;padding:10px 12px;text-align:center;font-size:11px;color:#999;z-index:10}
-.loading{grid-column:1/-1;padding:80px 20px;text-align:center;color:#bbb;font-size:14px}
+.rank-item:active{background:#E8652D;color:#fff;border-color:#E8652D}
+.ftr{bottom:0;position:fixed;max-width:420px;width:calc(100% - 24px);background:#fff;border-top:1px solid #eee;padding:8px 12px;text-align:center;font-size:11px;color:#999;z-index:10}
+.no-data{grid-column:1/-1;padding:80px 0;text-align:center;color:#bbb;font-size:14px}
+
 /* Detail */
 .detail{display:none;position:fixed;inset:0;background:#f8f7f4;z-index:50;overflow-y:auto;max-width:420px;margin:0 auto}
 .detail.active{display:block}
-.d-top{display:flex;align-items:center;padding:16px 12px;background:#fff;border-bottom:1px solid #eee;position:sticky;top:0}
-.d-back{font-size:22px;cursor:pointer;color:#666;margin-right:8px}
-.d-sec{background:#fff;border-radius:12px;padding:14px;margin:10px 12px;border-left:4px solid #E8652D;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+.d-top{display:flex;align-items:center;padding:14px 12px;background:#fff;border-bottom:1px solid #eee;position:sticky;top:0}
+.d-back{font-size:22px;cursor:pointer;color:#666;margin-right:10px;line-height:1}
+.d-sec{background:#fff;border-radius:12px;padding:14px;margin:10px 12px;border-left:4px solid #E8652D}
 .d-h{font-size:14px;font-weight:700;color:#C0392B;margin-bottom:6px}
-.d-p{font-size:13px;color:#444;line-height:1.7;white-space:pre-wrap}
-table{width:100%;border-collapse:collapse;font-size:12px;margin:4px 0}
+.d-p{font-size:13px;color:#444;line-height:1.6;white-space:pre-wrap}
+table{width:100%;border-collapse:collapse;font-size:12px}
 td{padding:4px 6px;border-bottom:1px solid #eee;color:#555}
-td:first-child{color:#C0392B;width:33%;font-size:12px}
+td:first-child{color:#C0392B;width:33%}
+.sub-b{background:#C0392B;color:#fff;border:none;padding:10px 24px;border-radius:10px;font-size:14px;cursor:pointer;margin:12px auto;display:block}
 </style>
 </head>
 <body>
 
-<div class="wrap">
-<div style="display:flex;align-items:center;gap:8px;padding:14px 0">
-  <span style="font-size:18px;font-weight:700;letter-spacing:2px;color:#C0392B">咔库</span>
-  <span style="font-size:12px;color:#999;font-weight:400" id="cnt">加载中…</span>
-  <span style="flex:1"></span>
-  <span style="font-size:11px;color:#bbb">α版</span>
+<div id="splash">
+  <div class="logo">咔</div>
+  <div class="name">咔库</div>
+  <div class="sub">1000+ 食品配方 · 毛利模型</div>
+  <div class="loader"></div>
 </div>
 
+<div class="wrap" id="wrap">
+<div class="hd"><h1>咔库</h1><span id="cnt" style="font-size:12px;color:#999">加载中…</span><span style="flex:1"></span><span style="font-size:11px;color:#bbb">α版</span></div>
 <div class="sb"><input id="q" placeholder="搜产品名或品类" onkeyup="f()"></div>
 <div class="chips" id="chips"></div>
 <div class="rank-bar" id="rankBar"></div>
-<div class="grid" id="grid"><div class="loading">正在加载产品库…</div></div>
-<div class="ftr">咔库 · 1041张配方卡</div>
+<div class="grid" id="grid"><div class="no-data">正在加载产品库…</div></div>
+<div class="ftr">咔库 · 配方·SOP·成本核算</div>
 </div>
 
 <div class="detail" id="detail">
@@ -68,85 +83,89 @@ td:first-child{color:#C0392B;width:33%;font-size:12px}
 </div>
 
 <script>
-// Mini cards index (compact, loaded via fetch)
-var CARD_LIST = [];
-var CD = {};
-var CAT_MAP = {
-  "滋滋烤·深夜烟火":["烤","烧鸟","炭烤","铁板"],"爆油炸·酥脆研究所":["炸","天妇罗","油","脆皮"],
-  "老汤卤·现捞热卤":["卤","酱","胡辣汤","老汤"],"沸腾锅·热辣江湖":["火锅","酸汤","锅底","麻辣烫"],
-  "猛火蒸·现做现吃":["包子","面点","蒸","饼","馒"],"暴打拌·酸辣开胃":["傣","舂","拌","沙拉"],
-  "手打柠檬茶·手搓咖啡":["柠檬","茶","咖啡","饮"],"新中式小吃":["小吃","面","饭","浇头","盖浇"]
-};
+// ===== DATA =====
+var CARD_LIST = [], CD = {};
 
 // Load index
-var start = Date.now();
 fetch('cards-index.json').then(function(r){return r.json()}).then(function(d){
   CARD_LIST = d;
   document.getElementById('cnt').textContent = d.length + '张';
   buildRank(); buildChips(); render();
-}).catch(function(e){ document.getElementById('grid').innerHTML = '<div class=loading>加载失败，刷新重试</div>' });
+  document.getElementById('wrap').classList.add('show');
+  document.getElementById('splash').classList.add('hide');
+}).catch(function(e){ 
+  document.getElementById('grid').innerHTML = '<div class="no-data">加载失败，<a href="javascript:location.reload()" style="color:#E8652D">点击重试</a></div>'; 
+});
 
 // Load detail data
-fetch('cards-data.json').then(function(r){return r.json()}).then(function(d){
-  CD = d;
-}).catch(function(e){});
+fetch('cards-data.json').then(function(r){return r.json()}).then(function(d){CD=d}).catch(function(){});
 
+// Safety: show app after max 8s no matter what
+setTimeout(function(){
+  var s = document.getElementById('splash');
+  if(s && !s.classList.contains('hide')){ s.classList.add('hide'); document.getElementById('wrap').classList.add('show'); }
+}, 8000);
+
+// ===== RANK =====
 function buildRank(){
-  var top = [{n:"羊肉串",i:"SY-001"},{n:"手打柠檬茶",i:"YC-001"},{n:"烤生蚝",i:"SY-006"},{n:"烤冷面",i:"SY-012"},{n:"烤苕皮",i:"SY-013"},{n:"铁板鱿鱼",i:"SY-009"},{n:"酸汤鱼",i:"SG-001"},{n:"手搓冰粉",i:"YC-003"},{n:"烤猪蹄",i:"SY-017"},{n:"烤鸡架",i:"SY-016"},{n:"糖醋麻辣炒鸡",i:"LZ-014"},{n:"铁板豆腐",i:"SY-010"}];
+  var t = [{n:"羊肉串",i:"SY-001"},{n:"手打柠檬茶",i:"YC-001"},{n:"烤生蚝",i:"SY-006"},{n:"烤冷面",i:"SY-012"},{n:"烤苕皮",i:"SY-013"},{n:"铁板鱿鱼",i:"SY-009"},{n:"酸汤鱼",i:"SG-001"},{n:"手搓冰粉",i:"YC-003"},{n:"烤猪蹄",i:"SY-017"},{n:"烤鸡架",i:"SY-016"},{n:"糖醋麻辣炒鸡",i:"LZ-014"},{n:"铁板豆腐",i:"SY-010"}];
   var h = '';
-  top.forEach(function(t,i){ h += '<span class="rank-item" onclick="o(''+t.i+'')">'+(i+1)+'.'+t.n+'</span>' });
-  document.getElementById('rankBar').innerHTML = '<span style="font-weight:700;margin-right:4px">🔥</span>' + h;
+  t.forEach(function(x,i){ h += '<span class="rank-item" onclick="o(\''+x.i+'\')">'+(i+1)+'.'+x.n+'</span>' });
+  document.getElementById('rankBar').innerHTML = '<span style="font-weight:700;margin-right:2px">🔥</span>' + h;
 }
 
+// ===== CHIPS =====
+var CATS = ['全部','滋滋烤·深夜烟火','爆油炸·酥脆研究所','老汤卤·现捞热卤','沸腾锅·热辣江湖','猛火蒸·现做现吃','文火煲·慢熬鲜香','暴打拌·酸辣开胃','手打柠檬茶·手搓咖啡','新中式小吃'];
+var CAT_MAP = {"滋滋烤·深夜烟火":["烤","烧鸟","炭烤"],"爆油炸·酥脆研究所":["炸","天妇罗"],"老汤卤·现捞热卤":["卤","胡辣汤"],"沸腾锅·热辣江湖":["火锅","酸汤"],"猛火蒸·现做现吃":["包子","面点","蒸"],"文火煲·慢熬鲜香":["粥","汤","煲"],"暴打拌·酸辣开胃":["傣","舂","沙拉"],"手打柠檬茶·手搓咖啡":["柠檬","茶","咖啡"]};
+
 function buildChips(){
-  var cats = ['全部'];
-  Object.keys(CAT_MAP).forEach(function(k){ cats.push(k) });
   var h = '';
-  cats.forEach(function(c){ h += '<span class="chip" onclick="filter(''+c+'')">'+c+'</span>' });
+  CATS.forEach(function(c){ h += '<span class="chip" onclick="filter(\''+c+'\')">'+c+'</span>' });
   document.getElementById('chips').innerHTML = h;
 }
 
 var cur = '全部';
 function filter(c){ cur=c; render() }
 
+// ===== RENDER =====
 function render(){
   var g = document.getElementById('grid'), h = '', q = (document.getElementById('q').value||'').toLowerCase();
-  CARD_LIST.forEach(function(card){
-    if(cur!='全部'){ var m=CAT_MAP[cur]||[]; var hit=false; m.forEach(function(v){if(card.c.indexOf(v)>=0)hit=true}); if(!hit && card.c!=cur) return }
-    if(q && card.n.indexOf(q)<0) return;
-    h += '<div class="card" onclick="o(''+card.i+'')"><div class="img">🍽️</div><div class="body"><div class="name">'+card.n+'</div><div class="meta"><span class="tag">'+card.c+'</span><span>'+card.m+'</span></div></div></div>'
+  CARD_LIST.forEach(function(cd){
+    if(cur!='全部'){ var m=CAT_MAP[cur]||[]; var hit=false; m.forEach(function(v){if(cd.c.indexOf(v)>=0)hit=true}); if(!hit && cd.c!=cur) return }
+    if(q && cd.n.indexOf(q)<0) return;
+    h += '<div class="card" onclick="o(\''+cd.i+'\')"><div class="img">🍽️</div><div class="body"><div class="name">'+cd.n+'</div><div class="meta"><span class="tag">'+cd.c+'</span><span>'+cd.m+'</span></div></div></div>'
   });
-  g.innerHTML = h || '<div class="loading">没有匹配的产品</div>';
+  g.innerHTML = h || '<div class="no-data">没有匹配的产品</div>';
 }
 
 function f(){ render() }
 
+// ===== DETAIL =====
 function o(id){
   var c = CD[id];
-  if(!c){ document.getElementById('dn').textContent = id; document.getElementById('db').innerHTML = '<div class="d-sec" style="text-align:center">详情加载中…<br><span style="color:#ddd;font-size:12px">请稍候</span></div>'; document.getElementById('detail').classList.add('active'); document.body.style.overflow='hidden'; setTimeout(function(){if(CD[id]){document.getElementById('detail').classList.remove('active');o(id)}},3000); return }
+  if(!c){
+    document.getElementById('dn').textContent = id;
+    document.getElementById('db').innerHTML = '<div class="d-sec" style="text-align:center">详情加载中…<br><span style="font-size:12px;color:#ddd">请稍候几秒</span></div><button class="sub-b" onclick="o(\''+id+'\')">重试</button>';
+    document.getElementById('detail').classList.add('active'); document.body.style.overflow='hidden';
+    setTimeout(function(){ if(CD[id]){ document.getElementById('detail').classList.remove('active'); o(id) } }, 4000);
+    return;
+  }
   document.getElementById('dn').textContent = id;
   var h = '';
   if(c.配方){h+='<div class="d-sec"><div class="d-h">配方（克/g）</div><table>';c.配方.forEach(function(r){h+='<tr><td>'+r[0]+'</td><td>'+r[1]+'</td><td>'+r[3]+'</td></tr>'});h+='</table></div>'}
   if(c.SOP){h+='<div class="d-sec"><div class="d-h">SOP</div><div class="d-p">';c.SOP.forEach(function(s){h+='<span style="color:#7B9A45;font-weight:700">●</span> '+s+'\n'});h+='</div></div>'}
-  if(c.毛利){
-    h+='<div class="d-sec"><div class="d-h">💰 毛利模型</div><div class="d-p">'+c.毛利+'</div></div>'
-    // Calculator
-    var ml = c.毛利, cb = "?", sp = "?", m2;
-    m2 = ml.match(/成本[约¥]*([0-9.]+)/); if(m2) cb = m2[1];
-    m2 = ml.match(/售价[约¥]*([0-9.]+)/); if(m2) sp = m2[1];
-    if(cb!="?" && sp!="?") {
-      var rate = ((parseFloat(sp)-parseFloat(cb))/parseFloat(sp)*100).toFixed(1);
-      h+='<div class="d-sec" style="border-left-color:#7B9A45"><div class="d-h">🧮 成本计算器</div><div class="d-p">原料成本: ¥'+cb+' | 售价: ¥'+sp+' | 毛利率: '+rate+'%<br><span style="font-size:11px;color:#999">订阅后查看完整成本分析</span></div></div>'
-    }
-    // Chart
-    h+='<div class="d-sec" style="border-left-color:#ccc;background:#f9f7f4"><div class="d-h" style="color:#999">📊 毛利趋势图</div><div style="height:100px;background:#f0ece6;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#bbb;font-size:12px">订阅后可查看历史趋势</div></div>'
-  }'
+  if(c.毛利){h+='<div class="d-sec"><div class="d-h">💰 毛利率</div><div class="d-p">'+c.毛利+'</div></div>';calc(c.毛利,h)}
   if(c.美食故事)h+='<div class="d-sec" style="border-left-color:#7B9A45"><div class="d-h">📖 场景故事</div><div class="d-p">'+c.美食故事+'</div></div>'
-  h+='<div style="text-align:center;padding:12px"><button class="chip" onclick="alert('订阅即将开通')" style="background:#C0392B;color:#fff;border:none;padding:10px 24px;border-radius:10px;font-size:14px;cursor:pointer">订阅解锁完整版</button></div>'
-  h += '<div class="d-sec" style="border-left-color:#ccc;background:#f9f7f4"><div class="d-h" style="color:#999;font-size:11px">📜 声明</div><div class="d-p" style="font-size:10px;color:#bbb">配方由滄林·小将团队收集验证 · 部分图片由AI生成 · 按方操作小白不输老师傅 · 数据仅供参考请以实测为准</div></div>';
   document.getElementById('db').innerHTML = h;
-  document.getElementById('detail').classList.add('active');
-  document.body.style.overflow='hidden';
+  document.getElementById('detail').classList.add('active'); document.body.style.overflow='hidden';
+}
+
+function calc(ml, h){
+  var cb="?", sp="?", m;
+  m=ml.match(/成本[约¥元]*([0-9.]+)/); if(m) cb=m[1];
+  m=ml.match(/售价[约¥元]*([0-9.]+)/); if(m) sp=m[1];
+  if(cb!="?"&&sp!="?"){var r=((parseFloat(sp)-parseFloat(cb))/parseFloat(sp)*100).toFixed(1);document.getElementById('db').innerHTML+='<div class="d-sec" style="border-left-color:#7B9A45"><div class="d-h">🧮 成本计算</div><div class="d-p">原料: ¥'+cb+' | 售价: ¥'+sp+' | 毛利率: '+r+'%</div></div>'}
+  document.getElementById('db').innerHTML+='<div class="d-sec" style="border-left-color:#ccc;background:#f9f7f4"><div class="d-h" style="color:#999">📊 毛利趋势</div><div style="height:80px;background:#f0ece6;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#bbb;font-size:12px">订阅后展示历史趋势</div></div><button class="sub-b" onclick="alert(\'订阅即将开通\')">订阅解锁完整版</button>'
 }
 
 function c(){ document.getElementById('detail').classList.remove('active'); document.body.style.overflow='' }
