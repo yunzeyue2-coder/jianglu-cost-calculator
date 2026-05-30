@@ -7394,9 +7394,20 @@ td:first-child{color:#C0392B;font-weight:500;width:35%}
 
 <script>
 let CD = {};
-fetch('cards-data.json').then(function(r){return r.json()}).then(function(d){CD=d}).catch(function(e){})
+fetch('cards-data.json').then(function(r){return r.json()}).then(function(d){CD=d;console.log('数据已加载')}).catch(function(e){console.log('加载失败')})
 function o(id) {
-  var c = CD[id]; if(!c) return alert('详情加载中，请稍后再试');
+  var c = CD[id]; 
+  if(!c) { 
+    document.getElementById('dn').textContent = id;
+    document.getElementById('di').innerHTML = '🍽️';
+    document.getElementById('dm').innerHTML = '<span>⏳ 详情加载中…</span>';
+    document.getElementById('db').innerHTML = '<div style="padding:60px 20px;text-align:center;color:#bbb;font-size:14px">正在加载配方数据…<br><span style="font-size:11px;color:#ddd">首次加载需下载数据，请稍候几秒</span></div>';
+    document.getElementById('detail').classList.add('active');
+    document.body.style.overflow='hidden';
+    // Retry loading
+    setTimeout(function(){ if(CD[id]) { document.getElementById('detail').classList.remove('active'); o(id) } }, 2000);
+    return;
+  }
   document.getElementById('dn').textContent = id;
   document.getElementById('di').innerHTML = '🍽️';
   var h = '<div class="d-content">';
