@@ -17,6 +17,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;backg
 .sb{display:flex;gap:8px;padding:0 0 10px}
 .sb input{flex:1;padding:10px 14px;border:1px solid #ddd;border-radius:20px;font-size:14px;outline:none;background:#fff;font-family:inherit}
 .sb input:focus{border-color:#E8652D}
+.rank-bar{background:#fff;border-radius:12px;padding:10px 12px;margin-bottom:10px;border:1px solid #eee}
+.rank-title{font-size:13px;font-weight:700;color:#C0392B;margin-bottom:8px}
+.rank-list{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.rank-item{background:#f9f5ef;padding:5px 12px;border-radius:20px;font-size:12px;white-space:nowrap;cursor:pointer;color:#555;flex-shrink:0;border:1px solid #f0e8de;transition:all 0.15s}
+.rank-item:active{background:#E8652D;color:#fff;border-color:#E8652D}
+.rank-item .rnk{display:inline-block;background:#C0392B;color:#fff;width:16px;height:16px;line-height:16px;text-align:center;border-radius:50%;font-size:9px;font-weight:700;margin-right:4px}
 .chips{display:flex;gap:6px;overflow-x:auto;padding:0 0 10px;scrollbar-width:none}
 .chip{padding:6px 14px;border:1px solid #ddd;border-radius:16px;font-size:13px;white-space:nowrap;cursor:pointer;background:#fff;flex-shrink:0;color:#666;transition:all 0.2s}
 .chip.active{background:#E8652D;color:#fff;border-color:#E8652D}
@@ -72,7 +78,11 @@ td:first-child{color:#C0392B;font-weight:500;width:35%}
 <body>
 
 <div class="wrap">
-<div class="hd"><h1>咔库</h1><span style="font-size:13px;color:#E8652D;font-weight:500">1041张</span><a href="handbook.html" style="font-size:13px;color:#888;text-decoration:none;margin-left:auto">📋开店手册</a></div>
+<div class="hd"><h1>咔库</h1><span style="font-size:12px;color:#E8652D;font-weight:500">1041张</span><span style="flex:1"></span><a href="#" onclick="showDecl()" style="font-size:12px;color:#999;text-decoration:none;margin-right:10px">📜声明</a><a href="handbook.html" style="font-size:12px;color:#888;text-decoration:none">📋开店手册</a></div>
+<div class="rank-bar" id="rankBar">
+  <div class="rank-title">🔥 热门推荐</div>
+  <div class="rank-list" id="rankList"></div>
+</div>
 <div class="sb"><input id="q" placeholder="搜产品名或品类" onkeyup="f()"></div>
 <div class="chips" id="chips"></div>
 <div class="grid" id="grid"></div>
@@ -108,6 +118,10 @@ var CAT_MAP = {
 let cur='全部'
 let CD = {}
 
+function showDecl(){
+  if(document.getElementById('declModal').style.display=='flex') {document.getElementById('declModal').style.display='none';return}
+  document.getElementById('declModal').style.display='flex'
+}
 function sub(){alert('订阅即将开通')}
 
 function render(q) {
@@ -165,7 +179,7 @@ function o(id) {
   if(cd.审核) h += '<div class="d-sec" style="border-left-color:#999;background:#f9f7f4"><div class="d-h" style="color:#999">🔍 审核</div><div class="d-p" style="font-size:12px;color:#999">'+cd.审核+'</div></div>'
   h += '</div>'
   h += '<div class="chart-area"><div class="title">📊 毛利趋势图</div><div class="chart-placeholder">即将上线，敬请期待</div></div>'
-  h += '<div class="msg-area"><div class="title">💬 留下你的问题或反馈</div><input class="msg-input" placeholder="写点什么…" maxlength="200"><br><button class="msg-btn" onclick="alert(\'反馈已提交，感谢！\')">发送</button></div>'
+  h += '<div class="msg-area"><div class="title">💬 留下你的问题或反馈</div><input class="msg-input" placeholder="写点什么…" maxlength="200"><br><button class="msg-btn" onclick="alert('反馈已提交，感谢！')">发送</button></div>'
   h += '<div style="text-align:center;padding:0 12px 24px"><button class="sub-btn" onclick="sub()">订阅解锁完整版</button></div>'
   document.getElementById('db').innerHTML = h
   d.classList.add('active'); document.body.style.overflow='hidden'
@@ -178,38 +192,43 @@ chips(); render('')
 fetch('cards-data.json').then(function(r){return r.json()}).then(function(d){CD=d;console.log('咔库数据已加载')}).catch(function(e){console.log('数据加载失败:',e)})
 </script>
 
-<!-- 声明区域 -->
-<div style="max-width:420px;margin:0 auto;padding:20px 12px 40px;border-top:1px solid #eee">
-  <div style="font-size:11px;color:#888;line-height:1.7">
-    <p style="font-weight:600;font-size:13px;color:#C0392B;margin-bottom:8px">📜 咔库声明</p>
-    <p style="font-size:11px;line-height:1.8;color:#666">
-      本库所有配方均由<br>
-      <b style="font-size:13px;color:#333">滄林·小将团队</b><br>
-      <span style="font-size:10px;color:#999">
-        食品行业19年+经验 · 历经全国中央厨房、餐饮连锁、酱卤肉企业<br>
-        食品面点企业、小吃培训机构<br>
-        ——收集 · 验证 · 整理 · 开发 · 优化
-      </span><br>
-      <span style="font-size:10px;color:#999">开发产品服务于市场多种连锁品牌及客户渠道</span>
-    </p>
-    <p style="margin-top:10px;font-size:11px;color:#888">可直接复制配方与工艺投入生产，但因各地消费市场、原料成本、口味习惯存在差异，请结合当地实际谨慎选用并适当调整。</p>
-    <p style="margin-top:6px;font-size:11px;color:#888">为规避图片版权风险，部分产品图由AI生成，请注意辨别。</p>
-    <p style="margin-top:10px;font-size:12px;font-weight:500;color:#444">📌 所有配方均经验证——按方操作，小白不输老师傅。有基础者可根据市场反馈进一步优化微调。</p>
-    <p style="margin-top:10px;font-size:11px;color:#888">产品技术咨询或反馈，欢迎加入国内技术咨询服务群：<br>
-      <a href="#" onclick="document.getElementById('qrcode').style.display='flex'" style="color:#E8652D;font-weight:600;font-size:12px">👥 点击获取入群方式</a>
-    <div id="qrcode" onclick="this.style.display='none'" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:999;align-items:center;justify-content:center">
-      <div style="background:#fff;padding:30px;border-radius:12px;text-align:center;max-width:320px">
-        <img src="images/wechat_qr.jpg" style="width:260px;height:260px;display:block;margin:0 auto;border-radius:8px">
-        <p style="margin-top:12px;font-size:12px;color:#666">长按识别二维码 · 国内技术咨询服务群</p>
-        <p style="margin-top:8px;font-size:11px;color:#999">咨询电话：<a href="tel:13007507375" style="color:#E8652D;font-weight:600;text-decoration:none">130-0750-7375</a></p>
-        <p style="margin-top:4px;font-size:11px;color:#999">海外技术咨询：<a href="https://t.me/canglinguanju" target="_blank" style="color:#E8652D;font-weight:600;text-decoration:none">@canglinguanju</a></p>
-        <p style="font-size:10px;color:#aaa">点击任意位置关闭</p>
-      </div>
-    </div>
-    </p>
-    <p style="margin-top:8px;font-size:10px;color:#aaa">感谢支持 ❤️ 慢慢走的不一定走得慢</p>
+<!-- 声明弹窗 -->
+<div id="declModal" onclick="this.style.display='none'" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:999;align-items:center;justify-content:center">
+  <div onclick="event.stopPropagation()" style="background:#fff;padding:24px;border-radius:14px;max-width:340px;margin:20px;font-size:12px;line-height:1.7;color:#555;max-height:80vh;overflow-y:auto">
+    <p style="font-weight:700;font-size:14px;color:#C0392B;margin-bottom:10px">📜 咔库声明</p>
+    <p>本库所有配方均由<b style="color:#333">滄林·小将团队</b>收集 · 验证 · 整理 · 开发 · 优化。<br>
+    <span style="color:#999;font-size:11px">食品行业19年+经验</span></p>
+    <p style="margin-top:8px">可直接复制配方与工艺投入生产，但因各地消费市场、原料成本、口味习惯存在差异，请结合当地实际谨慎选用并适当调整。</p>
+    <p style="margin-top:6px">为规避图片版权风险，部分产品图由AI生成，请注意辨别。</p>
+    <p style="margin-top:8px;font-weight:600;color:#444">📌 所有配方均经验证——按方操作，小白不输老师傅。</p>
+    <p style="margin-top:10px;font-size:11px;color:#888">技术咨询：<a href="https://t.me/canglinguanju" target="_blank" style="color:#E8652D">@canglinguanju</a></p>
+    <p style="margin-top:6px;font-size:11px;color:#888">咨询电话：<a href="tel:13007507375" style="color:#E8652D">130-0750-7375</a></p>
+    <p style="margin-top:6px;font-size:11px;color:#888">技术咨询/入群：<a href="#" onclick="document.getElementById('qrcode').style.display='flex';document.getElementById('declModal').style.display='none'" style="color:#E8652D;font-weight:600">👥 点击获取二维码</a></p>
+    <div style="text-align:center;margin-top:14px"><span onclick="document.getElementById('declModal').style.display='none'" style="color:#999;font-size:12px;cursor:pointer">点击关闭</span></div>
   </div>
 </div>
+
+<!-- 排行榜初始化 -->
+<script>
+// 热门前10（按品类权重排序，手动精选TOP10爆款）
+var RANK_ITEMS = [
+  {n:"羊肉串",id:"SY-001"},{n:"手打柠檬茶",id:"YC-001"},{n:"烤生蚝",id:"SY-006"},
+  {n:"烤冷面",id:"SY-012"},{n:"烤苕皮",id:"SY-013"},{n:"铁板鱿鱼",id:"SY-009"},
+  {n:"烤面筋",id:"SY-004"},{n:"酸汤鱼",id:"SG-001"},{n:"手搓冰粉",id:"YC-003"},
+  {n:"烤猪蹄",id:"SY-017"},{n:"烤鸡架",id:"SY-016"},{n:"糖醋麻辣炒鸡",id:"LZ-014"},
+  {n:"青花椒炒鸡",id:"LZ-013"},{n:"天妇罗大虾",id:"RB-002"},{n:"铁板豆腐",id:"SY-010"},
+  {n:"烤茄子",id:"SY-015"},{n:"烤脑花",id:"SY-014"},{n:"古法酸梅汤",id:"YC-004"},
+  {n:"椰奶清补凉",id:"YC-008"},{n:"麻辣炒鸡",id:"LZ-015"}
+]
+function initRank(){
+  var d = '', list = RANK_ITEMS
+  list.forEach(function(item,i){
+    d += '<span class="rank-item" onclick="o(''+item.id+'')"><span class="rnk">'+(i+1)+'</span>'+item.n+'</span>'
+  })
+  document.getElementById('rankList').innerHTML = d
+}
+initRank()
+</script>
 
 </body>
 </html>
