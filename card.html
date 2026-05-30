@@ -530,7 +530,20 @@ const CARDS = [
   {"i":"CS-007","n":"CS-007","c":"调味料","m":"--","p":"","s":""}
 ]
 
-const CATS = ['全部','中式卤味','中式面点','手打柠檬茶','韩式铁板烧烤','新中式小吃','手搓咖啡','延边酱菜','日式烧鸟·拉面','中式烧烤','中式早点','中式糖水铺','傣舂系列','小吃','调味料','冷饮','鲜制肉品','汤品']
+const CATS = ['全部','滋滋烤·深夜烟火','爆油炸·酥脆研究所','老汤卤·现捞热卤','沸腾锅·热辣江湖','猛火蒸·现做现吃','文火煲·慢熬鲜香','暴打拌·酸辣开胃','手打柠檬茶·手搓咖啡','新中式小吃','延边酱菜','傣舂系列']
+var CAT_MAP = {
+  "滋滋烤·深夜烟火":["烧烤","烤鱼","烧鸟","韩式烤肉","烤鸡","烤","烤鸭","烤五花","烤牛舌","烤鱿鱼","炭烤","铁板烧","烤猪蹄"],
+  "爆油炸·酥脆研究所":["炸鸡","炸串","炸","天妇罗","炸薯","酥脆","炸猪排","油","脆皮","麻花","油条","酥"],
+  "老汤卤·现捞热卤":["卤","卤水","酱","卤味","老汤","胡辣汤","盐水","酱板","盐焗","酱骨","猪头","猪蹄","烧鸡","扒鸡","熏鸡"],
+  "沸腾锅·热辣江湖":["火锅","锅底","麻辣烫","串串","冒菜","干锅","鱼火锅","酸汤","焖锅"],
+  "猛火蒸·现做现吃":["包子","小笼","灌汤","饺","面点","馒头","花卷","饼","肠粉","蒸","糕","糍粑","粽子","糯米"],
+  "文火煲·慢熬鲜香":["粥","汤","煲","砂锅","炖","焖","老火","靓汤","糖水","银耳","红豆沙"],
+  "暴打拌·酸辣开胃":["傣味","舂","泡菜","拌","延边","朝鲜族","小菜","凉菜","沙拉","酱菜","芥末","萝卜","椒麻","口水"],
+  "手打柠檬茶·手搓咖啡":["柠檬茶","柠檬","咖啡","奶茶","奶盖","拿铁","美式","厚乳","椰乳","果茶","水果茶","冰柠","冰茶","清补凉","双皮奶"],
+  "新中式小吃":["小吃","臭豆腐","鸡排","鸡柳","锁骨","炸鸡","美食","土豆","年糕","豆腐","煎饼","凉皮","粉","面","米线","螺蛳粉"],
+  "延边酱菜":["延边","泡菜","辣白菜","酱菜","朝鲜族冷面"],
+  "傣舂系列":["傣味","舂菜","舂"]
+}
 let cur='全部'
 
 function sub(){alert('订阅即将开通')}
@@ -543,7 +556,7 @@ let CD = {}
 function render(q) {
   var g = document.getElementById('grid'), h = '', qe = (q||'').toLowerCase()
   CARDS.forEach(function(c){
-    if(cur!='全部' && c.c!=cur && (!c.s || c.s.indexOf(cur)<0)) return
+    if(cur!='全部') { var m = CAT_MAP[cur]||[]; var hit = false; m.forEach(function(v){ if(c.c.indexOf(v)>=0 || (c.s&&c.s.indexOf(v)>=0)) hit=true; }); if(!hit && c.c!=cur && (!c.s || c.s.indexOf(cur)<0)) return }
     if(qe && c.n.indexOf(qe)<0) return
     h += '<div class="card" onclick="o(\''+c.i+'\')"><div class="img">'+(c.p?'<img src="'+c.p+'">':'🍽️')+'</div><div class="body"><div class="name">'+c.n+'</div><div class="meta"><span class="tag">'+c.c+'</span><span>'+c.m+'</span></div></div></div>'
   })
@@ -556,7 +569,8 @@ function chips() {
   CATS.forEach(function(c){ var a=c==curcat?' active':''; var s=sec.includes(c)?' sec':''; d += '<span class="chip'+a+s+'" onclick="filter(\''+c+'\')">'+c+'</span>' })
   document.getElementById('chips').innerHTML = d
 }
-function filter(c) { cur=c; 
+function filter(c) { cur=c;
+  var m = CAT_MAP[c]||[]; 
 chips(); render(document.getElementById('q').value) }
 // Open detail
 function o(id) {
