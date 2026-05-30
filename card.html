@@ -128,7 +128,19 @@ function o(id){
   var h = '';
   if(c.配方){h+='<div class="d-sec"><div class="d-h">配方（克/g）</div><table>';c.配方.forEach(function(r){h+='<tr><td>'+r[0]+'</td><td>'+r[1]+'</td><td>'+r[3]+'</td></tr>'});h+='</table></div>'}
   if(c.SOP){h+='<div class="d-sec"><div class="d-h">SOP</div><div class="d-p">';c.SOP.forEach(function(s){h+='<span style="color:#7B9A45;font-weight:700">●</span> '+s+'\n'});h+='</div></div>'}
-  if(c.毛利)h+='<div class="d-sec"><div class="d-h">💰 毛利模型</div><div class="d-p">'+c.毛利+'</div></div>'
+  if(c.毛利){
+    h+='<div class="d-sec"><div class="d-h">💰 毛利模型</div><div class="d-p">'+c.毛利+'</div></div>'
+    // Calculator
+    var ml = c.毛利, cb = "?", sp = "?", m2;
+    m2 = ml.match(/成本[约¥]*([0-9.]+)/); if(m2) cb = m2[1];
+    m2 = ml.match(/售价[约¥]*([0-9.]+)/); if(m2) sp = m2[1];
+    if(cb!="?" && sp!="?") {
+      var rate = ((parseFloat(sp)-parseFloat(cb))/parseFloat(sp)*100).toFixed(1);
+      h+='<div class="d-sec" style="border-left-color:#7B9A45"><div class="d-h">🧮 成本计算器</div><div class="d-p">原料成本: ¥'+cb+' | 售价: ¥'+sp+' | 毛利率: '+rate+'%<br><span style="font-size:11px;color:#999">订阅后查看完整成本分析</span></div></div>'
+    }
+    // Chart
+    h+='<div class="d-sec" style="border-left-color:#ccc;background:#f9f7f4"><div class="d-h" style="color:#999">📊 毛利趋势图</div><div style="height:100px;background:#f0ece6;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#bbb;font-size:12px">订阅后可查看历史趋势</div></div>'
+  }'
   if(c.美食故事)h+='<div class="d-sec" style="border-left-color:#7B9A45"><div class="d-h">📖 场景故事</div><div class="d-p">'+c.美食故事+'</div></div>'
   h+='<div style="text-align:center;padding:12px"><button class="chip" onclick="alert('订阅即将开通')" style="background:#C0392B;color:#fff;border:none;padding:10px 24px;border-radius:10px;font-size:14px;cursor:pointer">订阅解锁完整版</button></div>'
   h += '<div class="d-sec" style="border-left-color:#ccc;background:#f9f7f4"><div class="d-h" style="color:#999;font-size:11px">📜 声明</div><div class="d-p" style="font-size:10px;color:#bbb">配方由滄林·小将团队收集验证 · 部分图片由AI生成 · 按方操作小白不输老师傅 · 数据仅供参考请以实测为准</div></div>';
