@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E8652D"/>
+      <stop offset="100%" stop-color="#C0392B"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="32" fill="url(#bg)"/>
+  <!-- 饭碗 -->
+  <ellipse cx="96" cy="105" rx="48" ry="32" fill="none" stroke="#fff" stroke-width="3"/>
+  <path d="M48 105 Q48 140 96 140 Q144 140 144 105" fill="none" stroke="#fff" stroke-width="3"/>
+  <!-- 米饭 -->
+  <ellipse cx="96" cy="105" rx="40" ry="24" fill="rgba(255,255,255,0.15)"/>
+  <!-- 筷子 -->
+  <line x1="86" y1="58" x2="80" y2="112" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+  <line x1="106" y1="58" x2="100" y2="112" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+  <!-- 文字 -->
+  <text x="96" y="168" text-anchor="middle" font-family="sans-serif" font-size="36" font-weight="700" fill="#fff">咔库</text>
+</svg>

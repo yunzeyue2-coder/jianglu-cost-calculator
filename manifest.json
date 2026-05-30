@@ -1,22 +1,14 @@
 {
   "name": "咔库",
   "short_name": "咔库",
-  "description": "食品产品卡库 · 配方·SOP·毛利·场景",
+  "description": "食品配方·SOP·毛利模型 · 1000+产品卡",
   "start_url": "/jianglu-cost-calculator/card.html",
   "display": "standalone",
   "background_color": "#f8f7f4",
-  "theme_color": "#1a1a1a",
+  "theme_color": "#E8652D",
   "orientation": "portrait",
   "icons": [
-    {
-      "src": "/jianglu-cost-calculator/images/kaku-192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "/jianglu-cost-calculator/images/kaku-512.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
+    {"src": "/jianglu-cost-calculator/images/kaku-192.svg", "sizes": "192x192", "type": "image/svg+xml"},
+    {"src": "/jianglu-cost-calculator/images/kaku-512.svg", "sizes": "512x512", "type": "image/svg+xml"}
   ]
 }
