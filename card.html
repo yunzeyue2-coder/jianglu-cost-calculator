@@ -11,6 +11,14 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;background:#f8f7f4;color:#2c2c2c}
+/* Splash loading */
+.splash{position:fixed;inset:0;background:#E8652D;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.4s}
+.splash.hide{opacity:0;pointer-events:none}
+.splash .logo{font-size:64px;margin-bottom:10px}
+.splash .name{font-size:22px;font-weight:700;color:#fff;letter-spacing:3px}
+.splash .sub{font-size:13px;color:rgba(255,255,255,0.7);margin-top:6px}
+.splash .loader{width:32px;height:32px;border:3px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.8s linear infinite;margin-top:20px}
+@keyframes spin{to{transform:rotate(360deg)}}
 .wrap{max-width:420px;margin:0 auto;padding:0 12px}
 .hd{display:flex;align-items:center;justify-content:space-between;padding:16px 0;position:sticky;top:0;background:#f8f7f4;z-index:10}
 .hd h1{font-size:18px;font-weight:700;letter-spacing:2px;color:#C0392B}
@@ -73,12 +81,19 @@ td:first-child{color:#C0392B;font-weight:500;width:35%}
 .msg-btn{background:#E8652D;color:#fff;border:none;padding:8px 20px;border-radius:8px;font-size:13px;cursor:pointer}
 .sub-btn{display:inline-block;padding:12px 32px;background:#C0392B;color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;margin:0 12px}
 .ftr{bottom:0;position:fixed;max-width:420px;width:calc(100% - 24px);background:#fff;border-top:1px solid #eee;padding:10px 12px;text-align:center;font-size:11px;color:#999;z-index:10}
+.cs-btn{position:fixed;bottom:60px;right:12px;width:48px;height:48px;background:#E8652D;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;cursor:pointer;box-shadow:0 2px 12px rgba(232,101,45,0.4);z-index:9997;border:none}
 </style>
 </head>
 <body>
+<div class="splash" id="splash">
+  <div class="logo">🍽️</div>
+  <div class="name">咔库</div>
+  <div class="sub">1000+ 食品配方 · SOP · 毛利模型</div>
+  <div class="loader"></div>
+</div>
 
 <div class="wrap">
-<div class="hd"><h1>咔库</h1><span style="font-size:12px;color:#E8652D;font-weight:500">1041张</span><span style="flex:1"></span><a href="#" onclick="showDecl()" style="font-size:12px;color:#999;text-decoration:none;margin-right:10px">📜声明</a><a href="handbook.html" style="font-size:12px;color:#888;text-decoration:none">📋开店手册</a></div>
+<div class="hd"><h1>咔库</h1><span style="font-size:12px;color:#E8652D;font-weight:500">1041张</span><span style="flex:1"></span><a href="#"  style="font-size:12px;color:#999;text-decoration:none;margin-right:10px">📜声明</a><a href="handbook.html" style="font-size:12px;color:#888;text-decoration:none">📋开店手册</a></div>
 <div class="rank-bar" id="rankBar">
   <div class="rank-title">🔥 热门推荐</div>
   <div class="rank-list" id="rankList"></div>
@@ -87,6 +102,12 @@ td:first-child{color:#C0392B;font-weight:500;width:35%}
 <div class="chips" id="chips"></div>
 <div class="grid" id="grid"></div>
 <div class="ftr">每张卡均含配方·SOP·毛利·设备·替代方案</div>
+<div class="cs-btn" onclick="showCS()">💬</div>
+<div id="csModal" style="display:none;position:fixed;bottom:70px;right:12px;z-index:9998;background:#fff;border-radius:14px;padding:16px;box-shadow:0 4px 20px rgba(0,0,0,0.12);max-width:260px;border:1px solid #eee">
+  <p style="font-size:13px;font-weight:600;color:#C0392B;margin-bottom:8px">人工客服</p>
+  <p style="font-size:12px;color:#555;line-height:1.6">技术咨询：<a href="https://t.me/canglinguanju" target="_blank" style="color:#E8652D">@canglinguanju</a><br>电话：<a href="tel:13007507375" style="color:#E8652D">130-0750-7375</a><br><a href="#" onclick="document.getElementById('csModal').style.display='none';document.getElementById('qrcode2').style.display='flex'" style="color:#7B9A45">👥 技术交流群</a></p>
+  <div style="text-align:right;margin-top:8px"><span onclick="document.getElementById('csModal').style.display='none'" style="color:#999;font-size:11px;cursor:pointer">关闭</span></div>
+</div>
 </div>
 
 <div class="detail" id="detail">
@@ -118,12 +139,14 @@ var CAT_MAP = {
 let cur='全部'
 let CD = {}
 
-function showDecl(){
+function _decl_removed(){
   if(document.getElementById('declModal').style.display=='flex') {document.getElementById('declModal').style.display='none';return}
   document.getElementById('declModal').style.display='flex'
 }
+function showCS(){ document.getElementById("csModal").style.display=document.getElementById("csModal").style.display=="block"?"none":"block" }
 function sub(){alert('订阅即将开通')}
 
+function hideSplash() { document.getElementById('splash').classList.add('hide') }
 function render(q) {
   var g = document.getElementById('grid'), h = '', qe = (q||'').toLowerCase()
   CARDS.forEach(function(c){
@@ -132,6 +155,7 @@ function render(q) {
     h += '<div class="card" onclick="o(''+c.i+'')"><div class="img">'+(c.p?'<img src="'+c.p+'">':'🍽️')+'</div><div class="body"><div class="name">'+c.n+'</div><div class="meta"><span class="tag">'+c.c+'</span><span>'+c.m+'</span></div></div></div>'
   })
   g.innerHTML = h||'<div style="padding:60px 20px;text-align:center;color:#bbb;font-size:14px">没有找到匹配的产品</div>'
+  hideSplash()
 }
 function f() { render(document.getElementById('q').value) }
 function chips() {
@@ -180,7 +204,8 @@ function o(id) {
   h += '</div>'
   h += '<div class="chart-area"><div class="title">📊 毛利趋势图</div><div class="chart-placeholder">即将上线，敬请期待</div></div>'
   h += '<div class="msg-area"><div class="title">💬 留下你的问题或反馈</div><input class="msg-input" placeholder="写点什么…" maxlength="200"><br><button class="msg-btn" onclick="alert('反馈已提交，感谢！')">发送</button></div>'
-  h += '<div style="text-align:center;padding:0 12px 24px"><button class="sub-btn" onclick="sub()">订阅解锁完整版</button></div>'
+  h += '<div style="text-align:center;padding:0 12px 24px"><button class="sub-btn" onclick="sub()">订阅解锁完整版</button></div>
+  <div style="padding:0 12px 30px;text-align:center;font-size:9px;color:#ccc;line-height:1.5">本库配方由滄林·小将团队收集验证 · 按方操作小白不输老师傅<br>部分图片由AI生成 · 配方数据仅供参考请以实测为准</div>'
   document.getElementById('db').innerHTML = h
   d.classList.add('active'); document.body.style.overflow='hidden'
 }
@@ -192,21 +217,7 @@ chips(); render('')
 fetch('cards-data.json').then(function(r){return r.json()}).then(function(d){CD=d;console.log('咔库数据已加载')}).catch(function(e){console.log('数据加载失败:',e)})
 </script>
 
-<!-- 声明弹窗 -->
-<div id="declModal" onclick="this.style.display='none'" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:999;align-items:center;justify-content:center">
-  <div onclick="event.stopPropagation()" style="background:#fff;padding:24px;border-radius:14px;max-width:340px;margin:20px;font-size:12px;line-height:1.7;color:#555;max-height:80vh;overflow-y:auto">
-    <p style="font-weight:700;font-size:14px;color:#C0392B;margin-bottom:10px">📜 咔库声明</p>
-    <p>本库所有配方均由<b style="color:#333">滄林·小将团队</b>收集 · 验证 · 整理 · 开发 · 优化。<br>
-    <span style="color:#999;font-size:11px">食品行业19年+经验</span></p>
-    <p style="margin-top:8px">可直接复制配方与工艺投入生产，但因各地消费市场、原料成本、口味习惯存在差异，请结合当地实际谨慎选用并适当调整。</p>
-    <p style="margin-top:6px">为规避图片版权风险，部分产品图由AI生成，请注意辨别。</p>
-    <p style="margin-top:8px;font-weight:600;color:#444">📌 所有配方均经验证——按方操作，小白不输老师傅。</p>
-    <p style="margin-top:10px;font-size:11px;color:#888">技术咨询：<a href="https://t.me/canglinguanju" target="_blank" style="color:#E8652D">@canglinguanju</a></p>
-    <p style="margin-top:6px;font-size:11px;color:#888">咨询电话：<a href="tel:13007507375" style="color:#E8652D">130-0750-7375</a></p>
-    <p style="margin-top:6px;font-size:11px;color:#888">技术咨询/入群：<a href="#" onclick="document.getElementById('qrcode').style.display='flex';document.getElementById('declModal').style.display='none'" style="color:#E8652D;font-weight:600">👥 点击获取二维码</a></p>
-    <div style="text-align:center;margin-top:14px"><span onclick="document.getElementById('declModal').style.display='none'" style="color:#999;font-size:12px;cursor:pointer">点击关闭</span></div>
-  </div>
-</div>
+
 
 <!-- 排行榜初始化 -->
 <script>
@@ -230,5 +241,13 @@ function initRank(){
 initRank()
 </script>
 
+<!-- 客服二维码 -->
+<div id="qrcode2" onclick="this.style.display='none'" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9999;align-items:center;justify-content:center">
+  <div style="background:#fff;padding:24px;border-radius:14px;text-align:center;max-width:280px">
+    <img src="images/wechat_qr.jpg" style="width:200px;height:200px;display:block;margin:0 auto;border-radius:8px">
+    <p style="margin-top:10px;font-size:12px;color:#666">扫码加入技术交流群</p>
+    <p style="margin-top:4px;font-size:11px;color:#999">点击任意位置关闭</p>
+  </div>
+</div>
 </body>
 </html>
