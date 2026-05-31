@@ -308,29 +308,52 @@ Schema V1.0（冻结版）· 数据版本 2026-05-31<br>
 <!-- 客服浮窗 -->
 <div id="csBtn" onclick="toggleCS()" style="position:fixed;bottom:20px;right:16px;width:52px;height:52px;background:#C0392B;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 4px 16px rgba(192,57,43,0.4);cursor:pointer;z-index:999;transition:all 0.2s">💬</div>
 
-<div id="csPanel" style="display:none;position:fixed;bottom:82px;right:16px;width:300px;background:#fff;border-radius:14px;box-shadow:0 4px 24px rgba(0,0,0,0.12);z-index:999;overflow:hidden">
-<div style="background:#C0392B;color:#fff;padding:14px 16px;font-size:14px;font-weight:600">🦞 虾哥 · 人工客服</div>
-<div style="padding:12px 16px;font-size:13px;color:#555;line-height:1.7">
-虾哥现在不在，但你可以在下面找到我👇<br><br>
-<strong>📞 人工转账开通订阅</strong><br>
-加微信：<strong style="color:#C0392B">canglin1985</strong><br>
-备注：产品卡订阅<br><br>
-<strong>💰 上门服务费用</strong><br>
+<div id="csPanel" style="display:none;position:fixed;bottom:82px;right:16px;width:310px;background:#fff;border-radius:14px;box-shadow:0 4px 24px rgba(0,0,0,0.12);z-index:999;overflow:hidden">
+<div style="background:#C0392B;color:#fff;padding:12px 14px;font-size:14px;font-weight:600">🦞 虾哥 · 食品技术咨询</div>
+
+<div style="padding:10px 14px;border-bottom:1px solid #f0ece6">
+<div style="font-size:11px;color:#888;margin-bottom:4px">📞 人工转账订阅</div>
+<div style="font-size:12px">加微信：<strong style="color:#C0392B">canglin1985</strong> 备注"订阅"</div>
 </div>
-<table style="width:100%;font-size:12px;border-collapse:collapse;margin:0 0 8px">
-<tr style="background:#f9f7f4"><td style="padding:6px 12px;font-weight:600">服务项目</td><td style="padding:6px 12px;font-weight:600;text-align:right">费用</td></tr>
-<tr><td style="padding:5px 12px;color:#555">基础咨询（在线）</td><td style="padding:5px 12px;text-align:right;font-weight:700">¥500-2,000</td></tr>
-<tr><td style="padding:5px 12px;color:#555">项目评估（选品+模型）</td><td style="padding:5px 12px;text-align:right;font-weight:700">¥3,000-10,000</td></tr>
-<tr><td style="padding:5px 12px;color:#555">上门服务（工厂/门店）</td><td style="padding:5px 12px;text-align:right;font-weight:700">¥5,000-30,000+</td></tr>
+
+<div style="padding:8px 14px;border-bottom:1px solid #f0ece6">
+<div style="font-size:11px;color:#888;margin-bottom:4px">💰 上门服务费用</div>
+<table style="width:100%;font-size:11px;border-collapse:collapse">
+<tr><td style="padding:3px 0;color:#555">基础咨询（在线）</td><td style="padding:3px 0;text-align:right;font-weight:700">¥500-2,000</td></tr>
+<tr><td style="padding:3px 0;color:#555">项目评估（选品+模型）</td><td style="padding:3px 0;text-align:right;font-weight:700">¥3,000-10,000</td></tr>
+<tr><td style="padding:3px 0;color:#555">上门服务（工厂/门店）</td><td style="padding:3px 0;text-align:right;font-weight:700">¥5,000-30,000+</td></tr>
 </table>
-<div style="padding:0 12px 12px;font-size:11px;color:#aaa">回复时间：工作日 10:00-18:00</div>
 </div>
+
+<div style="padding:10px 14px 14px">
+<div style="font-size:12px;font-weight:600;margin-bottom:6px">💬 给我留言</div>
+<textarea id="csMsg" placeholder="描述您的问题，我会在Telegram看到并回复您……" style="width:100%;height:60px;border:1px solid #ddd;border-radius:6px;padding:8px;font-size:12px;resize:none;font-family:inherit"></textarea>
+<div style="display:flex;gap:6px;margin-top:6px">
+<input id="csWx" placeholder="您的微信号（选填）" style="flex:1;border:1px solid #ddd;border-radius:6px;padding:8px;font-size:12px">
+<button onclick="submitCS()" style="background:#C0392B;color:#fff;border:none;border-radius:6px;padding:8px 14px;font-size:12px;font-weight:600;cursor:pointer">发送</button>
+</div>
+<div id="csStatus" style="font-size:11px;color:#7B9A45;margin-top:4px;display:none">✅ 已收到，我会尽快回复您</div>
+</div>
+</div>
+
 
 <script>
 function toggleCS(){
 var p=document.getElementById('csPanel'),b=document.getElementById('csBtn');
 if(p.style.display==='none'||p.style.display===''){p.style.display='block';b.style.transform='rotate(10deg)'}
 else{p.style.display='none';b.style.transform='rotate(0deg)'}
+}
+function submitCS(){
+var msg=document.getElementById('csMsg').value.trim();
+var wx=document.getElementById('csWx').value.trim();
+if(!msg){alert('请填写问题描述');return}
+var txt='📩 用户留言\n━━━━━━━━━━━\n问题：'+msg+(wx?'\n微信：'+wx:'')+'\n━━━━━━━━━━━\n来源：daokou-shaoji.html';
+var token='8387435352:AAFR7N2c5aP_Dg0CYe6vPA_JfK3oiqHI';
+fetch('https://api.telegram.org/bot'+token+'/sendMessage',{
+method:'POST',
+headers:{'Content-Type':'application/json'},
+body:JSON.stringify({chat_id:'8305915519',text:txt})
+}).then(function(){document.getElementById('csStatus').style.display='block';document.getElementById('csMsg').value=''}).catch(function(){alert('发送失败，请直接加微信 canglin1985')});
 }
 // 点击外部关闭
 document.addEventListener('click',function(e){
