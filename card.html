@@ -265,14 +265,32 @@ td:first-child{color:#C0392B;width:30%;font-size:11px;font-weight:500}
 <div class="ftr">咔库 · 1000+食品产品卡</div>
 
 <script>
-var DET = {};
+var DET = {}, SCR = {};
 fetch('data-det.json').then(function(r){return r.json()}).then(function(d){DET=d}).catch(function(){});
+fetch('data-scores.json').then(function(r){return r.json()}).then(function(s){SCR=s}).catch(function(){});
 
 function o(id){
   var d=DET[id];
   if(!d){ document.getElementById('detail').classList.add('active'); document.getElementById('dn').textContent=id; document.getElementById('db').innerHTML='<div style="text-align:center;padding:40px;color:#bbb">加载中…</div>'; setTimeout(function(){if(DET[id]){document.getElementById('detail').classList.remove('active');o(id)}},3000); return }
   document.getElementById('dn').textContent=id;
   var h='';
+  // 商业评分
+  var sc = SCR[id];
+  if(sc && sc.s){
+    var labels=['摆摊','门店','外卖','扩张','复购'],colors=['#E8652D','#C0392B','#7B9A45','#D4A017','#555'];
+    h+='<div class="d-sec" style="border-left-color:#E8652D;background:#fef6f2"><div class="d-h">📊 商业评分</div><div style="padding:4px 0">';
+    for(var i=0;i<5;i++){
+      var v=sc.s[i]||0, pc=(v/10*100).toFixed(0);
+      h+='<div style="display:flex;align-items:center;gap:6px;margin:4px 0;font-size:12px">';
+      h+='<span style="width:28px;color:#888;flex-shrink:0">'+labels[i]+'</span>';
+      h+='<div style="flex:1;height:10px;background:#eee;border-radius:5px;overflow:hidden">';
+      h+='<div style="width:'+pc+'%;height:100%;background:'+colors[i]+';border-radius:5px"></div></div>';
+      h+='<span style="width:30px;text-align:right;font-weight:700;font-size:13px;color:'+colors[i]+'">'+v+'</span></div>';
+    }
+    h+='</div>';
+    if(sc.d)h+='<div style="font-size:12px;color:#666;padding:6px 0 0;border-top:1px solid #e8e0d8;margin-top:4px">👉 '+sc.d+'</div>';
+    h+='</div>';
+  }
   // 配方
   if(d.f){h+='<div class="d-sec"><div class="d-h">📋 配方</div><table>';d.f.forEach(function(r){h+='<tr><td>'+r[0]+'</td><td>'+r[1]+'</td><td style="color:#888;font-size:11px">'+r[2]+'</td></tr>'});h+='</table></div>'}
   // SOP
