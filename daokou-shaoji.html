@@ -309,39 +309,63 @@ Schema V1.0（冻结版）· 数据版本 2026-05-31<br>
 <div id="csBtn" onclick="toggleCS()" style="position:fixed;bottom:20px;right:16px;width:52px;height:52px;background:#C0392B;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 4px 16px rgba(192,57,43,0.4);cursor:pointer;z-index:999;transition:all 0.2s">💬</div>
 
 <div id="csPanel" style="display:none;position:fixed;bottom:82px;right:16px;width:310px;background:#fff;border-radius:14px;box-shadow:0 4px 24px rgba(0,0,0,0.12);z-index:999;overflow:hidden">
-<div style="background:#C0392B;color:#fff;padding:12px 14px;font-size:14px;font-weight:600">🦞 虾哥 · 食品技术咨询</div>
+<div style="background:#C0392B;color:#fff;padding:10px 14px;font-size:13px;font-weight:600">🦞 虾哥 · 食品技术咨询</div>
 
-<div style="padding:10px 14px;border-bottom:1px solid #f0ece6">
-<div style="font-size:11px;color:#888;margin-bottom:4px">📞 人工转账订阅</div>
-<div style="font-size:12px">加微信：<strong style="color:#C0392B">canglin1985</strong> 备注"订阅"</div>
+<div id="csHome">
+<div style="padding:8px 14px;">
+<div style="font-size:11px;color:#888;margin-bottom:4px">📞 人工转账订阅：加微信 <strong style="color:#C0392B">canglin1985</strong></div>
 </div>
 
-<div style="padding:8px 14px;border-bottom:1px solid #f0ece6">
-<div style="font-size:11px;color:#888;margin-bottom:4px">💰 上门服务费用</div>
-<table style="width:100%;font-size:11px;border-collapse:collapse">
-<tr><td style="padding:3px 0;color:#555">基础咨询（在线）</td><td style="padding:3px 0;text-align:right;font-weight:700">¥500-2,000</td></tr>
-<tr><td style="padding:3px 0;color:#555">项目评估（选品+模型）</td><td style="padding:3px 0;text-align:right;font-weight:700">¥3,000-10,000</td></tr>
-<tr><td style="padding:3px 0;color:#555">上门服务（工厂/门店）</td><td style="padding:3px 0;text-align:right;font-weight:700">¥5,000-30,000+</td></tr>
-</table>
+<div style="padding:0 14px 6px">
+<div style="font-size:11px;color:#888;margin-bottom:4px">❓ 常见问题（点击查看答案）</div>
+<div class="csQ" onclick="csAnswer(0)" style="padding:7px 10px;background:#f9f7f4;border-radius:6px;margin:3px 0;font-size:12px;cursor:pointer;border:1px solid #eee">🔸 产品卡怎么订阅？</div>
+<div class="csQ" onclick="csAnswer(1)" style="padding:7px 10px;background:#f9f7f4;border-radius:6px;margin:3px 0;font-size:12px;cursor:pointer;border:1px solid #eee">🔸 上门服务怎么收费？</div>
+<div class="csQ" onclick="csAnswer(2)" style="padding:7px 10px;background:#f9f7f4;border-radius:6px;margin:3px 0;font-size:12px;cursor:pointer;border:1px solid #eee">🔸 有技术问题找谁？</div>
+<div class="csQ" onclick="csAnswer(3)" style="padding:7px 10px;background:#f9f7f4;border-radius:6px;margin:3px 0;font-size:12px;cursor:pointer;border:1px solid #eee">🔸 能帮我定制配方吗？</div>
+<div class="csQ" onclick="csAnswer(4)" style="padding:7px 10px;background:#f9f7f4;border-radius:6px;margin:3px 0;font-size:12px;cursor:pointer;border:1px solid #eee">🔸 想学某个产品怎么做？</div>
 </div>
 
-<div style="padding:10px 14px 14px">
-<div style="font-size:12px;font-weight:600;margin-bottom:6px">💬 给我留言</div>
-<textarea id="csMsg" placeholder="描述您的问题，我会在Telegram看到并回复您……" style="width:100%;height:60px;border:1px solid #ddd;border-radius:6px;padding:8px;font-size:12px;resize:none;font-family:inherit"></textarea>
-<div style="display:flex;gap:6px;margin-top:6px">
-<input id="csWx" placeholder="您的微信号（选填）" style="flex:1;border:1px solid #ddd;border-radius:6px;padding:8px;font-size:12px">
-<button onclick="submitCS()" style="background:#C0392B;color:#fff;border:none;border-radius:6px;padding:8px 14px;font-size:12px;font-weight:600;cursor:pointer">发送</button>
+<div style="padding:6px 14px 10px;border-top:1px solid #f0ece6">
+<div style="font-size:11px;color:#aaa;margin-bottom:4px">以上没有您的问题？给我留言👇</div>
+<textarea id="csMsg" placeholder="描述您的问题……" style="width:100%;height:44px;border:1px solid #ddd;border-radius:6px;padding:6px 8px;font-size:12px;resize:none;font-family:inherit"></textarea>
+<div style="display:flex;gap:4px;margin-top:4px">
+<input id="csWx" placeholder="微信号" style="flex:1;border:1px solid #ddd;border-radius:6px;padding:6px;font-size:11px">
+<button onclick="submitCS()" style="background:#C0392B;color:#fff;border:none;border-radius:6px;padding:6px 12px;font-size:11px;font-weight:600;cursor:pointer">发送</button>
 </div>
-<div id="csStatus" style="font-size:11px;color:#7B9A45;margin-top:4px;display:none">✅ 已收到，我会尽快回复您</div>
+<div id="csStatus" style="font-size:11px;color:#7B9A45;margin-top:3px;display:none">✅ 已收到</div>
+</div>
+</div>
+
+<!-- 答案页 -->
+<div id="csAns" style="display:none;padding:10px 14px 14px">
+<div onclick="csBack()" style="font-size:11px;color:#C0392B;cursor:pointer;margin-bottom:6px">← 返回</div>
+<div id="csAnsText" style="font-size:12px;line-height:1.7;color:#333"></div>
 </div>
 </div>
 
 
 <script>
+var qa=[
+'<strong>订阅方式：</strong><br>• 月度：¥59/月<br>• 年度：¥399/年（省¥309）<br><br>⚠️ 目前为人工过渡期<br>加微信：<strong>canglin1985</strong><br>备注：产品卡订阅<br>转账后24小时内开通',
+'<strong>上门服务费用：</strong><br><br>• 基础咨询（在线诊断）<br>　¥500-2,000<br>• 项目评估（选品+模型）<br>　¥3,000-10,000<br>• 上门服务（工厂/门店）<br>　¥5,000-30,000+<br><br>加微信沟通具体需求',
+'<strong>技术问题可以找谁？</strong><br><br>虾哥（我）在线解答。<br>点击下方留言，我会在Telegram收到并回复您。<br><br>或直接加微信：canglin1985',
+'<strong>可以定制配方吗？</strong><br><br>可以。需评估具体产品需求、工艺路线、目标成本。<br><br>费用根据项目复杂程度另议。<br>加微信沟通：canglin1985',
+'<strong>想学某个产品怎么做？</strong><br><br>订阅后您可以查看完整产品卡库（1041+张），每张卡含：<br>• 完整配方<br>• 工艺流程SOP<br>• 成本拆解<br>• 盈利模型<br><br>找不到您想要的产品？给我留言，我尽快补充。'
+];
+
 function toggleCS(){
 var p=document.getElementById('csPanel'),b=document.getElementById('csBtn');
 if(p.style.display==='none'||p.style.display===''){p.style.display='block';b.style.transform='rotate(10deg)'}
 else{p.style.display='none';b.style.transform='rotate(0deg)'}
+}
+function csAnswer(i){
+document.getElementById('csHome').style.display='none';
+document.getElementById('csAns').style.display='block';
+document.getElementById('csAnsText').innerHTML=qa[i];
+}
+function csBack(){
+document.getElementById('csHome').style.display='block';
+document.getElementById('csAns').style.display='none';
 }
 function submitCS(){
 var msg=document.getElementById('csMsg').value.trim();
